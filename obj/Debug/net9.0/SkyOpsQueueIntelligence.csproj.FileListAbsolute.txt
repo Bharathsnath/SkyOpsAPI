@@ -1,0 +1,452 @@
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\appsettings.json
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\SkyOpsQueueIntelligence.staticwebassets.endpoints.json
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\SkyOpsQueueIntelligence.exe
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\SkyOpsQueueIntelligence.deps.json
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\SkyOpsQueueIntelligence.runtimeconfig.json
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\SkyOpsQueueIntelligence.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\SkyOpsQueueIntelligence.pdb
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\Microsoft.Bcl.TimeProvider.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\Microsoft.Extensions.AI.Abstractions.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\Microsoft.Extensions.Hosting.Abstractions.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\ModelContextProtocol.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\ModelContextProtocol.AspNetCore.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\ModelContextProtocol.Core.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\MySqlConnector.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\System.Diagnostics.DiagnosticSource.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\System.IO.Pipelines.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\System.Net.ServerSentEvents.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\System.Text.Encodings.Web.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\System.Text.Json.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\bin\Debug\net9.0\runtimes\win\lib\net9.0\System.Text.Encodings.Web.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\SkyOpsQueueIntelligence.csproj.AssemblyReference.cache
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\rpswa.dswa.cache.json
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\SkyOpsQueueIntelligence.GeneratedMSBuildEditorConfig.editorconfig
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\SkyOpsQueueIntelligence.AssemblyInfoInputs.cache
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\SkyOpsQueueIntelligence.AssemblyInfo.cs
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\SkyOpsQueueIntelligence.csproj.CoreCompileInputs.cache
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\SkyOpsQueueIntelligence.MvcApplicationPartsAssemblyInfo.cache
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\SkyOpsQueueIntelligence.sourcelink.json
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\rjimswa.dswa.cache.json
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\scopedcss\bundle\SkyOpsQueueIntelligence.styles.css
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\staticwebassets.build.json
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\staticwebassets.build.json.cache
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\staticwebassets.development.json
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\SkyOpsQu.142CF5A9.Up2Date
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\SkyOpsQueueIntelligence.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\refint\SkyOpsQueueIntelligence.dll
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\SkyOpsQueueIntelligence.pdb
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\SkyOpsQueueIntelligence.genruntimeconfig.cache
+d:\Seshadrinath-Workbench\Saber QtestMCP\obj\Debug\net9.0\ref\SkyOpsQueueIntelligence.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\appsettings.Beta.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\appsettings.Development.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\appsettings.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\appsettings.Production.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\SkyOpsQueueIntelligence.staticwebassets.endpoints.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\SkyOpsQueueIntelligence.deps.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\SkyOpsQueueIntelligence.runtimeconfig.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\SkyOpsQueueIntelligence.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\SkyOpsQueueIntelligence.pdb
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\Microsoft.Bcl.TimeProvider.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\Microsoft.Extensions.AI.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\Microsoft.Extensions.Caching.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\Microsoft.Extensions.Diagnostics.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\Microsoft.Extensions.Hosting.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\Microsoft.Extensions.Options.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\Microsoft.Extensions.Primitives.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\Microsoft.IdentityModel.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\Microsoft.IdentityModel.Logging.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\Microsoft.IdentityModel.Protocols.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\Microsoft.IdentityModel.Tokens.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\ModelContextProtocol.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\ModelContextProtocol.AspNetCore.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\ModelContextProtocol.Core.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\MySqlConnector.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\System.Diagnostics.DiagnosticSource.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\System.IdentityModel.Tokens.Jwt.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\System.IO.Pipelines.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\System.Net.ServerSentEvents.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\System.Text.Encodings.Web.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\System.Text.Json.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\.build-validation\runtimes\win\lib\net9.0\System.Text.Encodings.Web.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\appsettings.Beta.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\appsettings.Development.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\appsettings.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\SkyOpsQueueIntelligence.staticwebassets.endpoints.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\SkyOpsQueueIntelligence.deps.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\SkyOpsQueueIntelligence.runtimeconfig.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\SkyOpsQueueIntelligence.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\SkyOpsQueueIntelligence.pdb
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\BouncyCastle.Cryptography.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\Google.Protobuf.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\K4os.Compression.LZ4.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\K4os.Compression.LZ4.Streams.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\K4os.Hash.xxHash.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\Microsoft.Bcl.TimeProvider.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\Microsoft.Extensions.AI.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\Microsoft.Extensions.Caching.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\Microsoft.Extensions.Diagnostics.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\Microsoft.Extensions.Hosting.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\Microsoft.Extensions.Options.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\Microsoft.Extensions.Primitives.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\Microsoft.IdentityModel.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\Microsoft.IdentityModel.Logging.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\Microsoft.IdentityModel.Protocols.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\Microsoft.IdentityModel.Tokens.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\ModelContextProtocol.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\ModelContextProtocol.AspNetCore.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\ModelContextProtocol.Core.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\MySql.Data.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\MySqlConnector.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\System.Configuration.ConfigurationManager.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\System.Diagnostics.DiagnosticSource.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\System.IdentityModel.Tokens.Jwt.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\System.IO.Pipelines.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\System.Net.ServerSentEvents.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\System.Security.Cryptography.ProtectedData.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\System.Security.Permissions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\System.Text.Encodings.Web.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\System.Text.Json.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\System.Windows.Extensions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\ZstdSharp.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\runtimes\win-x64\native\comerr64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\runtimes\win-x64\native\gssapi64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\runtimes\win-x64\native\k5sprt64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\runtimes\win-x64\native\krb5_64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\runtimes\win-x64\native\krbcc64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\runtimes\win\lib\net9.0\System.Text.Encodings.Web.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\buildverify\runtimes\win\lib\net8.0\System.Windows.Extensions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\appsettings.Beta.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\appsettings.Development.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\appsettings.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\SkyOpsQueueIntelligence.staticwebassets.endpoints.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\SkyOpsQueueIntelligence.deps.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\SkyOpsQueueIntelligence.runtimeconfig.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\SkyOpsQueueIntelligence.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\SkyOpsQueueIntelligence.pdb
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\BouncyCastle.Cryptography.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\Google.Protobuf.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\K4os.Compression.LZ4.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\K4os.Compression.LZ4.Streams.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\K4os.Hash.xxHash.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\Microsoft.Bcl.TimeProvider.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\Microsoft.Extensions.AI.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\Microsoft.Extensions.Caching.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\Microsoft.Extensions.Diagnostics.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\Microsoft.Extensions.Hosting.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\Microsoft.Extensions.Options.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\Microsoft.Extensions.Primitives.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\Microsoft.IdentityModel.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\Microsoft.IdentityModel.Logging.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\Microsoft.IdentityModel.Protocols.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\Microsoft.IdentityModel.Tokens.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\ModelContextProtocol.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\ModelContextProtocol.AspNetCore.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\ModelContextProtocol.Core.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\MySql.Data.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\MySqlConnector.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\System.Configuration.ConfigurationManager.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\System.Diagnostics.DiagnosticSource.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\System.IdentityModel.Tokens.Jwt.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\System.IO.Pipelines.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\System.Net.ServerSentEvents.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\System.Security.Cryptography.ProtectedData.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\System.Security.Permissions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\System.Text.Encodings.Web.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\System.Text.Json.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\System.Windows.Extensions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\ZstdSharp.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\runtimes\win-x64\native\comerr64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\runtimes\win-x64\native\gssapi64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\runtimes\win-x64\native\k5sprt64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\runtimes\win-x64\native\krb5_64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\runtimes\win-x64\native\krbcc64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\runtimes\win\lib\net9.0\System.Text.Encodings.Web.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\tmpbuild\runtimes\win\lib\net8.0\System.Windows.Extensions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\appsettings.Beta.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\appsettings.Development.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\appsettings.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\SkyOpsQueueIntelligence.staticwebassets.endpoints.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\SkyOpsQueueIntelligence.deps.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\SkyOpsQueueIntelligence.runtimeconfig.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\SkyOpsQueueIntelligence.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\SkyOpsQueueIntelligence.pdb
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\BouncyCastle.Cryptography.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\Google.Protobuf.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\K4os.Compression.LZ4.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\K4os.Compression.LZ4.Streams.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\K4os.Hash.xxHash.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\Microsoft.Bcl.TimeProvider.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\Microsoft.Extensions.AI.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\Microsoft.Extensions.Caching.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\Microsoft.Extensions.Diagnostics.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\Microsoft.Extensions.Hosting.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\Microsoft.Extensions.Options.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\Microsoft.Extensions.Primitives.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\Microsoft.IdentityModel.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\Microsoft.IdentityModel.Logging.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\Microsoft.IdentityModel.Protocols.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\Microsoft.IdentityModel.Tokens.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\ModelContextProtocol.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\ModelContextProtocol.AspNetCore.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\ModelContextProtocol.Core.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\MySql.Data.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\MySqlConnector.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\System.Configuration.ConfigurationManager.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\System.Diagnostics.DiagnosticSource.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\System.IdentityModel.Tokens.Jwt.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\System.IO.Pipelines.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\System.Net.ServerSentEvents.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\System.Security.Cryptography.ProtectedData.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\System.Security.Permissions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\System.Text.Encodings.Web.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\System.Text.Json.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\System.Windows.Extensions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\ZstdSharp.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\runtimes\win-x64\native\comerr64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\runtimes\win-x64\native\gssapi64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\runtimes\win-x64\native\k5sprt64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\runtimes\win-x64\native\krb5_64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\runtimes\win-x64\native\krbcc64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\runtimes\win\lib\net9.0\System.Text.Encodings.Web.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify\runtimes\win\lib\net8.0\System.Windows.Extensions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\appsettings.Beta.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\appsettings.Development.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\appsettings.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\SkyOpsQueueIntelligence.staticwebassets.endpoints.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\SkyOpsQueueIntelligence.deps.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\SkyOpsQueueIntelligence.runtimeconfig.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\SkyOpsQueueIntelligence.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\SkyOpsQueueIntelligence.pdb
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\BouncyCastle.Cryptography.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\Google.Protobuf.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\K4os.Compression.LZ4.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\K4os.Compression.LZ4.Streams.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\K4os.Hash.xxHash.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\Microsoft.Bcl.TimeProvider.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\Microsoft.Extensions.AI.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\Microsoft.Extensions.Caching.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\Microsoft.Extensions.Diagnostics.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\Microsoft.Extensions.Hosting.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\Microsoft.Extensions.Options.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\Microsoft.Extensions.Primitives.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\Microsoft.IdentityModel.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\Microsoft.IdentityModel.Logging.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\Microsoft.IdentityModel.Protocols.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\Microsoft.IdentityModel.Tokens.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\ModelContextProtocol.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\ModelContextProtocol.AspNetCore.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\ModelContextProtocol.Core.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\MySql.Data.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\MySqlConnector.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\System.Configuration.ConfigurationManager.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\System.Diagnostics.DiagnosticSource.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\System.IdentityModel.Tokens.Jwt.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\System.IO.Pipelines.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\System.Net.ServerSentEvents.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\System.Security.Cryptography.ProtectedData.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\System.Security.Permissions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\System.Text.Encodings.Web.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\System.Text.Json.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\System.Windows.Extensions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\ZstdSharp.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\runtimes\win-x64\native\comerr64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\runtimes\win-x64\native\gssapi64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\runtimes\win-x64\native\k5sprt64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\runtimes\win-x64\native\krb5_64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\runtimes\win-x64\native\krbcc64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\runtimes\win\lib\net9.0\System.Text.Encodings.Web.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify2\runtimes\win\lib\net8.0\System.Windows.Extensions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\appsettings.Beta.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\appsettings.Development.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\appsettings.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\SkyOpsQueueIntelligence.staticwebassets.endpoints.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\SkyOpsQueueIntelligence.deps.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\SkyOpsQueueIntelligence.runtimeconfig.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\SkyOpsQueueIntelligence.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\SkyOpsQueueIntelligence.pdb
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\BouncyCastle.Cryptography.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\Google.Protobuf.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\K4os.Compression.LZ4.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\K4os.Compression.LZ4.Streams.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\K4os.Hash.xxHash.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\Microsoft.Bcl.TimeProvider.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\Microsoft.Extensions.AI.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\Microsoft.Extensions.Caching.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\Microsoft.Extensions.Diagnostics.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\Microsoft.Extensions.Hosting.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\Microsoft.Extensions.Options.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\Microsoft.Extensions.Primitives.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\Microsoft.IdentityModel.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\Microsoft.IdentityModel.Logging.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\Microsoft.IdentityModel.Protocols.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\Microsoft.IdentityModel.Tokens.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\ModelContextProtocol.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\ModelContextProtocol.AspNetCore.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\ModelContextProtocol.Core.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\MySql.Data.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\MySqlConnector.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\System.Configuration.ConfigurationManager.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\System.Diagnostics.DiagnosticSource.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\System.IdentityModel.Tokens.Jwt.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\System.IO.Pipelines.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\System.Net.ServerSentEvents.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\System.Security.Cryptography.ProtectedData.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\System.Security.Permissions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\System.Text.Encodings.Web.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\System.Text.Json.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\System.Windows.Extensions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\ZstdSharp.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\runtimes\win-x64\native\comerr64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\runtimes\win-x64\native\gssapi64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\runtimes\win-x64\native\k5sprt64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\runtimes\win-x64\native\krb5_64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\runtimes\win-x64\native\krbcc64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\runtimes\win\lib\net9.0\System.Text.Encodings.Web.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify3\runtimes\win\lib\net8.0\System.Windows.Extensions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\appsettings.Beta.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\appsettings.Development.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\appsettings.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\SkyOpsQueueIntelligence.staticwebassets.endpoints.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\SkyOpsQueueIntelligence.exe
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\SkyOpsQueueIntelligence.deps.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\SkyOpsQueueIntelligence.runtimeconfig.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\SkyOpsQueueIntelligence.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\SkyOpsQueueIntelligence.pdb
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\BouncyCastle.Cryptography.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\Google.Protobuf.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\K4os.Compression.LZ4.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\K4os.Compression.LZ4.Streams.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\K4os.Hash.xxHash.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\Microsoft.Bcl.TimeProvider.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\Microsoft.Extensions.AI.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\Microsoft.Extensions.Hosting.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\ModelContextProtocol.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\ModelContextProtocol.AspNetCore.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\ModelContextProtocol.Core.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\MySql.Data.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\MySqlConnector.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\System.Configuration.ConfigurationManager.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\System.Diagnostics.DiagnosticSource.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\System.IO.Pipelines.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\System.Net.ServerSentEvents.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\System.Security.Permissions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\System.Text.Encodings.Web.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\System.Text.Json.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\System.Windows.Extensions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\ZstdSharp.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\runtimes\win-x64\native\comerr64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\runtimes\win-x64\native\gssapi64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\runtimes\win-x64\native\k5sprt64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\runtimes\win-x64\native\krb5_64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\runtimes\win-x64\native\krbcc64.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\runtimes\win\lib\net9.0\System.Text.Encodings.Web.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\runtimes\win\lib\net8.0\System.Windows.Extensions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\SkyOpsQueueIntelligence.csproj.AssemblyReference.cache
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\rpswa.dswa.cache.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\SkyOpsQueueIntelligence.GeneratedMSBuildEditorConfig.editorconfig
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\SkyOpsQueueIntelligence.AssemblyInfoInputs.cache
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\SkyOpsQueueIntelligence.AssemblyInfo.cs
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\SkyOpsQueueIntelligence.csproj.CoreCompileInputs.cache
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\SkyOpsQueueIntelligence.MvcApplicationPartsAssemblyInfo.cache
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\SkyOpsQueueIntelligence.sourcelink.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\rjimswa.dswa.cache.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\scopedcss\bundle\SkyOpsQueueIntelligence.styles.css
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\staticwebassets.build.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\staticwebassets.build.json.cache
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\staticwebassets.development.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\SkyOpsQu.142CF5A9.Up2Date
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\SkyOpsQueueIntelligence.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\refint\SkyOpsQueueIntelligence.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\SkyOpsQueueIntelligence.pdb
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\SkyOpsQueueIntelligence.genruntimeconfig.cache
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\Debug\net9.0\ref\SkyOpsQueueIntelligence.dll
