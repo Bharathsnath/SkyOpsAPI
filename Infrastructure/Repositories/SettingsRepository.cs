@@ -48,69 +48,7 @@ public sealed class SettingsRepository : ISettingsRepository
         return await reader.ReadAsync(ct) ? Map(reader) : null;
     }
 
-    public async Task<long> CreateAsync(PccCredential credential, CancellationToken ct = default)
-    {
-        try
-        {
-            await using var conn = await OpenAsync(ct);
-            var indianNow = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("India Standard Time"));
-
-            // Check if row exists for this PCCMasterCode + TagName
-            const string checkSql = "SELECT Cred_ID FROM wpset_credentialdetails WHERE PCCMasterCode = @PCCMasterCode AND TagName = @TagName LIMIT 1";
-            await using var checkCmd = new MySqlCommand(checkSql, conn);
-            checkCmd.Parameters.AddWithValue("@PCCMasterCode", credential.PCCMasterCode);
-            checkCmd.Parameters.AddWithValue("@TagName", credential.TagName);
-            var existing = await checkCmd.ExecuteScalarAsync(ct);
-
-            if (existing != null)
-            {
-                // Update existing row
-                const string updateSql = "UPDATE wpset_credentialdetails SET TagValue = @TagValue, ModifiedUser = @ModifiedUser, ModifiedDate = @IndianNow WHERE PCCMasterCode = @PCCMasterCode AND TagName = @TagName";
-                await using var updateCmd = new MySqlCommand(updateSql, conn);
-                updateCmd.Parameters.AddWithValue("@TagValue", credential.TagValue);
-                updateCmd.Parameters.AddWithValue("@ModifiedUser", credential.ModifiedUser);
-                updateCmd.Parameters.AddWithValue("@IndianNow", indianNow);
-                updateCmd.Parameters.AddWithValue("@PCCMasterCode", credential.PCCMasterCode);
-                updateCmd.Parameters.AddWithValue("@TagName", credential.TagName);
-                await updateCmd.ExecuteNonQueryAsync(ct);
-                return Convert.ToInt64(existing);
-            }
-
-            // Insert new row
-            const string insertSql = """
-                INSERT INTO wpset_credentialdetails
-                (PCCMasterCode, Provider, ServiceType, SectorType, TagName, TagValue, RecordStatus, SystemStatus,
-                 CreatedUser, CreatedDate, ModifiedUser, ModifiedDate, LocationId, PCCRegionID, ProviderId, AirlineCurrencyCode)
-                VALUES
-                (@PCCMasterCode, @Provider, @ServiceType, @SectorType, @TagName, @TagValue, @RecordStatus, @SystemStatus,
-                 @CreatedUser, @IndianNow, @ModifiedUser, @IndianNow, @LocationId, @PCCRegionID, @ProviderId, @AirlineCurrencyCode);
-                SELECT LAST_INSERT_ID();
-                """;
-            await using var cmd = new MySqlCommand(insertSql, conn);
-            cmd.Parameters.AddWithValue("@IndianNow", indianNow);
-            cmd.Parameters.AddWithValue("@PCCMasterCode", credential.PCCMasterCode);
-            cmd.Parameters.AddWithValue("@Provider", credential.Provider);
-            cmd.Parameters.AddWithValue("@ServiceType", credential.ServiceType);
-            cmd.Parameters.AddWithValue("@SectorType", credential.SectorType);
-            cmd.Parameters.AddWithValue("@TagName", credential.TagName);
-            cmd.Parameters.AddWithValue("@TagValue", credential.TagValue);
-            cmd.Parameters.AddWithValue("@RecordStatus", credential.RecordStatus);
-            cmd.Parameters.AddWithValue("@SystemStatus", int.TryParse(credential.SystemStatus, out var sysStatus) ? sysStatus : 0);
-            cmd.Parameters.AddWithValue("@CreatedUser", credential.CreatedUser);
-            cmd.Parameters.AddWithValue("@ModifiedUser", credential.ModifiedUser);
-            cmd.Parameters.AddWithValue("@LocationId", credential.LocationId);
-            cmd.Parameters.AddWithValue("@PCCRegionID", credential.PCCRegionID);
-            cmd.Parameters.AddWithValue("@ProviderId", credential.ProviderId);
-            cmd.Parameters.AddWithValue("@AirlineCurrencyCode", credential.AirlineCurrencyCode);
-            var result = await cmd.ExecuteScalarAsync(ct);
-            return Convert.ToInt64(result);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error creating PCC credential: {ex.Message}");
-            throw;
-        }
-    }
+    
 
     public async Task<IReadOnlyList<PccAgentEmailMaster>> GetPccAgentEmailMastersAsync(CancellationToken ct = default)
     {
@@ -440,11 +378,11 @@ public sealed class SettingsRepository : ISettingsRepository
         var indianNow = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("India Standard Time"));
         const string sql = """
             INSERT INTO wpset_credentialdetails
-            (PCCMasterCode, Provider, ServiceType, SectorType, TagName, TagValue, RecordStatus, SystemStatus,
-             CreatedUser, CreatedDate, ModifiedUser, ModifiedDate, LocationId, PCCRegionID, ProviderId, AirlineCurrencyCode)
+            (PCCMasterCode, Provider, ServiceType, SectorType, TagName, TagValue, RecordStatus,
+             CreatedUser, CreatedDate, ModifiedUser, ModifiedDate, AirlineCurrencyCode)
             VALUES
-            (@PCCMasterCode, @Provider, @ServiceType, @SectorType, @TagName, @TagValue, @RecordStatus, @SystemStatus,
-             @CreatedUser, @IndianNow, @ModifiedUser, @IndianNow, @LocationId, @PCCRegionID, @ProviderId, @AirlineCurrencyCode);
+            (@PCCMasterCode, @Provider, @ServiceType, @SectorType, @TagName, @TagValue, @RecordStatus,
+             @CreatedUser, @IndianNow, @ModifiedUser, @IndianNow,  @AirlineCurrencyCode);
             SELECT LAST_INSERT_ID();
             """;
         await using var cmd = new MySqlCommand(sql, conn);
@@ -456,12 +394,8 @@ public sealed class SettingsRepository : ISettingsRepository
         cmd.Parameters.AddWithValue("@TagName", credential.TagName);
         cmd.Parameters.AddWithValue("@TagValue", credential.TagValue);
         cmd.Parameters.AddWithValue("@RecordStatus", credential.RecordStatus);
-        cmd.Parameters.AddWithValue("@SystemStatus", int.TryParse(credential.SystemStatus, out var sysStatus) ? sysStatus : 0);
         cmd.Parameters.AddWithValue("@CreatedUser", credential.CreatedUser);
         cmd.Parameters.AddWithValue("@ModifiedUser", credential.ModifiedUser);
-        cmd.Parameters.AddWithValue("@LocationId", credential.LocationId);
-        cmd.Parameters.AddWithValue("@PCCRegionID", credential.PCCRegionID);
-        cmd.Parameters.AddWithValue("@ProviderId", credential.ProviderId);
         cmd.Parameters.AddWithValue("@AirlineCurrencyCode", credential.AirlineCurrencyCode);
         var result = await cmd.ExecuteScalarAsync(ct);
         return Convert.ToInt64(result);
@@ -472,11 +406,11 @@ public sealed class SettingsRepository : ISettingsRepository
         var indianNow = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("India Standard Time"));
         const string sql = """
             INSERT INTO skyops.wpset_credentialdetails
-            (PCCMasterCode, Provider, ServiceType, SectorType, TagName, TagValue, RecordStatus, SystemStatus,
-             CreatedUser, CreatedDate, ModifiedUser, ModifiedDate, LocationId, PCCRegionID, ProviderId, AirlineCurrencyCode)
+            (PCCMasterCode, Provider, ServiceType, SectorType, TagName, TagValue, RecordStatus,
+             CreatedUser, CreatedDate, ModifiedUser, ModifiedDate, AirlineCurrencyCode)
             VALUES
-            (@PCCMasterCode, @Provider, @ServiceType, @SectorType, @TagName, @TagValue, @RecordStatus, @SystemStatus,
-             @CreatedUser, @IndianNow, @ModifiedUser, @IndianNow, @LocationId, @PCCRegionID, @ProviderId, @AirlineCurrencyCode);
+            (@PCCMasterCode, @Provider, @ServiceType, @SectorType, @TagName, @TagValue, @RecordStatus,
+             @CreatedUser, @IndianNow, @ModifiedUser, @IndianNow,  @AirlineCurrencyCode);
             SELECT LAST_INSERT_ID();
             """;
         await using var cmd = new MySqlCommand(sql, conn);
@@ -488,12 +422,8 @@ public sealed class SettingsRepository : ISettingsRepository
         cmd.Parameters.AddWithValue("@TagName", credential.TagName);
         cmd.Parameters.AddWithValue("@TagValue", credential.TagValue);
         cmd.Parameters.AddWithValue("@RecordStatus", credential.RecordStatus);
-        cmd.Parameters.AddWithValue("@SystemStatus", int.TryParse(credential.SystemStatus, out var sysStatus) ? sysStatus : 0);
         cmd.Parameters.AddWithValue("@CreatedUser", credential.CreatedUser);
         cmd.Parameters.AddWithValue("@ModifiedUser", credential.ModifiedUser);
-        cmd.Parameters.AddWithValue("@LocationId", credential.LocationId);
-        cmd.Parameters.AddWithValue("@PCCRegionID", credential.PCCRegionID);
-        cmd.Parameters.AddWithValue("@ProviderId", credential.ProviderId);
         cmd.Parameters.AddWithValue("@AirlineCurrencyCode", credential.AirlineCurrencyCode);
         var result = await cmd.ExecuteScalarAsync(ct);
         return Convert.ToInt64(result);

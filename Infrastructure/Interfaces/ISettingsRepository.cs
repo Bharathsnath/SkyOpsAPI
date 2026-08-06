@@ -7,7 +7,7 @@ public interface ISettingsRepository
     Task<IReadOnlyList<AppConfiguration>> GetAllAsync(CancellationToken ct = default);
     Task<IReadOnlyList<AppConfiguration>> GetByCategoryAsync(string category, CancellationToken ct = default);
     Task<AppConfiguration?> GetByIdAsync(long id, CancellationToken ct = default);
-    Task<long> CreateAsync(PccCredential credential, CancellationToken ct = default);
+    
     Task<IReadOnlyList<PccAgentEmailMaster>> GetPccAgentEmailMastersAsync(CancellationToken ct = default);
     Task<IReadOnlyList<PccAgentEmailMaster>> GetPccAgentEmailMastersByPccAsync(string pccCode, CancellationToken ct = default);
     Task<IReadOnlyList<PccAgentEmailMaster>> GetPccAgentEmailMastersByPccsAsync(IEnumerable<string> pccCodes, CancellationToken ct = default);

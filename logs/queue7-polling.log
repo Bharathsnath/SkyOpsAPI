@@ -10609,3 +10609,10 @@
 2026-08-05 15:05:09 +05:30 | PCC 1VZ8 Q/379: Queue empty or no parsable items.
 2026-08-05 15:05:23 +05:30 | PCC 1VZ8 Q/62: analyzed 22 PNRs, saved 0 actions.
 2026-08-05 15:05:38 +05:30 | PCC 3A78 Q/7: analyzed 10 PNRs, saved 2 actions.
+2026-08-05 18:19:20 +05:30 | Queue polling started. Queues: Q/7, Q/379, Q/62. Interval: 15 min.
+2026-08-05 18:19:20 +05:30 | Processing 4 PCC(s)...
+2026-08-05 18:19:22 +05:30 | PCC 1V08 Q/7: Queue empty or no parsable items.
+2026-08-05 18:19:23 +05:30 | PCC 1V08 Q/379: Queue empty or no parsable items.
+2026-08-05 18:19:32 +05:30 | PCC 1V08 Q/62: analyzed 11 PNRs, saved 0 actions.
+2026-08-05 18:19:34 +05:30 | PCC 1VZ8 Q/7: Queue empty or no parsable items.
+2026-08-05 18:19:35 +05:30 | PCC 1VZ8 Q/379: Queue empty or no parsable items.

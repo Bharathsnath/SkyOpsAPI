@@ -32,14 +32,12 @@ public sealed class PccCredential
     public string TagName { get; init; } = string.Empty;
     public string TagValue { get; init; } = string.Empty;
     public int RecordStatus { get; init; }
-    public string SystemStatus { get; init; } = string.Empty;
+    
     public int CreatedUser { get; init; }
     public DateTime? CreatedDate { get; init; }
     public int ModifiedUser { get; init; }
     public DateTime? ModifiedDate { get; init; }
-    public int LocationId { get; init; }
-    public int PCCRegionID { get; init; }
-    public int ProviderId { get; init; }
+    
     public string AirlineCurrencyCode { get; init; } = string.Empty;
 }
 

@@ -30,14 +30,12 @@ public sealed class SettingsDtoAdapter
         TagName = request.TagName,
         TagValue = request.TagValue,
         RecordStatus = request.RecordStatus,
-        SystemStatus = request.SystemStatus,
+    
         CreatedUser = request.CreatedUser,
         CreatedDate = request.CreatedDate,
         ModifiedUser = request.ModifiedUser,
         ModifiedDate = request.ModifiedDate,
-        LocationId = request.LocationId,
-        PCCRegionID = request.PCCRegionID,
-        ProviderId = request.ProviderId,
+       
         AirlineCurrencyCode = request.AirlineCurrencyCode
     };
 

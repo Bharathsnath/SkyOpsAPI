@@ -58,14 +58,12 @@ public class PccCredentialRequest
     public string TagName { get; set; } = string.Empty;
     public string TagValue { get; set; } = string.Empty;
     public int RecordStatus { get; set; }
-    public string SystemStatus { get; set; } = string.Empty;
+    
     public int CreatedUser { get; set; }
     public DateTime? CreatedDate { get; set; }
     public int ModifiedUser { get; set; }
     public DateTime? ModifiedDate { get; set; }
-    public int LocationId { get; set; }
-    public int PCCRegionID { get; set; }
-    public int ProviderId { get; set; }
+    
     public string AirlineCurrencyCode { get; set; } = string.Empty;
 }
 
