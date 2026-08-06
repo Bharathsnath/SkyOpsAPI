@@ -239,6 +239,57 @@ public sealed class SabreCommandService : ISabreCommandService
         }
     }
 
+    public async Task<string> ExecuteHostCommandAsync(string officeId, string hostCommand, CancellationToken cancellationToken = default)
+    {
+        var (username, password, pccCode) = ResolveCredentials(officeId);
+
+        SabreSession? session = null;
+        try
+        {
+            session = await _sessionService.CreateSessionAsync(username, password, officeId, cancellationToken)
+                ?? throw new InvalidOperationException($"Session creation failed for OfficeId: {officeId}");
+
+            var response = await SendCommandAsync(session, hostCommand, pccCode, cancellationToken);
+            return response;
+        }
+        finally
+        {
+            if (session is not null)
+                await _sessionService.CloseSessionAsync(session, cancellationToken);
+        }
+    }
+
+    public async Task<IReadOnlyList<string>> ExecutePagedHostCommandAsync(
+        string officeId, string firstCommand, string nextPageCommand, string endMarker, int maxPages,
+        CancellationToken cancellationToken = default)
+    {
+        var (username, password, pccCode) = ResolveCredentials(officeId);
+
+        SabreSession? session = null;
+        try
+        {
+            session = await _sessionService.CreateSessionAsync(username, password, officeId, cancellationToken)
+                ?? throw new InvalidOperationException($"Session creation failed for OfficeId: {officeId}");
+
+            var pages = new List<string>();
+            var page = await SendCommandAsync(session, firstCommand, pccCode, cancellationToken);
+            pages.Add(page);
+
+            for (var i = 0; i < maxPages && !page.Contains(endMarker, StringComparison.OrdinalIgnoreCase); i++)
+            {
+                page = await SendCommandAsync(session, nextPageCommand, pccCode, cancellationToken);
+                pages.Add(page);
+            }
+
+            return pages;
+        }
+        finally
+        {
+            if (session is not null)
+                await _sessionService.CloseSessionAsync(session, cancellationToken);
+        }
+    }
+
     private static string ExtractResponseText(string soapResponse)
     {
         try
