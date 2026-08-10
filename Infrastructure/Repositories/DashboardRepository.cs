@@ -397,6 +397,7 @@ public sealed class DashboardRepository : IDashboardRepository
 
         return new ManagementDashboardDto(pccRanking, queueEfficiency, providerRanking, transactionRanking, totalToday, criticalToday, criticalPct);
     }
+    
 
     public async Task<XmlLogsDto> GetXmlLogsAsync(CancellationToken ct = default)
     {
@@ -637,7 +638,7 @@ public sealed class DashboardRepository : IDashboardRepository
         return new { UserId = userId, PccMappings = pccRows, ResolvedCompanies = companyRows, GeneratedFilter = filter };
     }
 
-    private async Task<string> BuildAccessFilterAsync(int userId, CancellationToken ct)
+    public async Task<string> BuildAccessFilterAsync(int userId, CancellationToken ct)
     {
         var skyOpsConnStr = _configuration.GetConnectionString("SkyOpsDBconnection");
 

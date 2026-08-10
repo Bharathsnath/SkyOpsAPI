@@ -20,4 +20,5 @@ public interface IDashboardRepository
     Task<ErrorLogsDto> GetErrorLogsAsync(CancellationToken ct = default);
     Task<PriorityPnrStatusDto> GetPriorityPnrStatusAsync(CancellationToken ct = default);
     Task<object> GetAccessFilterDebugAsync(int userId, CancellationToken ct = default);
+    Task<string> BuildAccessFilterAsync(int userId, CancellationToken ct = default);
 }

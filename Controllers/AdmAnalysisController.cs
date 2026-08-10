@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SkyOpsQueueIntelligence.Application.Interfaces;
 using SkyOpsQueueIntelligence.Application.DTO;
+using System.Security.Claims;
 
 namespace SkyOpsQueueIntelligence.Controllers;
 
@@ -14,6 +15,9 @@ public class AdmAnalysisController : ControllerBase
     {
         _service = service;
     }
+
+    private int GetUserId() =>
+        int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var id) ? id : 0;
 
     [HttpPost("run")]
     public async Task<IActionResult> Run(CancellationToken cancellationToken)
@@ -32,7 +36,14 @@ public class AdmAnalysisController : ControllerBase
     [HttpGet("dashboard")]
     public async Task<IActionResult> Dashboard(CancellationToken cancellationToken)
     {
-        var d = await _service.GetDashboardAsync(cancellationToken);
+        var d = await _service.GetDashboardAsync(GetUserId(), cancellationToken);
+        return Ok(d);
+    }
+
+    [HttpGet("adm-dashboard")]
+    public async Task<IActionResult> AdmDashboard(CancellationToken cancellationToken)
+    {
+        var d = await _service.GetAdmDashboardAsync(cancellationToken);
         return Ok(d);
     }
 

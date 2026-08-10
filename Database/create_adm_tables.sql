@@ -25,12 +25,13 @@ CREATE TABLE IF NOT EXISTS adm_analysis
     TicketMarket VARCHAR(30),
     BookingMarket VARCHAR(30),
     IsCrossBorder TINYINT(1),
-    ChangedSegmentCount INT,
-    IsChangedSegment TINYINT(1),
+    ChurnedSegmentCount INT,
+    IsChurnedSegment TINYINT(1),
     MarriedSegmentCount INT,
     IsMarriedSegment TINYINT(1),
     RiskScore INT,
     Remarks VARCHAR(255),
+    TransactionId VARCHAR(50) NULL,
     CreatedDate DATETIME,
     UNIQUE KEY uq_adm_analysis_pnr (Pnr)
 );
@@ -49,3 +50,18 @@ INSERT IGNORE INTO adm_pcc_market (Pcc, Market) VALUES
     ('3A78', 'India'),
     ('8FR2', 'UAE'),
     ('4ABC', 'USA');
+
+CREATE TABLE IF NOT EXISTS HistoryItenary
+(
+    Id           BIGINT       PRIMARY KEY AUTO_INCREMENT,
+    PccCode      VARCHAR(20)  NOT NULL,
+    HostCommand  VARCHAR(500) NOT NULL,
+    ResponseText MEDIUMTEXT   NULL,
+    UplId        VARCHAR(100) NULL,
+    Pnr          VARCHAR(10)  NULL,
+    ExecutedAt   DATETIME     NOT NULL,
+    CONSTRAINT chk_hi_command CHECK (HostCommand LIKE '*HI%')
+);
+
+-- Migration: add Pnr column if table already exists
+-- ALTER TABLE HistoryItenary ADD COLUMN Pnr VARCHAR(10) NULL;

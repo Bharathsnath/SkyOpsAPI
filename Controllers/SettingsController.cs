@@ -151,7 +151,7 @@ public class SettingsController : ControllerBase
     [HttpGet("connection-credentials")]
     public IActionResult GetConnectionCredentials()
     {
-        var all = _connectionCredentialStore.GetAll();
+        var all = _connectionCredentialStore.GetConnectionCredentials();
         var providers = all
             .GroupBy(c => c.PCCMasterCode.ToUpperInvariant())
             .Select(g => new

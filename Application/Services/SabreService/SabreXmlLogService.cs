@@ -27,6 +27,8 @@ public sealed class SabreXmlLogService : ISabreXmlLogService
         string pccCode = "",
         string status = "SUCCESS",
         string uplId = "",
+        string moduleName = "SabreQueueMCP",
+        string moduleCode = "QUEUE",
         CancellationToken cancellationToken = default)
     {
         try
@@ -37,13 +39,15 @@ public sealed class SabreXmlLogService : ISabreXmlLogService
 
             await _queueActionRepository.SaveApiLogAsync(
                 pccCode: pccCode,
-                serviceName: "QueueTextSource",
+                serviceName: moduleName,
                 hostCommand: hostCommand,
                 requestXml: soapRequest,
                 responseXml: soapResponse,
                 httpStatusCode: httpStatusCode,
                 status: status,
                 uplId: uplId,
+                moduleName: moduleName,
+                moduleCode: moduleCode,
                 cancellationToken: cancellationToken);
         }
         catch (Exception ex)

@@ -16,6 +16,7 @@ public sealed class SabreCommandService : ISabreCommandService
     private readonly Queue7PollingOptions _options;
     private readonly IErrorLogService _errorLogService;
     private readonly HttpClient _httpClient;
+    private readonly IAdmAnalysisRepository _admAnalysisRepository;
 
     public SabreCommandService(
         ISabreSessionService sessionService,
@@ -23,7 +24,8 @@ public sealed class SabreCommandService : ISabreCommandService
         ISabreXmlLogService xmlLogService,
         IOptions<Queue7PollingOptions> options,
         IErrorLogService errorLogService,
-        HttpClient httpClient)
+        HttpClient httpClient,
+        IAdmAnalysisRepository admAnalysisRepository)
     {
         _sessionService = sessionService;
         _credentialStore = credentialStore;
@@ -31,6 +33,7 @@ public sealed class SabreCommandService : ISabreCommandService
         _options = options.Value;
         _errorLogService = errorLogService;
         _httpClient = httpClient;
+        _admAnalysisRepository = admAnalysisRepository;
     }
 
     public Task<SabreCommandResponse> ExecuteEwrAsync(SabreCommandRequest request, CancellationToken cancellationToken = default)
@@ -163,7 +166,7 @@ public sealed class SabreCommandService : ISabreCommandService
         return (username, password, pccGroup.Key);
     }
 
-    private async Task<string> SendCommandAsync(SabreSession session, string hostCommand, string pccCode, CancellationToken cancellationToken)
+    private async Task<string> SendCommandAsync(SabreSession session, string hostCommand, string pccCode, CancellationToken cancellationToken, string moduleName = "SabreQueueMCP", string moduleCode = "QUEUE", string? pnr = null)
     {
         var apiOptions = _options.SabreApi;
         var messageId = $"{Guid.NewGuid()}@{apiOptions.FromPartyId}";
@@ -221,12 +224,19 @@ public sealed class SabreCommandService : ISabreCommandService
                 httpStatusCode: statusCode, pccCode: pccCode,
                 status: response.IsSuccessStatusCode ? "SUCCESS" : "FAILED",
                 uplId: session.UplId,
+                moduleName: moduleName,
+                moduleCode: moduleCode,
                 cancellationToken: cancellationToken);
 
             if (!response.IsSuccessStatusCode)
                 throw new HttpRequestException($"Sabre command '{hostCommand}' failed: HTTP {statusCode}");
 
-            return ExtractResponseText(responseText);
+            var result = ExtractResponseText(responseText);
+
+            await _admAnalysisRepository.SaveCommandHistoryAsync(
+                pccCode, hostCommand, result, session.UplId, pnr, cancellationToken);
+
+            return result;
         }
         catch (Exception ex)
         {
@@ -234,12 +244,14 @@ public sealed class SabreCommandService : ISabreCommandService
                 hostCommand: hostCommand, soapRequest: envelope,
                 soapResponse: string.IsNullOrWhiteSpace(responseText) ? ex.Message : responseText,
                 httpStatusCode: statusCode == 0 ? 500 : statusCode,
-                pccCode: pccCode, status: "FAILED", uplId: session.UplId, cancellationToken: cancellationToken);
+                pccCode: pccCode, status: "FAILED", uplId: session.UplId,
+                moduleName: moduleName, moduleCode: moduleCode,
+                cancellationToken: cancellationToken);
             throw;
         }
     }
 
-    public async Task<string> ExecuteHostCommandAsync(string officeId, string hostCommand, CancellationToken cancellationToken = default)
+    public async Task<string> ExecuteHostCommandAsync(string officeId, string hostCommand, CancellationToken cancellationToken = default, string moduleName = "SabreQueueMCP", string moduleCode = "QUEUE")
     {
         var (username, password, pccCode) = ResolveCredentials(officeId);
 
@@ -249,8 +261,31 @@ public sealed class SabreCommandService : ISabreCommandService
             session = await _sessionService.CreateSessionAsync(username, password, officeId, cancellationToken)
                 ?? throw new InvalidOperationException($"Session creation failed for OfficeId: {officeId}");
 
-            var response = await SendCommandAsync(session, hostCommand, pccCode, cancellationToken);
-            return response;
+            return await SendCommandAsync(session, hostCommand, pccCode, cancellationToken, moduleName, moduleCode);
+        }
+        finally
+        {
+            if (session is not null)
+                await _sessionService.CloseSessionAsync(session, cancellationToken);
+        }
+    }
+
+    public async Task<IReadOnlyList<string>> ExecuteSequentialCommandsAsync(
+        string officeId, IEnumerable<string> commands, CancellationToken cancellationToken = default, string moduleName = "SabreQueueMCP", string moduleCode = "QUEUE", string? pnr = null)
+    {
+        var (username, password, pccCode) = ResolveCredentials(officeId);
+
+        SabreSession? session = null;
+        try
+        {
+            session = await _sessionService.CreateSessionAsync(username, password, officeId, cancellationToken)
+                ?? throw new InvalidOperationException($"Session creation failed for OfficeId: {officeId}");
+
+            var results = new List<string>();
+            foreach (var cmd in commands)
+                results.Add(await SendCommandAsync(session, cmd, pccCode, cancellationToken, moduleName, moduleCode, pnr));
+
+            return results;
         }
         finally
         {
@@ -261,7 +296,7 @@ public sealed class SabreCommandService : ISabreCommandService
 
     public async Task<IReadOnlyList<string>> ExecutePagedHostCommandAsync(
         string officeId, string firstCommand, string nextPageCommand, string endMarker, int maxPages,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default, string moduleName = "SabreQueueMCP", string moduleCode = "QUEUE")
     {
         var (username, password, pccCode) = ResolveCredentials(officeId);
 
@@ -272,12 +307,12 @@ public sealed class SabreCommandService : ISabreCommandService
                 ?? throw new InvalidOperationException($"Session creation failed for OfficeId: {officeId}");
 
             var pages = new List<string>();
-            var page = await SendCommandAsync(session, firstCommand, pccCode, cancellationToken);
+            var page = await SendCommandAsync(session, firstCommand, pccCode, cancellationToken, moduleName, moduleCode);
             pages.Add(page);
 
-            for (var i = 0; i < maxPages && !page.Contains(endMarker, StringComparison.OrdinalIgnoreCase); i++)
+            for (var i = 0; i < maxPages && !IsEndOfPagedReport(page, endMarker); i++)
             {
-                page = await SendCommandAsync(session, nextPageCommand, pccCode, cancellationToken);
+                page = await SendCommandAsync(session, nextPageCommand, pccCode, cancellationToken, moduleName, moduleCode);
                 pages.Add(page);
             }
 
@@ -333,6 +368,11 @@ public sealed class SabreCommandService : ISabreCommandService
             || upper.Contains("VERIFY ORDER OF ITINERARY SEGMENTS")
             || System.Text.RegularExpressions.Regex.IsMatch(upper, @"\d+\.\d+[A-Z]+/[A-Z]+");
     }
+
+    private static bool IsEndOfPagedReport(string page, string endMarker)
+        => page.Contains(endMarker, StringComparison.OrdinalIgnoreCase)
+        || page.Contains("TOTAL DAILY SALES", StringComparison.OrdinalIgnoreCase)
+        || System.Text.RegularExpressions.Regex.IsMatch(page, @"VERIFY DATE-\d+", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
 
     private static string Escape(string value)
         => System.Security.SecurityElement.Escape(value) ?? string.Empty;

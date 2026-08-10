@@ -91,9 +91,11 @@ Open PNR
 
 *{PNR}
 
+Cross Border Ticket Detection Run ADM Rules
+*HI
+Married Segment Detection Run ADM Rules
+Changed Segment Detection Run ADM Rules
 ↓
-
-Run ADM Rules
 
 ↓
 

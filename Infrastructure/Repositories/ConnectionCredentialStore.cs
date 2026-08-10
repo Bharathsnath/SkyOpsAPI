@@ -27,7 +27,7 @@ public sealed class ConnectionCredentialStore : IConnectionCredentialStore
 
     public bool IsConfigured => !string.IsNullOrWhiteSpace(_connectionString);
 
-    public IReadOnlyList<ConnectionCredential> GetAll() => _credentials;
+    public IReadOnlyList<ConnectionCredential> GetConnectionCredentials() => _credentials;
 
     public IReadOnlyList<ConnectionCredential> GetByPcc(string pccCode) =>
         _credentials.Where(c => c.PCCMasterCode.Equals(pccCode, StringComparison.OrdinalIgnoreCase)).ToList();
