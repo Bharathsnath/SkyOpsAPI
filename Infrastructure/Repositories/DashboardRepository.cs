@@ -720,9 +720,19 @@ public sealed class DashboardRepository : IDashboardRepository
         // COMPANY FILTER
         // =====================================================
 
-        string companyFilter = prefixes.Count > 0
-            ? $"({string.Join(" OR ", prefixes.Select(x => $"qr.TransactionId LIKE '{x}%'"))})"
-            : "1=0";
+        // A prefix is valid if it has a non-numeric Pifix (letter-prefixed) OR represents a 9-digit numeric TransactionId.
+        // If no valid prefixes exist, company filter is not applicable (1=1).
+        var validPrefixes = prefixes
+            .Where(x => !string.IsNullOrEmpty(x) &&
+                        (!long.TryParse(x, out _) || (x.Length == 9 && x.All(char.IsDigit))))
+            .ToList();
+
+        string companyFilter = validPrefixes.Count > 0
+            ? $"({string.Join(" OR ", validPrefixes.Select(x =>
+                x.All(char.IsDigit)
+                    ? $"qr.TransactionId = '{x}'"
+                    : $"qr.TransactionId LIKE '{x}%'"))})"
+            : "1=1";
 
         return $"({pccFilter}) AND ({companyFilter})";
     }
