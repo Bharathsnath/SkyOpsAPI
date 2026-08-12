@@ -719,9 +719,13 @@ public sealed class DashboardRepository : IDashboardRepository
         // COMPANY FILTER
         // =====================================================
 
-        string companyFilter = prefixes.Count > 0
+        // Offline transactions (TransactionId not matching 2L+9D format, or NULL) are always included.
+        // Online transactions (2L+9D) are filtered by the user's assigned prefixes.
+        string onlineFilter = prefixes.Count > 0
             ? $"({string.Join(" OR ", prefixes.Select(x => $"qr.TransactionId LIKE '{x}%'"))})"
             : "1=0";
+
+        string companyFilter = $"(qr.TransactionId IS NULL OR qr.TransactionId NOT REGEXP '^[A-Za-z]{{2}}[0-9]{{9}}$' OR {onlineFilter})";
 
         return $"({pccFilter}) AND ({companyFilter})";
     }
