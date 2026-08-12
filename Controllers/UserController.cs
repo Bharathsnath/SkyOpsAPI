@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using SkyOpsQueueIntelligence.Application.DTO;
 using SkyOpsQueueIntelligence.Application.Interfaces;
 using SkyOpsQueueIntelligence.Infrastructure.Interfaces;
@@ -27,9 +28,16 @@ public class UserController : ControllerBase
         if (!int.TryParse(User.FindFirst("isAdmin")?.Value, out var currentRole))
             return Forbid();
 
-        // Role 1 can see every user. Role 2 can see operators only (Role = 2).
+        long? callerUserId = null;
+        if (currentRole != 1) // non-SuperAdmin: scope to own company
+        {
+            if (!long.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out var uid))
+                return Forbid();
+            callerUserId = uid;
+        }
+
         var visibleRole = currentRole == 1 ? (int?)null : currentRole == 2 ? 3 : -1;
-        return Ok(await _userService.GetAllAsync(visibleRole, ct));
+        return Ok(await _userService.GetAllAsync(visibleRole, callerUserId, ct));
     }
 
     [HttpGet("{username}")]
