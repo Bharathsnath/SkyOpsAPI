@@ -17,7 +17,7 @@ public class UserRepository : IUserRepository
         _logger = logger;
     }
 
-    public async Task<IReadOnlyList<User>> GetAllAsync(int? role = null, CancellationToken ct = default)
+    public async Task<IReadOnlyList<User>> GetAllAsync(int? role = null, long? callerUserId = null, CancellationToken ct = default)
     {
         if (string.IsNullOrWhiteSpace(_connectionString))
             throw new InvalidOperationException("SkyOpsDBconnection not configured");
@@ -25,13 +25,22 @@ public class UserRepository : IUserRepository
         await using var conn = new MySqlConnection(_connectionString);
         await conn.OpenAsync(ct);
 
-        const string sql = @"SELECT Id, Username, Email,  IsActive, FailedLoginAttempts, LockedUntil,
-                                    LastLogin, Role, Updatedby, CreatedAt, mobile
-                             FROM Users
-                             WHERE (@role IS NULL OR Role = @role)
-                             ORDER BY CreatedAt DESC, Id DESC";
+        const string sql = @"SELECT u.Id, u.Username, u.Email, u.IsActive, u.FailedLoginAttempts, u.LockedUntil,
+                                    u.LastLogin, u.Role, u.Updatedby, u.CreatedAt, u.mobile
+                             FROM Users u
+                             WHERE (@role IS NULL OR u.Role = @role)
+                               AND (@callerUserId IS NULL OR EXISTS (
+                                   SELECT 1 FROM UserMarketPermission ump
+                                   WHERE ump.UserId = u.Id AND ump.PermissionType = 'C' AND ump.IsActive = 1
+                                     AND ump.ReferenceId IN (
+                                         SELECT ReferenceId FROM UserMarketPermission
+                                         WHERE UserId = @callerUserId AND PermissionType = 'C' AND IsActive = 1
+                                     )
+                               ))
+                             ORDER BY u.CreatedAt DESC, u.Id DESC";
         await using var cmd = new MySqlCommand(sql, conn);
         cmd.Parameters.AddWithValue("@role", (object?)role ?? DBNull.Value);
+        cmd.Parameters.AddWithValue("@callerUserId", (object?)callerUserId ?? DBNull.Value);
 
         await using var rdr = await cmd.ExecuteReaderAsync(ct);
         var users = new List<User>();

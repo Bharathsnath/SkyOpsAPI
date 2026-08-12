@@ -4,7 +4,7 @@ namespace SkyOpsQueueIntelligence.Application.Interfaces;
 
 public interface IUserService
 {
-    Task<IReadOnlyList<User>> GetAllAsync(int? role = null, CancellationToken ct = default);
+    Task<IReadOnlyList<User>> GetAllAsync(int? role = null, long? callerUserId = null, CancellationToken ct = default);
     Task<User?> GetByUsernameAsync(string username, CancellationToken ct = default);
     Task<long> CreateUserAsync(CreateUserRequest request, CancellationToken ct = default);
     Task<bool> UpdateUserAsync(long id, UpdateUserRequest request, CancellationToken ct = default);

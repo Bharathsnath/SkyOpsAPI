@@ -4,7 +4,7 @@ namespace SkyOpsQueueIntelligence.Infrastructure.Interfaces;
 
 public interface IUserRepository
 {
-    Task<IReadOnlyList<User>> GetAllAsync(int? role = null, CancellationToken ct = default);
+    Task<IReadOnlyList<User>> GetAllAsync(int? role = null, long? callerUserId = null, CancellationToken ct = default);
     Task<User?> GetByUsernameAsync(string username, CancellationToken ct = default);
     Task UpdateLastLoginAsync(string username, CancellationToken ct = default);
     Task IncrementFailedAttemptsAsync(string username, CancellationToken ct = default);

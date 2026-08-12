@@ -15,10 +15,10 @@ public class UserService : IUserService
         _userDirectoryCache = userDirectoryCache;
     }
 
-    public async Task<IReadOnlyList<User>> GetAllAsync(int? role = null, CancellationToken ct = default)
+    public async Task<IReadOnlyList<User>> GetAllAsync(int? role = null, long? callerUserId = null, CancellationToken ct = default)
     {
-        var users = await _userRepository.GetAllAsync(role, ct);
-        var allUsers = role is null ? users : await _userRepository.GetAllAsync(ct: ct);
+        var users = await _userRepository.GetAllAsync(role, callerUserId, ct);
+        var allUsers = role is null ? users : await _userRepository.GetAllAsync(callerUserId: callerUserId, ct: ct);
         RefreshDirectoryCache(allUsers);
         return users;
     }
