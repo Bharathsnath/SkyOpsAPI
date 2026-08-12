@@ -12,13 +12,14 @@ namespace SkyOpsQueueIntelligence.Controllers;
 public class QueueController : ControllerBase
 {
     private readonly IQueueAnalysisService _service;
+    private readonly IEmailNotificationService _emailService;
    
     private static readonly int[] AllowedQueues = new[] { 7, 379, 62 };
 
-    public QueueController(IQueueAnalysisService service, IQueueActionRepository repository)
+    public QueueController(IQueueAnalysisService service, IQueueActionRepository repository, IEmailNotificationService emailService)
     {
         _service = service;
-      
+        _emailService = emailService;
     }
 
     [HttpGet("/queue-summary")]
@@ -77,5 +78,11 @@ public class QueueController : ControllerBase
         }
     }
 
-    
+    [HttpPost("/email/test-remark")]
+    public async Task<IActionResult> SendTestRemarkEmail([FromQuery] string to, CancellationToken ct)
+    {
+        if (string.IsNullOrWhiteSpace(to)) return BadRequest(new { message = "'to' email is required." });
+        await _emailService.SendTestRemarkEmailAsync(to, ct);
+        return Ok(new { message = $"Test remark email sent to {to}" });
+    }
 }

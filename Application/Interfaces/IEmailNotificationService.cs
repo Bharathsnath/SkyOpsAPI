@@ -14,4 +14,5 @@ public interface IEmailNotificationService
     Task SendPriorityPnrAlertAsync(string pnr, IReadOnlyList<string> toEmails, IReadOnlyList<QueueAnalysisResult> results, CancellationToken ct = default);
     Task SendPriorityPnrRegistrationAsync(string pnr, IReadOnlyList<string> toEmails, CancellationToken ct = default);
     Task SendRemarkEmailNotificationAsync(string pnr, string remarkEmail, IReadOnlyList<QueueAnalysisResult> results, CancellationToken ct = default);
+    Task SendTestRemarkEmailAsync(string toEmail, CancellationToken ct = default);
 }

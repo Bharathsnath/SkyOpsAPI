@@ -162,7 +162,7 @@ public class UserRepository : IUserRepository
         await conn.OpenAsync(ct);
 
         const string sql = @"UPDATE Users SET
-                             Username = @u, Email = @e, IsActive = @a, Role = @admin, Updatedby = @updatedby
+                             Username = @u, Email = @e, IsActive = @a, Role = @admin, Updatedby = @updatedby, mobile = @mobile
                              WHERE Id = @id";
         await using var cmd = new MySqlCommand(sql, conn);
         cmd.Parameters.AddWithValue("@u", user.Username);
@@ -170,6 +170,7 @@ public class UserRepository : IUserRepository
         cmd.Parameters.AddWithValue("@a", user.IsActive);
         cmd.Parameters.AddWithValue("@admin", user.Role);
         cmd.Parameters.AddWithValue("@updatedby", user.Id);
+        cmd.Parameters.AddWithValue("@mobile", user.mobile);
         cmd.Parameters.AddWithValue("@id", user.Id);
 
         return await cmd.ExecuteNonQueryAsync(ct) > 0;

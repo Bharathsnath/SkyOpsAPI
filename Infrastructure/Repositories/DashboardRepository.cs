@@ -165,7 +165,7 @@ public sealed class DashboardRepository : IDashboardRepository
         var critical = await QueryAsync(conn, $"""
             SELECT Pnr, Flight, TransactionId, StatusCode, QueueNumber, ActionText, ReasonText, PCC, ProviderName, UpdatedAt
              FROM wptravelitineraryflightqueuereports AS qr
-              WHERE StatusCode='HX' AND ActionTaken=1 AND {accessFilter} 
+              WHERE StatusCode='HX' AND ActionTaken=1 and isTicketed=1 AND {accessFilter} 
               ORDER BY UpdatedAt DESC
             """,
             r => new CriticalQueueItemDto(
@@ -200,10 +200,10 @@ public sealed class DashboardRepository : IDashboardRepository
                 r.IsDBNull(7) ? null : r.GetString(7), r.IsDBNull(8) ? null : r.GetString(8), r.GetDateTime(9)),
             ct, ("@userId", userId));
 
-        var total = await ScalarAsync<long>(conn, $"SELECT COUNT(*) FROM wptravelitineraryflightqueuereports AS qr WHERE StatusCode='HX' AND ActionTaken=1 AND {accessFilter}", ct, ("@userId", userId));
+       
         var ticketedtotal = await ScalarAsync<long>(conn, $"SELECT COUNT(*) FROM wptravelitineraryflightqueuereports AS qr WHERE StatusCode='HX' AND ActionTaken=1 and isTicketed = 1 AND {accessFilter}", ct, ("@userId", userId));
         var unticketedtotal = await ScalarAsync<long>(conn, $"SELECT COUNT(*) FROM wptravelitineraryflightqueuereports AS qr WHERE StatusCode='HX' AND ActionTaken=1 and isTicketed = 0 AND {accessFilter}", ct, ("@userId", userId));
-        return new CriticalQueueDto(total, critical, Unticketedcritical, ticketedtotal, unticketedtotal);
+        return new CriticalQueueDto( critical, Unticketedcritical, ticketedtotal, unticketedtotal);
     }
 
     public async Task<DelayAnalysisDto> GetDelayAnalysisAsync(int userId, CancellationToken ct = default)
@@ -225,9 +225,9 @@ public sealed class DashboardRepository : IDashboardRepository
         var postponed = await ScalarAsync<decimal?>(conn, $"SELECT COUNT(DelayMinutes) FROM wptravelitineraryflightqueuereports AS qr WHERE StatusCode='tk' AND DelayMinutes>0 AND ActionTaken=1 AND {accessFilter}", ct, ("@userId", userId));
         var preponed = await ScalarAsync<int?>(conn, $"SELECT COUNT(DelayMinutes) FROM wptravelitineraryflightqueuereports AS qr WHERE StatusCode='tk' AND DelayMinutes<0 AND ActionTaken=1 AND {accessFilter}", ct, ("@userId", userId));
         var ontime = await ScalarAsync<int?>(conn, $"SELECT COUNT(DelayMinutes) FROM wptravelitineraryflightqueuereports AS qr WHERE StatusCode='tk' AND DelayMinutes=0 AND ActionTaken=1 AND {accessFilter}", ct, ("@userId", userId));
-        var scheduleChange = await ScalarAsync<long>(conn, $"SELECT COUNT(*) FROM wptravelitineraryflightqueuereports AS qr WHERE StatusCode='tk' AND ActionTaken=1 AND {accessFilter}", ct, ("@userId", userId));
+        var FlightChange = await ScalarAsync<long>(conn, $"SELECT COUNT(*) FROM wptravelitineraryflightqueuereports AS qr WHERE StatusCode='tk' AND DelayMinutes IS NULL AND ActionTaken=1 AND {accessFilter}", ct, ("@userId", userId));
 
-        return new DelayAnalysisDto(scheduleChange, postponed, preponed, ontime, delays);
+        return new DelayAnalysisDto(preponed, postponed, FlightChange, ontime, delays);
     }
 
     public async Task<FlightImpactDto> GetFlightImpactAsync(int userId, CancellationToken ct = default)

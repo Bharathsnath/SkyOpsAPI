@@ -51,7 +51,8 @@ public class UserService : IUserService
             Username = request.Username,
             Email = request.Email,
             IsActive = request.IsActive,
-            Role = request.Role
+            Role = request.Role,
+            mobile = request.Mobile
         };
         var updated = await _userRepository.UpdateUserAsync(user, ct);
         if (updated)

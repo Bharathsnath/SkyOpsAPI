@@ -34,4 +34,5 @@ public class UpdateUserRequest
     public bool IsActive { get; set; }
     public int Role { get; set; }
     public int UpdatedBy { get; set; }
+    public long Mobile { get; set; }    
 }

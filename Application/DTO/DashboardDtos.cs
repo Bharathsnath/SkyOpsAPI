@@ -23,10 +23,10 @@ public sealed record FlightStatusSummaryDto(string Status, long Total);
 public sealed record FlightStatusDto(IReadOnlyList<FlightStatusItemDto> Flights, IReadOnlyList<FlightStatusSummaryDto> Summary);
 
 public sealed record CriticalQueueItemDto(string Pnr, string Flight, string TransactionId, string Status, int Queue, string Action, string? Reason, string? PCC, string? ProviderName, DateTime UpdatedAt);
-public sealed record CriticalQueueDto(long TotalCritical, IReadOnlyList<CriticalQueueItemDto> CriticalItems, IReadOnlyList<CriticalQueueItemDto> UnticketedCriticalItems, long TicketedTotal, long UnticketedTotal);
+public sealed record CriticalQueueDto( IReadOnlyList<CriticalQueueItemDto> CriticalItems, IReadOnlyList<CriticalQueueItemDto> UnticketedCriticalItems, long TicketedTotal, long UnticketedTotal);
 
 public sealed record DelayItemDto(string Pnr, string Flight, string TransactionId, int? DelayMinutes, decimal? DelayHours, int Queue, string? PCC, string? ProviderName, DateTime UpdatedAt);
-public sealed record DelayAnalysisDto(long ScheduleChange, decimal? PostponedPnrCount, int? PreponedPnrCount, int? OntimePnrCount, IReadOnlyList<DelayItemDto> Delays);
+public sealed record DelayAnalysisDto(  int? PreponedPnrCount,decimal? PostponedPnrCount,long FlightChange, int? OntimePnrCount, IReadOnlyList<DelayItemDto> Delays);
 
 public sealed record FlightImpactItemDto(string Pnr, string Flight, string TransactionId, string Status, int Queue, string Action, string? Reason, string? PCC, string? ProviderName, DateTime UpdatedAt);
 public sealed record FlightImpactDto(IReadOnlyList<FlightImpactItemDto> ImpactedFlights, long TotalImpacted);

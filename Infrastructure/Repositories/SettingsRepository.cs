@@ -262,11 +262,7 @@ public sealed class SettingsRepository : ISettingsRepository
             ct,
             pccCode));
 
-        credentials.AddRange(await ReadCredentialsFromConnectionAsync(
-            OpenAsync,
-            "SkyOps DB",
-            ct,
-            pccCode));
+        
 
         return credentials
             .OrderBy(c => c.PCCMasterCode)

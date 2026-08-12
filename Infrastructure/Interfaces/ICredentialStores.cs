@@ -16,8 +16,8 @@ public interface IConnectionCredentialStore
 public interface ICredentialStore
 {
     bool IsConfigured { get; }
-    IReadOnlyList<PccCredential> GetAll();
-    IReadOnlyList<PccCredential> GetByPcc(string pccCode);
+    IReadOnlyList<StorePccCredential> GetAll();
+    IReadOnlyList<StorePccCredential> GetByPcc(string pccCode);
     string? GetTagValue(string pccCode, string tagName);
     Task LoadAsync(CancellationToken cancellationToken = default);
 }

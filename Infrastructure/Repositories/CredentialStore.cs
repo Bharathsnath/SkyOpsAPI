@@ -13,7 +13,7 @@ public sealed class CredentialStore : ICredentialStore
     private readonly string? _connectionString;
     private readonly ILogger<CredentialStore> _logger;
     private readonly IServiceProvider _serviceProvider;
-    private List<PccCredential> _credentials = new List<PccCredential>();
+    private List<StorePccCredential> _credentials = new List<StorePccCredential>();
 
     public CredentialStore(
         IConfiguration configuration,
@@ -29,9 +29,9 @@ public sealed class CredentialStore : ICredentialStore
 
     public bool IsConfigured => !string.IsNullOrWhiteSpace(_connectionString);
 
-    public IReadOnlyList<PccCredential> GetAll() => _credentials;
+    public IReadOnlyList<StorePccCredential> GetAll() => _credentials;
 
-    public IReadOnlyList<PccCredential> GetByPcc(string pccCode) =>
+    public IReadOnlyList<StorePccCredential> GetByPcc(string pccCode) =>
         _credentials.Where(c => c.PCCMasterCode.Equals(pccCode, StringComparison.OrdinalIgnoreCase)).ToList();
 
     public string? GetTagValue(string pccCode, string tagName) =>
@@ -65,11 +65,11 @@ public sealed class CredentialStore : ICredentialStore
             await using var cmd = new MySqlCommand(sql, connection);
             await using var reader = await cmd.ExecuteReaderAsync(cancellationToken);
 
-            var list = new List<PccCredential>();
+            var list = new List<StorePccCredential>();
 
             while (await reader.ReadAsync(cancellationToken))
             {
-                list.Add(new PccCredential
+                list.Add(new StorePccCredential
                 {
                     Cred_ID = reader.GetInt64("Cred_ID"),
                     PCCMasterCode = GetStringOrEmpty(reader, "PCCMasterCode"),

@@ -40,7 +40,25 @@ public sealed class PccCredential
     
     public string AirlineCurrencyCode { get; init; } = string.Empty;
 }
-
+public sealed class StorePccCredential
+{
+    public long Cred_ID { get; init; }
+    public string SourceDb { get; init; } = string.Empty;
+    public string PCCMasterCode { get; init; } = string.Empty;
+    public string Provider { get; init; } = string.Empty;
+    public string ServiceType { get; init; } = string.Empty;
+    public string SectorType { get; init; } = string.Empty;
+    public string TagName { get; init; } = string.Empty;
+    public string TagValue { get; init; } = string.Empty;
+    public int RecordStatus { get; init; }
+    
+    public int CreatedUser { get; init; }
+    public DateTime? CreatedDate { get; init; }
+    public int ModifiedUser { get; init; }
+    public DateTime? ModifiedDate { get; init; }
+    
+    public string AirlineCurrencyCode { get; init; } = string.Empty;
+}
 public sealed class PccListEntry
 {
     public string Provider { get; init; } = string.Empty;
