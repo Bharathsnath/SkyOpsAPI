@@ -183,6 +183,76 @@ public class AdmAnalysisService : IAdmAnalysisService
         _logger.LogInformation("ADM analysis run completed. Total PNRs processed: {Count}", pnrMap.Count);
     }
 
+    // Matches PNR locator from a queue item header: e.g. ODLOCF  or  1V08.1V08*AWC ...
+    private static readonly System.Text.RegularExpressions.Regex s_queuePnrRegex = new(
+        @"^([A-Z0-9]{6})\s*$",
+        System.Text.RegularExpressions.RegexOptions.Multiline | System.Text.RegularExpressions.RegexOptions.Compiled);
+
+    public async Task RunQueue379ChurnScanAsync(CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Starting Queue 379 churn scan.");
+
+        var officeIds = _credentialStore.GetAll()
+            .Where(c => c.TagName.Equals("SourceOffice", StringComparison.OrdinalIgnoreCase) && !string.IsNullOrWhiteSpace(c.TagValue))
+            .Select(c => c.TagValue)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToList();
+
+        if (officeIds.Count == 0)
+        {
+            _logger.LogWarning("No SourceOffice credentials found; aborting Queue 379 churn scan.");
+            return;
+        }
+
+        var marketCache = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var officeId in officeIds)
+        {
+            _logger.LogInformation("Reading Q/379 for PCC: {OfficeId}", officeId);
+
+            var pages = await _sabreCommandService.ExecutePagedHostCommandAsync(
+                officeId, "Q/379", "I", "QUEUE EMPTY", maxPages: 500, cancellationToken,
+                moduleName: "SabreADMAnalysis", moduleCode: "ADM");
+
+            var combinedText = string.Join("\n", pages);
+
+            // Extract 6-char PNR locators from queue items
+            var pnrs = s_queuePnrRegex.Matches(combinedText)
+                .Select(m => m.Groups[1].Value.ToUpperInvariant())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            _logger.LogInformation("Queue 379 PNRs found for {OfficeId}: {Count}", officeId, pnrs.Count);
+
+            foreach (var pnr in pnrs)
+            {
+                try
+                {
+                    var responses = await _sabreCommandService.ExecuteSequentialCommandsAsync(
+                        officeId, [$"*{pnr}", "*HI"], cancellationToken,
+                        moduleName: "SabreADMAnalysis", moduleCode: "ADM", pnr: pnr);
+
+                    var pnrText = responses[0];
+                    var hiText = responses[1];
+
+                    var segments = ExtractSegmentKeys(hiText);
+                    var duplicates = segments.GroupBy(s => s).Where(g => g.Count() > 1).ToList();
+                    if (!duplicates.Any()) continue;
+
+                    var analysis = await RunRulesAsync(pnr, null, pnrText, hiText, officeId, marketCache, cancellationToken);
+                    analysis = analysis with { TransactionId = ExtractTransactionId(pnrText) };
+                    await _repository.SaveAdmAnalysisAsync(analysis, cancellationToken);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Queue 379 churn scan failed for PNR {Pnr}", pnr);
+                }
+            }
+        }
+
+        _logger.LogInformation("Queue 379 churn scan completed.");
+    }
+
     private async Task<AdmAnalysisDto> RunRulesAsync(string pnr, string? ticketNo, string pnrText, string hiText, string officeId, Dictionary<string, string> marketCache, CancellationToken cancellationToken)
     {
         // Rule 1 — Cross Border
@@ -283,14 +353,15 @@ public class AdmAnalysisService : IAdmAnalysisService
     }
 
     // Rule 2 — segment key: only AS lines with HK status (real bookings, not NN/TK/SS attempts)
-    // Format: AS   VJ1806Z 03AUG AMDSGN SS/HK3  or  AS   GF 135E 12AUG DELBAH*SS/HK1
+    // Format: AS   VJ1806Z 03AUG AMDSGN SS/HK3  or  AS   GF 65O 25AUG BOMBAH*HK1
+    // Status delimiter can be * (e.g. BOMBAH*HK1) or SS/ (e.g. AMDSGN SS/HK3)
     private static readonly System.Text.RegularExpressions.Regex s_hiSegmentRegex = new(
-        @"^\s*AS\s+([A-Z]{2})\s*(\d{1,4}[A-Z]?)\s+(\d{2}[A-Z]{3})\s+([A-Z]{3})([A-Z]{3})[^\n]*?/HK\d",
+        @"^\s*AS\s+([A-Z]{2})\s*(\d{1,4}[A-Z]?)\s+(\d{2}[A-Z]{3})\s+([A-Z]{3})([A-Z]{3})[^\n]*?[*/]HK\d",
         System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Multiline | System.Text.RegularExpressions.RegexOptions.Compiled);
 
     // Fallback: no date — AS VJ1806Z AMDSGN SS/HK3
     private static readonly System.Text.RegularExpressions.Regex s_hiSegmentNoDtRegex = new(
-        @"^\s*AS\s+([A-Z]{2})\s*(\d{1,4}[A-Z]?)\s+([A-Z]{3})([A-Z]{3})[^\n]*?/HK\d",
+        @"^\s*AS\s+([A-Z]{2})\s*(\d{1,4}[A-Z]?)\s+([A-Z]{3})([A-Z]{3})[^\n]*?[*/]HK\d",
         System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Multiline | System.Text.RegularExpressions.RegexOptions.Compiled);
 
     private static List<string> ExtractSegmentKeys(string text)
