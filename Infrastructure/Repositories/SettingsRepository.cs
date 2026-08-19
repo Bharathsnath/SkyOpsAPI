@@ -583,9 +583,9 @@ public sealed class SettingsRepository : ISettingsRepository
                 PccValue = reader.IsDBNull(reader.GetOrdinal("PCCCode")) ? string.Empty : reader.GetString("PCCCode"),
                 Emails = reader.IsDBNull(reader.GetOrdinal("Emails")) ? string.Empty : reader.GetString("Emails"),
                 IsActive = reader.IsDBNull(reader.GetOrdinal("IsActive")) ? 0 : reader.GetInt32("IsActive"),
-                CreatedBy = reader.IsDBNull(reader.GetOrdinal("CreatedBy")) ? string.Empty : reader.GetString("CreatedBy"),
+                CreatedBy = reader.IsDBNull(reader.GetOrdinal("CreatedBy")) ? 0 : reader.GetInt32("CreatedBy"),
                 CreatedDate = reader.IsDBNull(reader.GetOrdinal("CreatedDate")) ? null : reader.GetDateTime("CreatedDate"),
-                ModifiedBy = reader.IsDBNull(reader.GetOrdinal("ModifiedBy")) ? string.Empty : reader.GetString("ModifiedBy"),
+                ModifiedBy = reader.IsDBNull(reader.GetOrdinal("ModifiedBy")) ? 0 : reader.GetInt32("ModifiedBy"),
                 ModifiedDate = reader.IsDBNull(reader.GetOrdinal("ModifiedDate")) ? null : reader.GetDateTime("ModifiedDate")
             });
         }

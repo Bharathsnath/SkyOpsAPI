@@ -84,8 +84,8 @@ public class PccAgentEmailMasterRequest
     public string? Pcc { get; set; }
     public string Emails { get; set; } = string.Empty;
     public int IsActive { get; set; }
-    public string CreatedBy { get; set; } = string.Empty;
+    public int CreatedBy { get; set; }
     public DateTime? CreatedDate { get; set; }
-    public string ModifiedBy { get; set; } = string.Empty;
+    public int ModifiedBy { get; set; }
     public DateTime? ModifiedDate { get; set; }
 }

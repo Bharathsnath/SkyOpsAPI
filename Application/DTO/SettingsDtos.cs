@@ -85,9 +85,9 @@ public sealed class PccAgentEmailMaster
     public string? Pcc { get; init; }
     public string Emails { get; init; } = string.Empty;
     public int IsActive { get; init; }
-    public string CreatedBy { get; init; } = string.Empty;
+    public int CreatedBy { get; init; }
     public DateTime? CreatedDate { get; init; }
-    public string ModifiedBy { get; init; } = string.Empty;
+    public int ModifiedBy { get; init; } 
     public DateTime? ModifiedDate { get; init; }
 
     [JsonIgnore]

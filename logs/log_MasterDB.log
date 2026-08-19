@@ -559,5 +559,10 @@ db update
 2026-08-12 17:02:40 +05:30 | LoadAsync | Success | Loaded 32 rows
 2026-08-12 17:07:26 +05:30 | LoadAsync | Success | Loaded 32 rows
 2026-08-12 17:17:31 +05:30 | LoadAsync | Success | Loaded 32 rows
+<<<<<<< HEAD
 >>>>>>> develop
 2026-08-12 17:38:44 +05:30 | LoadAsync | Success | Loaded 32 rows
+=======
+2026-08-17 12:46:29 +05:30 | LoadAsync | Success | Loaded 32 rows
+2026-08-17 13:22:22 +05:30 | LoadAsync | Success | Loaded 32 rows
+>>>>>>> develop
