@@ -160,10 +160,15 @@ public class DashboardController : ControllerBase
         if (string.IsNullOrWhiteSpace(pnr))
             return BadRequest(new { message = "Pnr and Remarks are required." });
 
-        var updated = await _queueService.UpdateRemarksAsync(pnr, 0, "", "", remarks, cancellationToken);
+        if (!TryGetUserId(out var userId))
+            return Unauthorized(new { message = "The authenticated user ID is missing or invalid." });
+
+        var updated = await _queueService.UpdateRemarksAsync(pnr, 0, "", "", remarks, userId, cancellationToken);
         if (!updated)
             return NotFound(new { pnr, message = "No queue action row was found for the supplied PNR." });
 
         return Ok(new { pnr, remarks, actionTaken = 0, message = "Remarks updated successfully." });
     }
+
+    
 }

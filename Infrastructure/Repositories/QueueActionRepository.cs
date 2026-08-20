@@ -474,7 +474,7 @@ public sealed class QueueActionRepository : IQueueActionRepository
         }
     }
 
-    public async Task<bool> UpdateRemarksAsync(
+     public async Task<bool> UpdateAgentRemarksAsync(
         string pnr,
         int segmentNumber,
         string flight,
@@ -493,7 +493,44 @@ public sealed class QueueActionRepository : IQueueActionRepository
 
         const string sql = """
             UPDATE wptravelitineraryflightqueuereports
+            SET CustomeRemarks = @Remarks,
+                CustomerActiontaken = 0,
+                UpdatedAt = CONVERT_TZ(UTC_TIMESTAMP(), '+00:00', '+05:30')
+            WHERE Pnr = @Pnr;
+            """;
+
+        await using var command = new MySqlCommand(sql, connection);
+        command.Parameters.AddWithValue("@Pnr", pnr);
+        command.Parameters.AddWithValue("@Remarks", remarks);
+       
+
+        var affected = await command.ExecuteNonQueryAsync(cancellationToken);
+        return affected > 0;
+    }
+    
+
+    public async Task<bool> UpdateRemarksAsync(
+        string pnr,
+        int segmentNumber,
+        string flight,
+        string statusCode,
+        string remarks,
+        int remarkUpdatedBy,
+        CancellationToken cancellationToken = default)
+    {
+        if (!IsConfigured)
+        {
+            _logger.LogWarning("Remarks update skipped because TransDBConnection is empty.");
+            return false;
+        }
+
+        await using var connection = new MySqlConnection(_connectionString);
+        await connection.OpenAsync(cancellationToken);
+
+        const string sql = """
+            UPDATE wptravelitineraryflightqueuereports
             SET Remarks = @Remarks,
+                RemarkUpdatedBy = @RemarkUpdatedBy,
                 ActionTaken = 0,
                 UpdatedAt = CONVERT_TZ(UTC_TIMESTAMP(), '+00:00', '+05:30')
             WHERE Pnr = @Pnr;
@@ -502,6 +539,7 @@ public sealed class QueueActionRepository : IQueueActionRepository
         await using var command = new MySqlCommand(sql, connection);
         command.Parameters.AddWithValue("@Pnr", pnr);
         command.Parameters.AddWithValue("@Remarks", remarks);
+        command.Parameters.AddWithValue("@RemarkUpdatedBy", remarkUpdatedBy);
 
         var affected = await command.ExecuteNonQueryAsync(cancellationToken);
         return affected > 0;
