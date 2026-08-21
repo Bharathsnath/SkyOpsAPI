@@ -183,9 +183,9 @@ public class AdmAnalysisService : IAdmAnalysisService
         _logger.LogInformation("ADM analysis run completed. Total PNRs processed: {Count}", pnrMap.Count);
     }
 
-    // Matches PNR locator from a queue item header: e.g. ODLOCF  or  1V08.1V08*AWC ...
+    // Matches PNR locator from a queue item header: e.g. ODLOCF or 1V08.1V08*AWC 1053/08AUG26 ODLOCF H
     private static readonly System.Text.RegularExpressions.Regex s_queuePnrRegex = new(
-        @"^([A-Z0-9]{6})\s*$",
+        @"^(?:[A-Z0-9]{6}\s*$|[A-Z0-9]{4}[.\s]+[A-Z0-9]{4}\*[A-Z0-9]+\s+\d{1,4}/\d{2}[A-Z]{3}\d{2}\s+(?<pnr>[A-Z0-9]{6})\b)",
         System.Text.RegularExpressions.RegexOptions.Multiline | System.Text.RegularExpressions.RegexOptions.Compiled);
 
     public async Task RunQueue379ChurnScanAsync(CancellationToken cancellationToken = default)
@@ -204,25 +204,24 @@ public class AdmAnalysisService : IAdmAnalysisService
             return;
         }
 
-        var marketCache = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-
         foreach (var officeId in officeIds)
         {
-            _logger.LogInformation("Reading Q/379 for PCC: {OfficeId}", officeId);
+            _logger.LogInformation("Reading Q/0 for PCC: {OfficeId}", officeId);
 
             var pages = await _sabreCommandService.ExecutePagedHostCommandAsync(
-                officeId, "Q/379", "I", "QUEUE EMPTY", maxPages: 500, cancellationToken,
+                officeId, "Q/0", "I", "QUEUE EMPTY", maxPages: 500, cancellationToken,
                 moduleName: "SabreADMAnalysis", moduleCode: "ADM");
 
             var combinedText = string.Join("\n", pages);
 
             // Extract 6-char PNR locators from queue items
             var pnrs = s_queuePnrRegex.Matches(combinedText)
-                .Select(m => m.Groups[1].Value.ToUpperInvariant())
+                .Select(m => m.Groups["pnr"].Success ? m.Groups["pnr"].Value : m.Groups[0].Value.Trim())
+                .Select(pnr => pnr.ToUpperInvariant())
                 .Distinct(StringComparer.OrdinalIgnoreCase)
                 .ToList();
 
-            _logger.LogInformation("Queue 379 PNRs found for {OfficeId}: {Count}", officeId, pnrs.Count);
+            _logger.LogInformation("Queue 0 PNRs found for {OfficeId}: {Count}", officeId, pnrs.Count);
 
             foreach (var pnr in pnrs)
             {
@@ -236,21 +235,29 @@ public class AdmAnalysisService : IAdmAnalysisService
                     var hiText = responses[1];
 
                     var segments = ExtractSegmentKeys(hiText);
-                    var duplicates = segments.GroupBy(s => s).Where(g => g.Count() > 1).ToList();
+                    var duplicates = segments.GroupBy(s => s).Where(g => g.Count() > 2).ToList();
                     if (!duplicates.Any()) continue;
 
-                    var analysis = await RunRulesAsync(pnr, null, pnrText, hiText, officeId, marketCache, cancellationToken);
-                    analysis = analysis with { TransactionId = ExtractTransactionId(pnrText) };
+                    var analysis = new AdmAnalysisDto
+                    {
+                        Pnr = pnr,
+                        IsChurnedSegment = true,
+                        ChurnedSegmentCount = duplicates.Count,
+                        RiskScore = 30,
+                        Remarks = "ChurnedSeg",
+                        TransactionId = ExtractTransactionId(pnrText),
+                        AnalyzedAt = DateTime.UtcNow
+                    };
                     await _repository.SaveAdmAnalysisAsync(analysis, cancellationToken);
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Queue 379 churn scan failed for PNR {Pnr}", pnr);
+                    _logger.LogError(ex, "Queue 0 churn scan failed for PNR {Pnr}", pnr);
                 }
             }
         }
 
-        _logger.LogInformation("Queue 379 churn scan completed.");
+        _logger.LogInformation("Queue 0 churn scan completed.");
     }
 
     private async Task<AdmAnalysisDto> RunRulesAsync(string pnr, string? ticketNo, string pnrText, string hiText, string officeId, Dictionary<string, string> marketCache, CancellationToken cancellationToken)
@@ -270,14 +277,7 @@ public class AdmAnalysisService : IAdmAnalysisService
         var risk = 0;
         if (isCrossBorder) risk += 40;
 
-        // Rule 2 — Churned Segment
-        var segments = ExtractSegmentKeys(hiText);
-        var duplicates = segments.GroupBy(s => s).Where(g => g.Count() > 1).ToList();
-        var churnedCount = duplicates.Count;
-        var isChurned = duplicates.Any();
-        if (isChurned) risk += 30;
-
-        // Rule 3 — Married Segment: a single R- block has 2+ distinct HK AS flights (connecting itinerary moved together)
+        // Rule 2 — Married Segment: a single R- block has 2+ distinct HK AS flights (connecting itinerary moved together)
         var signatures = ExtractItinerarySignatures(hiText);
         var isMarried = signatures.Any(sig => sig.Split('|').Length > 1);
         var uniqueItineraryGroups = signatures.Distinct().Count();
@@ -292,12 +292,10 @@ public class AdmAnalysisService : IAdmAnalysisService
             TicketMarket = ticketMarket,
             BookingMarket = bookingMarket,
             IsCrossBorder = isCrossBorder,
-            ChurnedSegmentCount = churnedCount,
-            IsChurnedSegment = isChurned,
             MarriedSegmentCount = uniqueItineraryGroups,
             IsMarriedSegment = isMarried,
             RiskScore = risk,
-            Remarks = BuildRemarks(isCrossBorder, isChurned, isMarried, ticketMarket, bookingMarket),
+            Remarks = BuildRemarks(isCrossBorder, false, isMarried, ticketMarket, bookingMarket),
             AnalyzedAt = DateTime.UtcNow
         };
     }
