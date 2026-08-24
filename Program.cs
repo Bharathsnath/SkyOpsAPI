@@ -90,7 +90,7 @@ app.MapHub<QueueNotificationsHub>("/queue-notifications");
 app.MapMcp("/mcp");
 app.MapGet("/", () => "SkyOps Queue Intelligence MCP Running - analysis only (queues 7, 379, 62)");
 
-var appUrl = builder.Configuration["EmailNotification:BaseUrl"];
+var appUrl = builder.Configuration["applicationUrl"];
 if (!string.IsNullOrEmpty(appUrl) && builder.Environment.IsDevelopment())
     app.Run(appUrl);
 else

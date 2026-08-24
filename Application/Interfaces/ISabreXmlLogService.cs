@@ -10,5 +10,7 @@ public interface ISabreXmlLogService
         string pccCode = "",
         string status = "SUCCESS",
         string uplId = "",
+        string moduleName = "SabreQueueMCP",
+        string moduleCode = "QUEUE",
         CancellationToken cancellationToken = default);
 }

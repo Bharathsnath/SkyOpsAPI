@@ -46,14 +46,19 @@ public sealed class SettingsService : ISettingsService
         var config = _adapter.ToAppConfiguration(request, request.Id);
         return ReloadAfterChangeAsync(_repository.UpdateAsync(config, ct), ct);
     }
-    public Task<bool> DeleteAsync(long id, CancellationToken ct = default) => ReloadAfterChangeAsync(_repository.DeleteAsync(id, ct), ct);
-    public Task<List<AppConfiguration>> GetLoggingConfigurationsAsync(CancellationToken ct = default) => _repository.GetLoggingConfigurationsAsync(ct);
-    public Task UpdateConfigurationAsync(string configKey, bool enabled, int modifiedUser, CancellationToken ct = default) => _repository.UpdateConfigurationAsync(configKey, enabled, modifiedUser, ct);
-    public Task<IReadOnlyList<PccCredential>> GetPccCredentialsAsync(CancellationToken ct = default) => _repository.GetPccCredentialsAsync(ct);
+    public Task<bool> 
+    DeleteAsync(long id, CancellationToken ct = default) => ReloadAfterChangeAsync(_repository.DeleteAsync(id, ct), ct);
+    public Task<List<AppConfiguration>>
+     GetLoggingConfigurationsAsync(CancellationToken ct = default) => _repository.GetLoggingConfigurationsAsync(ct);
+    public Task
+     UpdateConfigurationAsync(string configKey, bool enabled, int modifiedUser, CancellationToken ct = default) => _repository.UpdateConfigurationAsync(configKey, enabled, modifiedUser, ct);
+    public Task<IReadOnlyList<PccCredential>> 
+    GetPccCredentialsAsync(CancellationToken ct = default) => _repository.GetPccCredentialsAsync(ct);
     public Task<IReadOnlyList<PccCredential>> GetPccCredentialsByPccAsync(string pccCode, CancellationToken ct = default) => _repository.GetPccCredentialsByPccAsync(pccCode, ct);
-    public Task<IReadOnlyList<PccGroupEntry>> GetPccListAsync(CancellationToken ct = default)
+    public async Task<IReadOnlyList<PccGroupEntry>> GetPccListAsync(CancellationToken ct = default)
     {
-        var result = _credentialStore.GetAll()
+        var Fullcredentials = await _credentialStore.GetAllFullAsync(ct);
+        var result = Fullcredentials
             .GroupBy(c => c.PCCMasterCode, StringComparer.OrdinalIgnoreCase)
             .Select(g => new
             {
@@ -81,7 +86,7 @@ public sealed class SettingsService : ISettingsService
             })
             .ToList();
 
-        return Task.FromResult<IReadOnlyList<PccGroupEntry>>(result);
+        return result;
     }
     public Task<long> CreateAppConfigurationAsync(AppConfigurationRequest request, CancellationToken ct = default)
     {

@@ -24,9 +24,15 @@ public sealed class QueueService : IQueueService
         catch (Exception ex) { await _errorLogService.LogAsync(ex, "QueueService", "SkyOpsQueueIntelligence", "SERVICE", nameof(GetDelayAnalysisByPnrAsync), nameof(QueueService), null, ct); throw; }
     }
 
-    public async Task<bool> UpdateRemarksAsync(string pnr, int segmentNumber, string flight, string statusCode, string remarks, CancellationToken ct = default)
+    public async Task<bool> UpdateRemarksAsync(string pnr, int segmentNumber, string flight, string statusCode, string remarks, int remarkUpdatedBy, CancellationToken ct = default)
     {
-        try { return await _repository.UpdateRemarksAsync(pnr, segmentNumber, flight, statusCode, remarks, ct); }
+        try { return await _repository.UpdateRemarksAsync(pnr, segmentNumber, flight, statusCode, remarks, remarkUpdatedBy, ct); }
         catch (Exception ex) { await _errorLogService.LogAsync(ex, "QueueService", "SkyOpsQueueIntelligence", "SERVICE", nameof(UpdateRemarksAsync), nameof(QueueService), null, ct); throw; }
+    }
+
+    public async Task<bool> UpdateAgentRemarksAsync(string pnr, int segmentNumber, string flight, string statusCode, string remarks, CancellationToken ct = default)
+    {
+        try { return await _repository.UpdateAgentRemarksAsync(pnr, segmentNumber, flight, statusCode, remarks, ct); }
+        catch (Exception ex) { await _errorLogService.LogAsync(ex, "QueueService", "SkyOpsQueueIntelligence", "SERVICE", nameof(UpdateAgentRemarksAsync), nameof(QueueService), null, ct); throw; }
     }
 }

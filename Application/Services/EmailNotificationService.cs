@@ -155,7 +155,7 @@ public sealed class EmailNotificationService : IEmailNotificationService
             if (toEmails.Count == 0) return;
 
             var baseUrl = section["BaseUrl"] ?? "https://skyopsapibeta.akbartravelsonline.com";
-            var pnrUrl = $"{baseUrl}/pnr-details/{pnr}";
+            var pnrUrl = $"{baseUrl}/pnr-detail/{pnr}";
             var registeredAt = DateTime.UtcNow.ToString("yyyy-MM-dd · HH:mm") + " UTC";
 
             var body = $"""
@@ -201,7 +201,7 @@ public sealed class EmailNotificationService : IEmailNotificationService
             if (toEmails.Count == 0) return;
 
             var baseUrl = section["BaseUrl"] ?? "https://skyopsapibeta.akbartravelsonline.com";
-            var pnrUrl = $"{baseUrl}/pnr-details/{pnr}";
+            var pnrUrl = $"{baseUrl}/pnr-detail/{pnr}";
             var processedAt = DateTime.UtcNow.ToString("yyyy-MM-dd · HH:mm") + " UTC";
 
             var body = $"""
@@ -250,38 +250,64 @@ public sealed class EmailNotificationService : IEmailNotificationService
             if (toAddresses.Length == 0) return;
 
             var baseUrl = section["BaseUrl"] ?? "https://skyopsapibeta.akbartravelsonline.com";
-            var pnrUrl = $"{baseUrl}/pnr-details/{pnr}";
-            var processedAt = DateTime.UtcNow.ToString("yyyy-MM-dd · HH:mm") + " UTC";
-            var actionCount = results.SelectMany(r => r.Actions).Count();
+            var pnrUrl = $"{baseUrl}/agent-pnr-detail/{pnr}";
+            var actions = results.SelectMany(result => result.Actions).ToList();
+            var status = string.Join(", ", actions
+                .Select(action => action.Status)
+                .Where(value => !string.IsNullOrWhiteSpace(value))
+                .Distinct(StringComparer.OrdinalIgnoreCase));
+            var remarks = string.Join("<br/>", actions
+                .Select(action => action.Reason ?? action.Action)
+                .Where(value => !string.IsNullOrWhiteSpace(value))
+                .Select(WebUtility.HtmlEncode));
+            if (string.IsNullOrWhiteSpace(remarks))
+            {
+                remarks = WebUtility.HtmlEncode(results
+                    .Select(result => result.Summary)
+                    .FirstOrDefault(value => !string.IsNullOrWhiteSpace(value)) ?? "Please review the PNR details.");
+            }
+
+            var encodedPnr = WebUtility.HtmlEncode(pnr);
+            var encodedPnrUrl = WebUtility.HtmlEncode(pnrUrl);
+            var encodedStatus = WebUtility.HtmlEncode(string.IsNullOrWhiteSpace(status) ? "Status change detected" : status);
 
             var body = $"""
                 <!DOCTYPE html><html><head><meta charset='utf-8'/></head>
-                <body style='margin:0;padding:0;background:#f0f4f8;font-family:Arial,sans-serif;'>
+                <body style='margin:0;padding:0;background:#f0f4f8;font-family:Arial,sans-serif;color:#555;'>
                 <table width='100%' cellpadding='0' cellspacing='0' style='background:#f0f4f8;padding:32px 0;'>
                 <tr><td align='center'>
                 <table width='560' cellpadding='0' cellspacing='0' style='background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.10);'>
                   <tr><td style='background:#1a2744;padding:20px 24px;'>
-                    <span style='color:#fff;font-size:18px;font-weight:800;'>&#9992; SkyOps &mdash; Queue Alert</span>
+                    <span style='color:#fff;font-size:18px;font-weight:800;'>&#9992; Akbar Travels &mdash; PNR Status Notification</span>
                   </td></tr>
                   <tr><td style='padding:24px;'>
-                    <div style='font-size:11px;color:#aaa;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px;'>PNR</div>
-                    <a href='{pnrUrl}' style='font-size:28px;font-weight:900;color:#1a2744;text-decoration:none;letter-spacing:3px;'>{pnr}</a>
-                    <div style='margin-top:16px;font-size:13px;color:#555;'>Processed at <strong>{processedAt}</strong>. Actions flagged: <strong>{actionCount}</strong>.</div>
-                    <div style='margin-top:20px;'>
-                      <a href='{pnrUrl}' style='background:#1a2744;color:#fff;padding:10px 22px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:700;'>View PNR Details</a>
-                    </div>
-                  </td></tr>
-                  <tr><td style='padding:0 24px 20px 24px;'>
-                    <table width='100%' cellpadding='0' cellspacing='0' style='background:#fffbea;border:1px solid #ffe082;border-radius:8px;'>
-                      <tr><td style='padding:10px 14px;font-size:12px;color:#555;'>&#9651; Recommendation only. No Sabre commands were executed.</td></tr>
+                    <p style='font-size:14px;line-height:1.7;margin:0 0 18px 0;'>Dear Travel Partner,</p>
+                    <p style='font-size:14px;line-height:1.7;margin:0 0 18px 0;'>We would like to bring to your attention the changes on current status of PNR <strong>{encodedPnr}</strong>.</p>
+                    <p style='font-size:14px;line-height:1.7;margin:0 0 18px 0;'>Please coordinate with your Operations Team for further assistance regarding the following:</p>
+                    <table width='100%' cellpadding='0' cellspacing='0' style='background:#f5f7fa;border-left:4px solid #1a2744;margin:0 0 18px 0;'>
+                      <tr><td style='padding:14px 16px;font-size:14px;line-height:1.8;'>
+                        <strong>PNR:</strong> <a href='{encodedPnrUrl}' style='color:#1a2744;font-weight:700;text-decoration:none;'>{encodedPnr}</a><br/>
+                        <strong>Status/Issue:</strong> {encodedStatus}<br/>
+                        <strong>Remarks:</strong> {remarks}
+                      </td></tr>
                     </table>
+                    <p style='font-size:14px;line-height:1.7;margin:0 0 18px 0;'>Kindly review the above information and take the necessary action at the earliest to avoid any disruption to the booking.</p>
+                    <p style='font-size:14px;line-height:1.7;margin:0 0 18px 0;'>For any further assistance, please contact the Operations Team.</p>
+                    <p style='font-size:14px;line-height:1.7;margin:0;'>Regards,<br/><strong>Operations Team</strong></p>
                   </td></tr>
                 </table>
                 </td></tr></table>
                 </body></html>
                 """;
 
-            await SendEmailAsync(section, $"[SKY OPS] Queue Alert for PNR: {pnr}", body, toAddresses, ct, throwOnError: false);
+            await SendEmailAsync(
+              section,
+              $"Notification of PNR Status: {pnr}",
+              body,
+              toAddresses,
+              ct,
+              throwOnError: false,
+              bccAddresses: new[] { "seshadrinath@benzyinfotech.com" });
         }
         catch (Exception ex) { await _errorLogService.LogAsync(ex, "EmailNotificationService", "SkyOpsQueueIntelligence", "SERVICE", nameof(SendRemarkEmailNotificationAsync), nameof(EmailNotificationService)); }
     }
@@ -294,7 +320,7 @@ public sealed class EmailNotificationService : IEmailNotificationService
 
         var baseUrl = section["BaseUrl"] ?? "https://skyopsapibeta.akbartravelsonline.com";
         var pnr = "TESTPNR";
-        var pnrUrl = $"{baseUrl}/pnr-details/{pnr}";
+        var pnrUrl = $"{baseUrl}/pnr-detail/{pnr}";
         var processedAt = DateTime.UtcNow.ToString("yyyy-MM-dd · HH:mm") + " UTC";
 
         var body = $"""
@@ -428,7 +454,7 @@ public sealed class EmailNotificationService : IEmailNotificationService
 
         void AppendCard(string pnr, ActionFinding action, string statusColor, string statusBg, string statusLabel, string? segLabel)
         {
-            var pnrUrl = $"{baseUrl}/pnr-details/{pnr}";
+            var pnrUrl = $"{baseUrl}/pnr-detail/{pnr}";
             
 
             var leftHtml = $@"
@@ -659,7 +685,8 @@ public sealed class EmailNotificationService : IEmailNotificationService
         string htmlBody,
         IReadOnlyList<string> toAddresses,
         CancellationToken ct,
-        bool throwOnError)
+        bool throwOnError,
+        IReadOnlyList<string>? bccAddresses = null)
     {
         var host = section["SmtpHost"]!;
         var port = section.GetValue<int>("SmtpPort");
@@ -679,6 +706,11 @@ public sealed class EmailNotificationService : IEmailNotificationService
         message.From = new MailAddress(fromAddress, fromName);
         foreach (var to in toAddresses)
             message.To.Add(to);
+        if (bccAddresses is not null)
+        {
+          foreach (var bcc in bccAddresses)
+            message.Bcc.Add(bcc);
+        }
         message.Subject = subject;
         message.Body = htmlBody;
         message.IsBodyHtml = true;

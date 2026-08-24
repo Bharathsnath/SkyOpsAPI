@@ -49,6 +49,14 @@ public interface IQueueActionRepository
         string flight,
         string statusCode,
         string remarks,
+        int remarkUpdatedBy,
+        CancellationToken cancellationToken = default);
+    Task<bool> UpdateAgentRemarksAsync(
+        string pnr,
+        int segmentNumber,
+        string flight,
+        string statusCode,
+        string remarks,
         CancellationToken cancellationToken = default);
 
     Task<PnrDelayAnalysisDto?> GetDelayAnalysisByPnrAsync(string pnr, CancellationToken cancellationToken = default);
