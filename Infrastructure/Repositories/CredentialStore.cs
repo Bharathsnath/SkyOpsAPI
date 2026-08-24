@@ -53,13 +53,12 @@ public sealed class CredentialStore : ICredentialStore
             await connection.OpenAsync(cancellationToken);
 
             const string sql = """
-                 SELECT * FROM wpset_credentialdetails
-                WHERE RecordStatus = '0' 
+                SELECT * FROM wpset_credentialdetails
+                WHERE RecordStatus = '0'
                 AND Provider IN ('AB', 'SB')
-                AND (PCCMasterCode LIKE '%AB_1V08_COCHINTDESK_DOM'
-                    OR PCCMasterCode LIKE '%AB_1VZ8_PONNANITDESK_DOM'
-                    OR PCCMasterCode LIKE '%HO PCC'
-                    OR PCCMasterCode LIKE '%1SKSAONLINE%');
+                AND PCCMasterCode IN (
+                    'AB_1V08_COCHINTDESK_DOM','AB_1VZ8_PONNANITDESK_DOM','HO PCC','1SKSAONLINE'
+                );
                 """;
 
             await using var cmd = new MySqlCommand(sql, connection);
@@ -96,6 +95,58 @@ public sealed class CredentialStore : ICredentialStore
             _logger.LogError(ex, "Failed to load PCC credentials from master table.");
             await LogMasterDbUsageAsync("LoadAsync", "Failed", ex.Message, cancellationToken);
             await TryLogToDbAsync(ex, cancellationToken);
+        }
+    }
+
+    public async Task<IReadOnlyList<PccCredential>> GetAllFullAsync(CancellationToken cancellationToken = default)
+    {
+        if (!IsConfigured)
+        {
+            _logger.LogWarning("GetAllFullAsync skipped: masterDBconnection is empty.");
+            return Array.Empty<PccCredential>();
+        }
+
+        try
+        {
+            await using var connection = new MySqlConnection(_connectionString);
+            await connection.OpenAsync(cancellationToken);
+
+            const string sql = """
+                SELECT * FROM wpset_credentialdetails
+                WHERE RecordStatus = '0';
+                """;
+
+            await using var cmd = new MySqlCommand(sql, connection);
+            await using var reader = await cmd.ExecuteReaderAsync(cancellationToken);
+
+            var list = new List<PccCredential>();
+            while (await reader.ReadAsync(cancellationToken))
+            {
+                list.Add(new PccCredential
+                {
+                    Cred_ID = reader.GetInt64("Cred_ID"),
+                    PCCMasterCode = GetStringOrEmpty(reader, "PCCMasterCode"),
+                    Provider = GetStringOrEmpty(reader, "Provider"),
+                    ServiceType = GetStringOrEmpty(reader, "ServiceType"),
+                    SectorType = GetStringOrEmpty(reader, "SectorType"),
+                    TagName = GetStringOrEmpty(reader, "TagName"),
+                    TagValue = GetStringOrEmpty(reader, "TagValue"),
+                    RecordStatus = GetIntOrDefault(reader, "RecordStatus"),
+                    CreatedUser = GetIntOrDefault(reader, "CreatedUser"),
+                    CreatedDate = reader.IsDBNull(reader.GetOrdinal("CreatedDate")) ? null : reader.GetDateTime("CreatedDate"),
+                    ModifiedUser = GetIntOrDefault(reader, "ModifiedUser"),
+                    ModifiedDate = reader.IsDBNull(reader.GetOrdinal("ModifiedDate")) ? null : reader.GetDateTime("ModifiedDate"),
+                    AirlineCurrencyCode = GetStringOrEmpty(reader, "AirlineCurrencyCode")
+                });
+            }
+
+            _logger.LogInformation("GetAllFullAsync loaded {Count} rows.", list.Count);
+            return list;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "GetAllFullAsync failed.");
+            return Array.Empty<PccCredential>();
         }
     }
 

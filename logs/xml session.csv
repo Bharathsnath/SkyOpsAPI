@@ -1,0 +1,1951 @@
+Log_LogID_ID,Log_UPL_VC,Log_WorkFlow_VC,Log_UserID_NB,Log_UserType_VC,Log_CompanyID_NB,Log_CompanyType_VC,Log_ModuleName_VC,Log_ModuleCode_VC,Log_ClassName_VC,Log_ProcedureName_VC,Log_LogCode_VC,Log_LogXML_VC,Log_Remarks_VC,Log_LogDate_DT,Log_AUI_VC,Log_UTL_VC,Log_TransactionID_NB,Log_Date,Log_RegionID_NB
+11780,ab90d9282203412e921a,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>1V08</CPAId>
+      <eb:ConversationId>8baba7ef-1771-4502-adf0-ebeb4fa208de@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>c86a7b7d-a2ac-4717-8d85-b93145abd670@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T10:43:33Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>9102</wsse:Username>
+        <wsse:Password>MUMBAI65</wsse:Password>
+        <Organization>1V08</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="1V08" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>8baba7ef-1771-4502-adf0-ebeb4fa208de@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3836232386728510430</eb:MessageId><eb:Timestamp>2026-08-10T10:44:32</eb:Timestamp><eb:RefToMessageId>c86a7b7d-a2ac-4717-8d85-b93145abd670@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESB!ICESMSLB\/RES.LB!1786358672870!914!541</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>8baba7ef-1771-4502-adf0-ebeb4fa208de@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:1V08|Command:|HTTP:200|Status:Success,"2026-08-10 16:15:09",,,0,"2026-08-10 16:15:09",0
+11770,e77b48c11cd14669803c,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>1VZ8</CPAId>
+      <eb:ConversationId>2c0be28f-7b84-4912-842e-c8e3b76c073e@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>71df06e9-0ca0-48b1-bfb2-753b1529b431@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:49:00Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>9102</wsse:Username>
+        <wsse:Password>MUMBAI65</wsse:Password>
+        <Organization>1VZ8</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="1VZ8" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>2c0be28f-7b84-4912-842e-c8e3b76c073e@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>255612353404840550</eb:MessageId><eb:Timestamp>2026-08-10T09:49:00</eb:Timestamp><eb:RefToMessageId>71df06e9-0ca0-48b1-bfb2-753b1529b431@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESF!ICESMSLB\/RES.LB!1786355340496!1170!529</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>2c0be28f-7b84-4912-842e-c8e3b76c073e@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:1VZ8|Command:|HTTP:200|Status:Success,"2026-08-10 15:19:00",,,0,"2026-08-10 15:19:00",0
+11763,8f80471e70c64278b35c,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>1VZ8</CPAId>
+      <eb:ConversationId>46806720-6d4a-4ab7-a728-656bd2f860df@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>08fd65e4-22c4-48a6-b9e7-8e3f694e8857@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:48:58Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>9102</wsse:Username>
+        <wsse:Password>MUMBAI65</wsse:Password>
+        <Organization>1VZ8</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="1VZ8" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>46806720-6d4a-4ab7-a728-656bd2f860df@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>2026163353384432400</eb:MessageId><eb:Timestamp>2026-08-10T09:48:58</eb:Timestamp><eb:RefToMessageId>08fd65e4-22c4-48a6-b9e7-8e3f694e8857@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESH!ICESMSLB\/RES.LB!1786355338456!5895!537</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>46806720-6d4a-4ab7-a728-656bd2f860df@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:1VZ8|Command:|HTTP:200|Status:Success,"2026-08-10 15:18:58",,,0,"2026-08-10 15:18:58",0
+11756,5bb5a63da9bf41bbac54,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>1VZ8</CPAId>
+      <eb:ConversationId>2378e487-6e32-4ace-a2be-8b7fd9c6a4b7@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>f139d80d-0d0f-4fea-a9f4-495da87963ed@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:48:56Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>9102</wsse:Username>
+        <wsse:Password>MUMBAI65</wsse:Password>
+        <Organization>1VZ8</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="1VZ8" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>2378e487-6e32-4ace-a2be-8b7fd9c6a4b7@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3494907353364890100</eb:MessageId><eb:Timestamp>2026-08-10T09:48:56</eb:Timestamp><eb:RefToMessageId>f139d80d-0d0f-4fea-a9f4-495da87963ed@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESD!ICESMSLB\/RES.LB!1786355336503!982!553</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>2378e487-6e32-4ace-a2be-8b7fd9c6a4b7@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:1VZ8|Command:|HTTP:200|Status:Success,"2026-08-10 15:18:56",,,0,"2026-08-10 15:18:56",0
+11748,163d24ce83f94ed58288,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>1VZ8</CPAId>
+      <eb:ConversationId>c2861254-cf2e-412f-b5cc-04273bb24d56@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>4558299d-074c-42dc-b26e-549fbf2c19d4@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:48:54Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>9102</wsse:Username>
+        <wsse:Password>MUMBAI65</wsse:Password>
+        <Organization>1VZ8</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="1VZ8" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>c2861254-cf2e-412f-b5cc-04273bb24d56@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3494751353344261350</eb:MessageId><eb:Timestamp>2026-08-10T09:48:54</eb:Timestamp><eb:RefToMessageId>4558299d-074c-42dc-b26e-549fbf2c19d4@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESD!ICESMSLB\/RES.LB!1786355334439!8840!545</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>c2861254-cf2e-412f-b5cc-04273bb24d56@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:1VZ8|Command:|HTTP:200|Status:Success,"2026-08-10 15:18:54",,,0,"2026-08-10 15:18:54",0
+11743,11deb448725a4d9a9717,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>1VZ8</CPAId>
+      <eb:ConversationId>d4291175-befc-4b7e-b30c-d5a09cd3bda6@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>90c60ef6-b454-49f2-a971-61ccb09efa2c@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:48:53Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>9102</wsse:Username>
+        <wsse:Password>MUMBAI65</wsse:Password>
+        <Organization>1VZ8</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="1VZ8" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>d4291175-befc-4b7e-b30c-d5a09cd3bda6@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3494577353331952410</eb:MessageId><eb:Timestamp>2026-08-10T09:48:53</eb:Timestamp><eb:RefToMessageId>90c60ef6-b454-49f2-a971-61ccb09efa2c@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESD!ICESMSLB\/RES.LB!1786355333210!8753!545</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>d4291175-befc-4b7e-b30c-d5a09cd3bda6@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:1VZ8|Command:|HTTP:200|Status:Success,"2026-08-10 15:18:53",,,0,"2026-08-10 15:18:53",0
+11736,9facf336413b41e78994,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>1VZ8</CPAId>
+      <eb:ConversationId>821814e2-c014-4509-843d-5968ab2c03a1@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>6c6dcdbf-1c3d-467c-98b1-e6e3bb1a0685@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:48:51Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>9102</wsse:Username>
+        <wsse:Password>MUMBAI65</wsse:Password>
+        <Organization>1VZ8</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="1VZ8" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>821814e2-c014-4509-843d-5968ab2c03a1@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>254966353311661950</eb:MessageId><eb:Timestamp>2026-08-10T09:48:51</eb:Timestamp><eb:RefToMessageId>6c6dcdbf-1c3d-467c-98b1-e6e3bb1a0685@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESD!ICESMSLB\/RES.LB!1786355331180!9444!521</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>821814e2-c014-4509-843d-5968ab2c03a1@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:1VZ8|Command:|HTTP:200|Status:Success,"2026-08-10 15:18:51",,,0,"2026-08-10 15:18:51",0
+11725,9011401980214ab1b62e,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>1V08</CPAId>
+      <eb:ConversationId>e8fb9216-70bf-45a7-9ae6-f4c2004c8ba3@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>7f0ebd78-e605-453e-8374-aa4df857e7a4@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:48:49Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>9102</wsse:Username>
+        <wsse:Password>MUMBAI65</wsse:Password>
+        <Organization>1V08</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="1V08" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>e8fb9216-70bf-45a7-9ae6-f4c2004c8ba3@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3494152353291250310</eb:MessageId><eb:Timestamp>2026-08-10T09:48:49</eb:Timestamp><eb:RefToMessageId>7f0ebd78-e605-453e-8374-aa4df857e7a4@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESA!ICESMSLB\/RES.LB!1786355329138!8219!549</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>e8fb9216-70bf-45a7-9ae6-f4c2004c8ba3@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:1V08|Command:|HTTP:200|Status:Success,"2026-08-10 15:18:49",,,0,"2026-08-10 15:18:49",0
+11720,86df94adf0514c5aae53,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>1V08</CPAId>
+      <eb:ConversationId>4a8a6df9-b293-4816-8016-2fa51fb92437@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>85756338-ca2f-4f82-9957-6bd93e02b2f5@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:48:47Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>9102</wsse:Username>
+        <wsse:Password>MUMBAI65</wsse:Password>
+        <Organization>1V08</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="1V08" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>4a8a6df9-b293-4816-8016-2fa51fb92437@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3493974353277161340</eb:MessageId><eb:Timestamp>2026-08-10T09:48:47</eb:Timestamp><eb:RefToMessageId>85756338-ca2f-4f82-9957-6bd93e02b2f5@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESF!ICESMSLB\/RES.LB!1786355327729!309!553</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>4a8a6df9-b293-4816-8016-2fa51fb92437@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:1V08|Command:|HTTP:200|Status:Success,"2026-08-10 15:18:47",,,0,"2026-08-10 15:18:47",0
+11715,3ab02edbf1e940c0a580,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>1VZ8</CPAId>
+      <eb:ConversationId>216115d0-aa56-49f6-b154-dffd57877aa3@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>89b599b3-9f0a-472c-9e32-87a6d75e9439@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:48:46Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>9102</wsse:Username>
+        <wsse:Password>MUMBAI65</wsse:Password>
+        <Organization>1VZ8</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="1VZ8" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>216115d0-aa56-49f6-b154-dffd57877aa3@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3493822353263761110</eb:MessageId><eb:Timestamp>2026-08-10T09:48:46</eb:Timestamp><eb:RefToMessageId>89b599b3-9f0a-472c-9e32-87a6d75e9439@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESB!ICESMSLB\/RES.LB!1786355326389!8369!557</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>216115d0-aa56-49f6-b154-dffd57877aa3@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:1VZ8|Command:|HTTP:200|Status:Success,"2026-08-10 15:18:46",,,0,"2026-08-10 15:18:46",0
+11711,a5fe3d8c16d7460f93f3,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>1V08</CPAId>
+      <eb:ConversationId>5203ee89-7e3e-499e-9a5d-a5ffbfd91584@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>488c52f8-a5da-4e02-9d33-d037c5871e80@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:48:45Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>9102</wsse:Username>
+        <wsse:Password>MUMBAI65</wsse:Password>
+        <Organization>1V08</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="1V08" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>5203ee89-7e3e-499e-9a5d-a5ffbfd91584@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3493748353252922230</eb:MessageId><eb:Timestamp>2026-08-10T09:48:45</eb:Timestamp><eb:RefToMessageId>488c52f8-a5da-4e02-9d33-d037c5871e80@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESE!ICESMSLB\/RES.LB!1786355325307!8278!557</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>5203ee89-7e3e-499e-9a5d-a5ffbfd91584@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:1V08|Command:|HTTP:200|Status:Success,"2026-08-10 15:18:45",,,0,"2026-08-10 15:18:45",0
+11697,bf27acd43e8a43b79de6,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>5U7H</CPAId>
+      <eb:ConversationId>bbb9269f-7649-491e-9b13-6845b1dc4e9d@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>b69c23ce-9d01-4572-8571-c652eccd41a4@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:48:39Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>7971</wsse:Username>
+        <wsse:Password>WS297960</wsse:Password>
+        <Organization>5U7H</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="5U7H" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>bbb9269f-7649-491e-9b13-6845b1dc4e9d@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3493118353196810130</eb:MessageId><eb:Timestamp>2026-08-10T09:48:39</eb:Timestamp><eb:RefToMessageId>b69c23ce-9d01-4572-8571-c652eccd41a4@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESH!ICESMSLB\/RES.LB!1786355319700!1507!517</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>bbb9269f-7649-491e-9b13-6845b1dc4e9d@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:5U7H|Command:|HTTP:200|Status:Success,"2026-08-10 15:18:39",,,0,"2026-08-10 15:18:39",0
+11688,8c1ed65fb03a42489a04,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>3A78</CPAId>
+      <eb:ConversationId>d341fb77-61c3-4830-b128-96ead1f7d34e@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>0c3502be-1c43-4f5d-af12-8d856a531a68@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:48:37Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>926019</wsse:Username>
+        <wsse:Password>OM23197</wsse:Password>
+        <Organization>3A78</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="3A78" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>d341fb77-61c3-4830-b128-96ead1f7d34e@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3492899353171400170</eb:MessageId><eb:Timestamp>2026-08-10T09:48:37</eb:Timestamp><eb:RefToMessageId>0c3502be-1c43-4f5d-af12-8d856a531a68@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESC!ICESMSLB\/RES.LB!1786355317155!1285!517</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>d341fb77-61c3-4830-b128-96ead1f7d34e@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:3A78|Command:|HTTP:200|Status:Success,"2026-08-10 15:18:37",,,0,"2026-08-10 15:18:37",0
+11683,8759c91abcdd4e89a543,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>1VZ8</CPAId>
+      <eb:ConversationId>de620d00-929f-4641-9924-5a78650dfae4@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>87185216-925b-403f-b833-ad51f54b174f@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:48:35Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>9102</wsse:Username>
+        <wsse:Password>MUMBAI65</wsse:Password>
+        <Organization>1VZ8</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="1VZ8" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>de620d00-929f-4641-9924-5a78650dfae4@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3492808353159811210</eb:MessageId><eb:Timestamp>2026-08-10T09:48:36</eb:Timestamp><eb:RefToMessageId>87185216-925b-403f-b833-ad51f54b174f@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESG!ICESMSLB\/RES.LB!1786355315995!8144!521</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>de620d00-929f-4641-9924-5a78650dfae4@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:1VZ8|Command:|HTTP:200|Status:Success,"2026-08-10 15:18:36",,,0,"2026-08-10 15:18:36",0
+11678,b2c7119bc6ee455cae88,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>1V08</CPAId>
+      <eb:ConversationId>e23f6db7-c3a1-4621-a32f-2ee0d8337b04@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>4524b095-8214-4c2c-b3e6-3695f6670ba3@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:48:33Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>9102</wsse:Username>
+        <wsse:Password>MUMBAI65</wsse:Password>
+        <Organization>1V08</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="1V08" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>e23f6db7-c3a1-4621-a32f-2ee0d8337b04@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3492567353142020230</eb:MessageId><eb:Timestamp>2026-08-10T09:48:34</eb:Timestamp><eb:RefToMessageId>4524b095-8214-4c2c-b3e6-3695f6670ba3@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESE!ICESMSLB\/RES.LB!1786355314218!9095!541</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>e23f6db7-c3a1-4621-a32f-2ee0d8337b04@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:1V08|Command:|HTTP:200|Status:Success,"2026-08-10 15:18:34",,,0,"2026-08-10 15:18:34",0
+11677,69fb2b4174ed4c8db4ee,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>1V08</CPAId>
+      <eb:ConversationId>7b629eee-31b3-43f5-96a4-d0f1c5f09a94@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>1e3efef4-5445-4401-862f-8cf4173b17f2@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:48:33Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>9102</wsse:Username>
+        <wsse:Password>MUMBAI65</wsse:Password>
+        <Organization>1V08</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="1V08" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>7b629eee-31b3-43f5-96a4-d0f1c5f09a94@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3412726353142110150</eb:MessageId><eb:Timestamp>2026-08-10T09:48:34</eb:Timestamp><eb:RefToMessageId>1e3efef4-5445-4401-862f-8cf4173b17f2@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESD!ICESMSLB\/RES.LB!1786355314235!7309!557</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>7b629eee-31b3-43f5-96a4-d0f1c5f09a94@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:1V08|Command:|HTTP:200|Status:Success,"2026-08-10 15:18:34",,,0,"2026-08-10 15:18:34",0
+11667,17a6900ac51f4bcead11,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>5U7H</CPAId>
+      <eb:ConversationId>97db12d9-e833-416d-9a5e-8d5766ac1add@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>154cab97-de0d-4b37-a571-913c949cda9c@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:40:44Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>7971</wsse:Username>
+        <wsse:Password>WS297960</wsse:Password>
+        <Organization>5U7H</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="5U7H" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>97db12d9-e833-416d-9a5e-8d5766ac1add@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3443306348441761890</eb:MessageId><eb:Timestamp>2026-08-10T09:40:44</eb:Timestamp><eb:RefToMessageId>154cab97-de0d-4b37-a571-913c949cda9c@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESG!ICESMSLB\/RES.LB!1786354844194!181!561</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>97db12d9-e833-416d-9a5e-8d5766ac1add@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:5U7H|Command:|HTTP:200|Status:Success,"2026-08-10 15:10:44",,,0,"2026-08-10 15:10:44",0
+11658,330681bcab1c4bcbbdc4,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>1VQ8</CPAId>
+      <eb:ConversationId>f76d3816-6e13-4636-9a76-ccb118ed6df2@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>ce859dde-b153-41d8-98f1-c17e98cc8cb9@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:40:39Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>420596</wsse:Username>
+        <wsse:Password>MUMBAI75</wsse:Password>
+        <Organization>1VQ8</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="1VQ8" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>f76d3816-6e13-4636-9a76-ccb118ed6df2@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3442772348395930130</eb:MessageId><eb:Timestamp>2026-08-10T09:40:39</eb:Timestamp><eb:RefToMessageId>ce859dde-b153-41d8-98f1-c17e98cc8cb9@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESC!ICESMSLB\/RES.LB!1786354839611!8840!529</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>f76d3816-6e13-4636-9a76-ccb118ed6df2@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:1VQ8|Command:|HTTP:200|Status:Success,"2026-08-10 15:10:39",,,0,"2026-08-10 15:10:39",0
+11657,8089452240ca42e6b47d,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Failed,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>3XZL</CPAId>
+      <eb:ConversationId>a2473302-ff93-4785-b517-8c5542bbe160@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>fe0a79df-4284-4310-8222-d7d3a21ea915@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:40:39Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>392507</wsse:Username>
+        <wsse:Password>mumbai75</wsse:Password>
+        <Organization>3XZL</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="3XZL" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>a2473302-ff93-4785-b517-8c5542bbe160@com.abacus.SWSSession</eb:ConversationId><eb:Service>SessionCreateRQ</eb:Service><eb:Action>ErrorRS</eb:Action><eb:MessageData><eb:MessageId>3442724348391522160</eb:MessageId><eb:Timestamp>2026-08-10T09:40:39</eb:Timestamp><eb:RefToMessageId>fe0a79df-4284-4310-8222-d7d3a21ea915@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"/></soap-env:Header><soap-env:Body><soap-env:Fault><faultcode>soap-env:Client.AuthenticationFailed</faultcode><faultstring>Authentication failed</faultstring><detail><StackTrace>com.sabre.universalservices.base.security.AuthenticationException: errors.authentication.USG_AUTHENTICATION_FAILED</StackTrace></detail></soap-env:Fault></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:3XZL|Command:|HTTP:500|Status:Failed,"2026-08-10 15:10:39",,,0,"2026-08-10 15:10:39",0
+11646,d0d540a129bb45d08ffd,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>3OOD</CPAId>
+      <eb:ConversationId>dafbeacb-02ca-4bde-83cc-f28b1e355c60@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>a6785dff-dd0d-4a2a-95ef-2334a8a03236@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:40:27Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>947385</wsse:Username>
+        <wsse:Password>WSNE8945</wsse:Password>
+        <Organization>3OOD</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="3OOD" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>dafbeacb-02ca-4bde-83cc-f28b1e355c60@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3441490348272751450</eb:MessageId><eb:Timestamp>2026-08-10T09:40:27</eb:Timestamp><eb:RefToMessageId>a6785dff-dd0d-4a2a-95ef-2334a8a03236@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESF!ICESMSLB\/RES.LB!1786354827290!2614!537</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>dafbeacb-02ca-4bde-83cc-f28b1e355c60@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:3OOD|Command:|HTTP:200|Status:Success,"2026-08-10 15:10:27",,,0,"2026-08-10 15:10:27",0
+11631,1ea5069c16b946188a43,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>1D58</CPAId>
+      <eb:ConversationId>b4a89279-e43a-4408-bd43-b94cb05e8b58@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>bcb9e7e2-20b1-4fd5-b0cd-6f3f2d148ac1@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:40:12Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>571603</wsse:Username>
+        <wsse:Password>351O7GW5</wsse:Password>
+        <Organization>1D58</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="1D58" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>b4a89279-e43a-4408-bd43-b94cb05e8b58@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3439890348124260100</eb:MessageId><eb:Timestamp>2026-08-10T09:40:12</eb:Timestamp><eb:RefToMessageId>bcb9e7e2-20b1-4fd5-b0cd-6f3f2d148ac1@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESB!ICESMSLB\/RES.LB!1786354812440!8573!517</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>b4a89279-e43a-4408-bd43-b94cb05e8b58@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:1D58|Command:|HTTP:200|Status:Success,"2026-08-10 15:10:12",,,0,"2026-08-10 15:10:12",0
+11622,1a08e59bd61042ffac11,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>0I5D</CPAId>
+      <eb:ConversationId>87f26673-5e6a-4c83-bc06-f3adbd47d2e6@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>29f7c0c1-9c56-4f3c-bc07-08ce866f90cd@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:40:07Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>508641</wsse:Username>
+        <wsse:Password>SZ51T1WM</wsse:Password>
+        <Organization>0I5D</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="0I5D" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>87f26673-5e6a-4c83-bc06-f3adbd47d2e6@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3439438348078220910</eb:MessageId><eb:Timestamp>2026-08-10T09:40:07</eb:Timestamp><eb:RefToMessageId>29f7c0c1-9c56-4f3c-bc07-08ce866f90cd@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESC!ICESMSLB\/RES.LB!1786354807837!6320!553</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>87f26673-5e6a-4c83-bc06-f3adbd47d2e6@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:0I5D|Command:|HTTP:200|Status:Success,"2026-08-10 15:10:08",,,0,"2026-08-10 15:10:08",0
+11456,56f5b8c2d1c441acab7a,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>41GD</CPAId>
+      <eb:ConversationId>80bc99e9-bc8f-4608-91d7-42c144b427da@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>d9516751-3d47-4404-b4c5-cbf5548c5b35@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:38:21Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>469752</wsse:Username>
+        <wsse:Password>mumbai75</wsse:Password>
+        <Organization>41GD</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="41GD" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>80bc99e9-bc8f-4608-91d7-42c144b427da@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>4042173347017661040</eb:MessageId><eb:Timestamp>2026-08-10T09:38:21</eb:Timestamp><eb:RefToMessageId>d9516751-3d47-4404-b4c5-cbf5548c5b35@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESH!ICESMSLB\/RES.LB!1786354701778!2415!561</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>80bc99e9-bc8f-4608-91d7-42c144b427da@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:41GD|Command:|HTTP:200|Status:Success,"2026-08-10 15:08:21",,,0,"2026-08-10 15:08:21",0
+11419,b2d80013bb4b43b1a2e7,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>VG38</CPAId>
+      <eb:ConversationId>0eff962d-a3cf-47db-9398-44ec89dda8dc@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>34a5d9f8-2988-4b3b-8b9b-9cade7aada34@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:37:50Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>517395</wsse:Username>
+        <wsse:Password>UW82793M</wsse:Password>
+        <Organization>VG38</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="VG38" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>0eff962d-a3cf-47db-9398-44ec89dda8dc@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>997753346709541540</eb:MessageId><eb:Timestamp>2026-08-10T09:37:50</eb:Timestamp><eb:RefToMessageId>34a5d9f8-2988-4b3b-8b9b-9cade7aada34@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESH!ICESMSLB\/RES.LB!1786354670963!7771!549</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>0eff962d-a3cf-47db-9398-44ec89dda8dc@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:VG38|Command:|HTTP:200|Status:Success,"2026-08-10 15:07:51",,,0,"2026-08-10 15:07:51",0
+11418,4d9cd19e1a084d32b2b9,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Failed,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>L8SM</CPAId>
+      <eb:ConversationId>b7eedfd6-6cb8-4333-9886-87a1bc640778@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>2f8f985c-147d-491c-a3d3-97c16c319a2f@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:37:50Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>977488</wsse:Username>
+        <wsse:Password>MUMBAI99</wsse:Password>
+        <Organization>L8SM</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="L8SM" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>b7eedfd6-6cb8-4333-9886-87a1bc640778@com.abacus.SWSSession</eb:ConversationId><eb:Service>SessionCreateRQ</eb:Service><eb:Action>ErrorRS</eb:Action><eb:MessageData><eb:MessageId>4038681346706041940</eb:MessageId><eb:Timestamp>2026-08-10T09:37:50</eb:Timestamp><eb:RefToMessageId>2f8f985c-147d-491c-a3d3-97c16c319a2f@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"/></soap-env:Header><soap-env:Body><soap-env:Fault><faultcode>soap-env:Client.AuthenticationFailed</faultcode><faultstring>Authentication failed</faultstring><detail><StackTrace>com.sabre.universalservices.base.security.AuthenticationException: errors.authentication.USG_AUTHENTICATION_FAILED</StackTrace></detail></soap-env:Fault></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:L8SM|Command:|HTTP:500|Status:Failed,"2026-08-10 15:07:50",,,0,"2026-08-10 15:07:50",0
+11245,63dfb7457bb446108310,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>3A78</CPAId>
+      <eb:ConversationId>3075fb46-28f6-4582-8f58-afb32f212f99@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>a888e2c5-23de-466b-aabc-e63682dc72e8@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:36:04Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>926019</wsse:Username>
+        <wsse:Password>OM23197</wsse:Password>
+        <Organization>3A78</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="3A78" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>3075fb46-28f6-4582-8f58-afb32f212f99@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>4026878345648600470</eb:MessageId><eb:Timestamp>2026-08-10T09:36:04</eb:Timestamp><eb:RefToMessageId>a888e2c5-23de-466b-aabc-e63682dc72e8@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESC!ICESMSLB\/RES.LB!1786354564869!5827!561</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>3075fb46-28f6-4582-8f58-afb32f212f99@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:3A78|Command:|HTTP:200|Status:Success,"2026-08-10 15:06:05",,,0,"2026-08-10 15:06:05",0
+11170,2d3c2487b89046c48744,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>2K6D</CPAId>
+      <eb:ConversationId>5b0303f3-8af5-41b2-a1ae-e512701e4c57@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>a1622467-c2e9-4d10-a87b-0fc9810b2769@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:35:20Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>713940</wsse:Username>
+        <wsse:Password>JI82793P</wsse:Password>
+        <Organization>2K6D</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="2K6D" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>5b0303f3-8af5-41b2-a1ae-e512701e4c57@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>980856345208211490</eb:MessageId><eb:Timestamp>2026-08-10T09:35:20</eb:Timestamp><eb:RefToMessageId>a1622467-c2e9-4d10-a87b-0fc9810b2769@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESD!ICESMSLB\/RES.LB!1786354520835!4549!517</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>5b0303f3-8af5-41b2-a1ae-e512701e4c57@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:2K6D|Command:|HTTP:200|Status:Success,"2026-08-10 15:05:21",,,0,"2026-08-10 15:05:21",0
+11169,6fc4d016e8c347429f0f,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Failed,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>Q6RD</CPAId>
+      <eb:ConversationId>e4fefa49-71f9-41c3-8a04-cd8da9a447fb@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>ab58ee37-4b06-49b8-892d-21fab1f488bd@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:35:20Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>926019</wsse:Username>
+        <wsse:Password>mumbai10</wsse:Password>
+        <Organization>Q6RD</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="Q6RD" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>e4fefa49-71f9-41c3-8a04-cd8da9a447fb@com.abacus.SWSSession</eb:ConversationId><eb:Service>SessionCreateRQ</eb:Service><eb:Action>ErrorRS</eb:Action><eb:MessageData><eb:MessageId>4021864345204580470</eb:MessageId><eb:Timestamp>2026-08-10T09:35:20</eb:Timestamp><eb:RefToMessageId>ab58ee37-4b06-49b8-892d-21fab1f488bd@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"/></soap-env:Header><soap-env:Body><soap-env:Fault><faultcode>soap-env:Client.AuthenticationFailed</faultcode><faultstring>Authentication failed</faultstring><detail><StackTrace>com.sabre.universalservices.base.security.AuthenticationException: errors.authentication.USG_AUTHENTICATION_FAILED</StackTrace></detail></soap-env:Fault></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:Q6RD|Command:|HTTP:500|Status:Failed,"2026-08-10 15:05:20",,,0,"2026-08-10 15:05:20",0
+11160,7b3269cf84cc46019389,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>SR6K</CPAId>
+      <eb:ConversationId>d2956289-918f-4d9c-8b18-f13cb2bf5b52@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>4f64a61a-b2de-4125-b389-7deadb75c9c7@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:35:16Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>680472</wsse:Username>
+        <wsse:Password>K6ITM2IT</wsse:Password>
+        <Organization>SR6K</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="SR6K" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>d2956289-918f-4d9c-8b18-f13cb2bf5b52@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>980338345162822400</eb:MessageId><eb:Timestamp>2026-08-10T09:35:16</eb:Timestamp><eb:RefToMessageId>4f64a61a-b2de-4125-b389-7deadb75c9c7@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESF!ICESMSLB\/RES.LB!1786354516291!100!549</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>d2956289-918f-4d9c-8b18-f13cb2bf5b52@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:SR6K|Command:|HTTP:200|Status:Success,"2026-08-10 15:05:16",,,0,"2026-08-10 15:05:16",0
+11146,a8d7bd1a634941dfb779,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>1VX8</CPAId>
+      <eb:ConversationId>f51f6f6c-6cba-413b-a719-c244139ca513@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>69ef352a-1ef3-45a7-8763-4f9c14fd4267@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:35:04Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>516420</wsse:Username>
+        <wsse:Password>00D15GKh</wsse:Password>
+        <Organization>1VX8</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="1VX8" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>f51f6f6c-6cba-413b-a719-c244139ca513@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3409874345047142450</eb:MessageId><eb:Timestamp>2026-08-10T09:35:04</eb:Timestamp><eb:RefToMessageId>69ef352a-1ef3-45a7-8763-4f9c14fd4267@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESA!ICESMSLB\/RES.LB!1786354504728!9709!545</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>f51f6f6c-6cba-413b-a719-c244139ca513@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:1VX8|Command:|HTTP:200|Status:Success,"2026-08-10 15:05:04",,,0,"2026-08-10 15:05:04",0
+11137,78ef3bbaf34d4005ba19,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>1Y0D</CPAId>
+      <eb:ConversationId>67f89a6a-774b-41a1-b293-6e6709f740f7@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>c002e2c0-02a6-4932-b2ba-bc233bb2e95d@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:35:00Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>926019</wsse:Username>
+        <wsse:Password>OM23197</wsse:Password>
+        <Organization>1Y0D</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="1Y0D" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>67f89a6a-774b-41a1-b293-6e6709f740f7@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3409433345003080960</eb:MessageId><eb:Timestamp>2026-08-10T09:35:00</eb:Timestamp><eb:RefToMessageId>c002e2c0-02a6-4932-b2ba-bc233bb2e95d@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESG!ICESMSLB\/RES.LB!1786354500325!590!525</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>67f89a6a-774b-41a1-b293-6e6709f740f7@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:1Y0D|Command:|HTTP:200|Status:Success,"2026-08-10 15:05:00",,,0,"2026-08-10 15:05:00",0
+11114,588e19b04f4c4e61afdd,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>VF88</CPAId>
+      <eb:ConversationId>2ea7ee18-1c83-4908-a5c4-0e1ffbad93b2@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>8d9ed2e3-3b35-4fad-a166-244c9b1c053d@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:34:47Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>926019</wsse:Username>
+        <wsse:Password>A27PJD8S</wsse:Password>
+        <Organization>VF88</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="VF88" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>2ea7ee18-1c83-4908-a5c4-0e1ffbad93b2@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3408158344869910250</eb:MessageId><eb:Timestamp>2026-08-10T09:34:47</eb:Timestamp><eb:RefToMessageId>8d9ed2e3-3b35-4fad-a166-244c9b1c053d@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESG!ICESMSLB\/RES.LB!1786354487003!616!541</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>2ea7ee18-1c83-4908-a5c4-0e1ffbad93b2@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:VF88|Command:|HTTP:200|Status:Success,"2026-08-10 15:04:47",,,0,"2026-08-10 15:04:47",0
+11093,23adcf0cf0c649b7851c,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>5G78</CPAId>
+      <eb:ConversationId>a83f2a00-18f0-4fb9-b24b-f519c7841a89@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>25e1d4e8-cf52-4ce3-87a0-24f5b8aded2b@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:34:35Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>8998</wsse:Username>
+        <wsse:Password>Dgw5tor3</wsse:Password>
+        <Organization>5G78</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="5G78" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>a83f2a00-18f0-4fb9-b24b-f519c7841a89@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3407107344758441340</eb:MessageId><eb:Timestamp>2026-08-10T09:34:35</eb:Timestamp><eb:RefToMessageId>25e1d4e8-cf52-4ce3-87a0-24f5b8aded2b@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESH!ICESMSLB\/RES.LB!1786354475870!9381!525</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>a83f2a00-18f0-4fb9-b24b-f519c7841a89@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:5G78|Command:|HTTP:200|Status:Success,"2026-08-10 15:04:36",,,0,"2026-08-10 15:04:36",0
+11092,301ffc7685da40538977,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Failed,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>Z3QD</CPAId>
+      <eb:ConversationId>e91189c2-1132-46c0-8d41-6b99a357b3f1@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>b818e0c3-aede-45fc-8e63-eaa66874089c@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:34:35Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>9102</wsse:Username>
+        <wsse:Password>11WS1423</wsse:Password>
+        <Organization>Z3QD</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="Z3QD" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>e91189c2-1132-46c0-8d41-6b99a357b3f1@com.abacus.SWSSession</eb:ConversationId><eb:Service>SessionCreateRQ</eb:Service><eb:Action>ErrorRS</eb:Action><eb:MessageData><eb:MessageId>3407033344754641340</eb:MessageId><eb:Timestamp>2026-08-10T09:34:35</eb:Timestamp><eb:RefToMessageId>b818e0c3-aede-45fc-8e63-eaa66874089c@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"/></soap-env:Header><soap-env:Body><soap-env:Fault><faultcode>soap-env:Client.AuthenticationFailed</faultcode><faultstring>Authentication failed</faultstring><detail><StackTrace>com.sabre.universalservices.base.security.AuthenticationException: errors.authentication.USG_AUTHENTICATION_FAILED</StackTrace></detail></soap-env:Fault></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:Z3QD|Command:|HTTP:500|Status:Failed,"2026-08-10 15:04:35",,,0,"2026-08-10 15:04:35",0
+11054,19bb3e6cba1a47ba8e75,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>VG38</CPAId>
+      <eb:ConversationId>bed783e5-c3a1-4c50-a9e1-183ffe47b974@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>58c99f2d-daaf-453d-8149-3e628dd32887@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:34:09Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>8998</wsse:Username>
+        <wsse:Password>BBA2ABB4</wsse:Password>
+        <Organization>VG38</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="VG38" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>bed783e5-c3a1-4c50-a9e1-183ffe47b974@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3404451344492520100</eb:MessageId><eb:Timestamp>2026-08-10T09:34:09</eb:Timestamp><eb:RefToMessageId>58c99f2d-daaf-453d-8149-3e628dd32887@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESC!ICESMSLB\/RES.LB!1786354449268!3765!537</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>bed783e5-c3a1-4c50-a9e1-183ffe47b974@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:VG38|Command:|HTTP:200|Status:Success,"2026-08-10 15:04:09",,,0,"2026-08-10 15:04:09",0
+11031,46877d0332294193a915,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>VF88</CPAId>
+      <eb:ConversationId>a9c0703d-8428-4990-8aeb-1d57aefccd03@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>a57ca5fb-da2e-4f08-a2a6-45e23bcc499b@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:33:53Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>403256</wsse:Username>
+        <wsse:Password>XK2Y302W</wsse:Password>
+        <Organization>VF88</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="VF88" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>a9c0703d-8428-4990-8aeb-1d57aefccd03@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>163414344339681160</eb:MessageId><eb:Timestamp>2026-08-10T09:33:54</eb:Timestamp><eb:RefToMessageId>a57ca5fb-da2e-4f08-a2a6-45e23bcc499b@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESG!ICESMSLB\/RES.LB!1786354433986!2998!537</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>a9c0703d-8428-4990-8aeb-1d57aefccd03@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:VF88|Command:|HTTP:200|Status:Success,"2026-08-10 15:03:54",,,0,"2026-08-10 15:03:54",0
+11030,f0d0cbeda5fd4dd2bcc1,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Failed,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>V74L</CPAId>
+      <eb:ConversationId>cbe3f41f-248d-41ce-8a78-da2c9e5ce7b2@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>c9508d46-6464-470e-98cd-be12905b9ccb@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:33:53Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>264938</wsse:Username>
+        <wsse:Password>MUMBAI99</wsse:Password>
+        <Organization>V74L</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="V74L" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>cbe3f41f-248d-41ce-8a78-da2c9e5ce7b2@com.abacus.SWSSession</eb:ConversationId><eb:Service>SessionCreateRQ</eb:Service><eb:Action>ErrorRS</eb:Action><eb:MessageData><eb:MessageId>3402767344335042010</eb:MessageId><eb:Timestamp>2026-08-10T09:33:53</eb:Timestamp><eb:RefToMessageId>c9508d46-6464-470e-98cd-be12905b9ccb@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"/></soap-env:Header><soap-env:Body><soap-env:Fault><faultcode>soap-env:Client.AuthenticationFailed</faultcode><faultstring>Authentication failed</faultstring><detail><StackTrace>com.sabre.universalservices.base.security.AuthenticationException: errors.authentication.USG_AUTHENTICATION_FAILED</StackTrace></detail></soap-env:Fault></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:V74L|Command:|HTTP:500|Status:Failed,"2026-08-10 15:03:53",,,0,"2026-08-10 15:03:53",0
+11029,dfaa20fe5d9049f4b533,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Failed,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>V27D</CPAId>
+      <eb:ConversationId>d38e5156-d7ae-4004-9c61-23fcca323d41@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>44fedd2a-f5a4-43a8-a390-0a5eaf01e47b@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:33:53Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>814357</wsse:Username>
+        <wsse:Password>WS507694</wsse:Password>
+        <Organization>V27D</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="V27D" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>d38e5156-d7ae-4004-9c61-23fcca323d41@com.abacus.SWSSession</eb:ConversationId><eb:Service>SessionCreateRQ</eb:Service><eb:Action>ErrorRS</eb:Action><eb:MessageData><eb:MessageId>3402710344331380170</eb:MessageId><eb:Timestamp>2026-08-10T09:33:53</eb:Timestamp><eb:RefToMessageId>44fedd2a-f5a4-43a8-a390-0a5eaf01e47b@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"/></soap-env:Header><soap-env:Body><soap-env:Fault><faultcode>soap-env:Client.AuthenticationFailed</faultcode><faultstring>Authentication failed</faultstring><detail><StackTrace>com.sabre.universalservices.base.security.AuthenticationException: errors.authentication.USG_AUTHENTICATION_FAILED</StackTrace></detail></soap-env:Fault></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:V27D|Command:|HTTP:500|Status:Failed,"2026-08-10 15:03:53",,,0,"2026-08-10 15:03:53",0
+11028,4847c0d8e1c14014a85c,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Failed,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>H7C8</CPAId>
+      <eb:ConversationId>5db4a58e-30be-461c-8c24-db42f444ed09@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>60b83d9b-5c2e-41e9-98e4-f76d1b874fa9@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:33:52Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>264973</wsse:Username>
+        <wsse:Password>4RFVBGT6</wsse:Password>
+        <Organization>H7C8</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="H7C8" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>5db4a58e-30be-461c-8c24-db42f444ed09@com.abacus.SWSSession</eb:ConversationId><eb:Service>SessionCreateRQ</eb:Service><eb:Action>ErrorRS</eb:Action><eb:MessageData><eb:MessageId>860017344327530410</eb:MessageId><eb:Timestamp>2026-08-10T09:33:52</eb:Timestamp><eb:RefToMessageId>60b83d9b-5c2e-41e9-98e4-f76d1b874fa9@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"/></soap-env:Header><soap-env:Body><soap-env:Fault><faultcode>soap-env:Client.AuthenticationFailed</faultcode><faultstring>Authentication failed</faultstring><detail><StackTrace>com.sabre.universalservices.base.security.AuthenticationException: errors.authentication.USG_AUTHENTICATION_FAILED</StackTrace></detail></soap-env:Fault></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:H7C8|Command:|HTTP:500|Status:Failed,"2026-08-10 15:03:52",,,0,"2026-08-10 15:03:52",0
+10992,5407e937c85c49d8912f,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>86AD</CPAId>
+      <eb:ConversationId>50fe1006-44bc-4e06-b338-460ff13ba0c2@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>f26bfcd7-96dd-44f1-8c14-6d46b66e321e@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:33:28Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>815062</wsse:Username>
+        <wsse:Password>NAM2J6SX</wsse:Password>
+        <Organization>86AD</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="86AD" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>50fe1006-44bc-4e06-b338-460ff13ba0c2@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3399900344087662230</eb:MessageId><eb:Timestamp>2026-08-10T09:33:28</eb:Timestamp><eb:RefToMessageId>f26bfcd7-96dd-44f1-8c14-6d46b66e321e@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESA!ICESMSLB\/RES.LB!1786354408782!4480!557</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>50fe1006-44bc-4e06-b338-460ff13ba0c2@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:86AD|Command:|HTTP:200|Status:Success,"2026-08-10 15:03:29",,,0,"2026-08-10 15:03:29",0
+10983,f1777d7d584e4bf791c0,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>5S8D</CPAId>
+      <eb:ConversationId>8fccae8c-65bb-4879-9fdb-ddd7c532ff41@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>4c35ceaa-9577-4641-9536-c0d8efe099e5@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:33:24Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>4201</wsse:Username>
+        <wsse:Password>BBA2AAB4</wsse:Password>
+        <Organization>5S8D</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="5S8D" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>8fccae8c-65bb-4879-9fdb-ddd7c532ff41@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>856514344044261710</eb:MessageId><eb:Timestamp>2026-08-10T09:33:24</eb:Timestamp><eb:RefToMessageId>4c35ceaa-9577-4641-9536-c0d8efe099e5@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESD!ICESMSLB\/RES.LB!1786354404445!3943!545</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>8fccae8c-65bb-4879-9fdb-ddd7c532ff41@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:5S8D|Command:|HTTP:200|Status:Success,"2026-08-10 15:03:24",,,0,"2026-08-10 15:03:24",0
+10963,e6243072f1aa40d8aa60,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>5G78</CPAId>
+      <eb:ConversationId>367430b2-bf1d-48cf-b28c-ae07af7b3875@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>e2aadba5-1439-4dad-a41e-2f82c04affe3@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:33:12Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>209175</wsse:Username>
+        <wsse:Password>MUMBAI88</wsse:Password>
+        <Organization>5G78</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="5G78" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>367430b2-bf1d-48cf-b28c-ae07af7b3875@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>855363343927240410</eb:MessageId><eb:Timestamp>2026-08-10T09:33:12</eb:Timestamp><eb:RefToMessageId>e2aadba5-1439-4dad-a41e-2f82c04affe3@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESD!ICESMSLB\/RES.LB!1786354392741!2587!549</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>367430b2-bf1d-48cf-b28c-ae07af7b3875@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:5G78|Command:|HTTP:200|Status:Success,"2026-08-10 15:03:12",,,0,"2026-08-10 15:03:12",0
+10797,b6b0dce8d7e04bccb355,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>41GD</CPAId>
+      <eb:ConversationId>091473ca-a71b-4bab-aeab-485b3d862cf9@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>dee15990-0d01-4ff5-b536-481992a591aa@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:31:28Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>415263</wsse:Username>
+        <wsse:Password>BBA2AAB4</wsse:Password>
+        <Organization>41GD</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="41GD" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>091473ca-a71b-4bab-aeab-485b3d862cf9@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>843595342883181710</eb:MessageId><eb:Timestamp>2026-08-10T09:31:28</eb:Timestamp><eb:RefToMessageId>dee15990-0d01-4ff5-b536-481992a591aa@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESG!ICESMSLB\/RES.LB!1786354288331!9848!537</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>091473ca-a71b-4bab-aeab-485b3d862cf9@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:41GD|Command:|HTTP:200|Status:Success,"2026-08-10 15:01:28",,,0,"2026-08-10 15:01:28",0
+10796,e84dd889293542a6a36e,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Failed,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>3XWL</CPAId>
+      <eb:ConversationId>53b28e3c-e758-42e2-86cf-588977e92c77@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>15d7a4ed-9977-42cc-b681-63e01fc22dbc@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:31:27Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>731592</wsse:Username>
+        <wsse:Password>A1B2C3D5</wsse:Password>
+        <Organization>3XWL</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="3XWL" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>53b28e3c-e758-42e2-86cf-588977e92c77@com.abacus.SWSSession</eb:ConversationId><eb:Service>SessionCreateRQ</eb:Service><eb:Action>ErrorRS</eb:Action><eb:MessageData><eb:MessageId>3386421342879591340</eb:MessageId><eb:Timestamp>2026-08-10T09:31:27</eb:Timestamp><eb:RefToMessageId>15d7a4ed-9977-42cc-b681-63e01fc22dbc@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"/></soap-env:Header><soap-env:Body><soap-env:Fault><faultcode>soap-env:Client.AuthenticationFailed</faultcode><faultstring>Authentication failed</faultstring><detail><StackTrace>com.sabre.universalservices.base.security.AuthenticationException: errors.authentication.USG_AUTHENTICATION_FAILED</StackTrace></detail></soap-env:Fault></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:3XWL|Command:|HTTP:500|Status:Failed,"2026-08-10 15:01:28",,,0,"2026-08-10 15:01:28",0
+10795,6622ab1db8d248dd9a47,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Failed,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>3XPL</CPAId>
+      <eb:ConversationId>976eaac4-5eeb-47cc-bd88-d328395f56f2@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>0403383f-7fad-4c5a-82b8-8d447e360ec5@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:31:27Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>413068</wsse:Username>
+        <wsse:Password>MUMBAI99</wsse:Password>
+        <Organization>3XPL</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="3XPL" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>976eaac4-5eeb-47cc-bd88-d328395f56f2@com.abacus.SWSSession</eb:ConversationId><eb:Service>SessionCreateRQ</eb:Service><eb:Action>ErrorRS</eb:Action><eb:MessageData><eb:MessageId>3386404342875270960</eb:MessageId><eb:Timestamp>2026-08-10T09:31:27</eb:Timestamp><eb:RefToMessageId>0403383f-7fad-4c5a-82b8-8d447e360ec5@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"/></soap-env:Header><soap-env:Body><soap-env:Fault><faultcode>soap-env:Client.AuthenticationFailed</faultcode><faultstring>Authentication failed</faultstring><detail><StackTrace>com.sabre.universalservices.base.security.AuthenticationException: errors.authentication.USG_AUTHENTICATION_FAILED</StackTrace></detail></soap-env:Fault></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:3XPL|Command:|HTTP:500|Status:Failed,"2026-08-10 15:01:27",,,0,"2026-08-10 15:01:27",0
+10646,e9e18f468f7242a6a556,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>3A78</CPAId>
+      <eb:ConversationId>4423227e-f7c9-4a57-90b6-c9a0d9879e49@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>b514a588-3430-4c7e-a6fe-b072252a10aa@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:29:53Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>2424</wsse:Username>
+        <wsse:Password>ws081619</wsse:Password>
+        <Organization>3A78</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="3A78" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>4423227e-f7c9-4a57-90b6-c9a0d9879e49@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3982348341932120910</eb:MessageId><eb:Timestamp>2026-08-10T09:29:53</eb:Timestamp><eb:RefToMessageId>b514a588-3430-4c7e-a6fe-b072252a10aa@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESF!ICESMSLB\/RES.LB!1786354193222!9911!553</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>4423227e-f7c9-4a57-90b6-c9a0d9879e49@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:3A78|Command:|HTTP:200|Status:Success,"2026-08-10 14:59:53",,,0,"2026-08-10 14:59:53",0
+10574,79d3492411004e59a3bc,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>2K6D</CPAId>
+      <eb:ConversationId>c5e77e60-f0c9-42fa-b8f4-fc46fee23117@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>33df9aa8-f40a-4a67-9e21-aac8c0f859ab@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:29:08Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>263851</wsse:Username>
+        <wsse:Password>mumbai77</wsse:Password>
+        <Organization>2K6D</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="2K6D" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>c5e77e60-f0c9-42fa-b8f4-fc46fee23117@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3977499341480962190</eb:MessageId><eb:Timestamp>2026-08-10T09:29:08</eb:Timestamp><eb:RefToMessageId>33df9aa8-f40a-4a67-9e21-aac8c0f859ab@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESD!ICESMSLB\/RES.LB!1786354148135!8093!529</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>c5e77e60-f0c9-42fa-b8f4-fc46fee23117@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:2K6D|Command:|HTTP:200|Status:Success,"2026-08-10 14:59:08",,,0,"2026-08-10 14:59:08",0
+10565,9004aab2eafd409f9fc0,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>29MD</CPAId>
+      <eb:ConversationId>156dc43d-1434-48de-a3e5-e0b5d82f2f5a@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>f227ef90-158c-4264-8cb2-2f1746b26c9a@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:29:03Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>9102</wsse:Username>
+        <wsse:Password>BBA2ABB4</wsse:Password>
+        <Organization>29MD</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="29MD" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>156dc43d-1434-48de-a3e5-e0b5d82f2f5a@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>935886341437501940</eb:MessageId><eb:Timestamp>2026-08-10T09:29:03</eb:Timestamp><eb:RefToMessageId>f227ef90-158c-4264-8cb2-2f1746b26c9a@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESC!ICESMSLB\/RES.LB!1786354143769!9931!517</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>156dc43d-1434-48de-a3e5-e0b5d82f2f5a@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:29MD|Command:|HTTP:200|Status:Success,"2026-08-10 14:59:03",,,0,"2026-08-10 14:59:03",0
+10555,43b151b801554ae6a485,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>27FD</CPAId>
+      <eb:ConversationId>8b906bce-a566-4067-9783-04eedcb76de8@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>dcb3ac75-3637-4f52-89b5-f964d8fc3213@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:28:58Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>926019</wsse:Username>
+        <wsse:Password>BBA2AAB4</wsse:Password>
+        <Organization>27FD</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="27FD" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>8b906bce-a566-4067-9783-04eedcb76de8@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3976393341384410640</eb:MessageId><eb:Timestamp>2026-08-10T09:28:58</eb:Timestamp><eb:RefToMessageId>dcb3ac75-3637-4f52-89b5-f964d8fc3213@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESF!ICESMSLB\/RES.LB!1786354138454!6556!521</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>8b906bce-a566-4067-9783-04eedcb76de8@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:27FD|Command:|HTTP:200|Status:Success,"2026-08-10 14:58:58",,,0,"2026-08-10 14:58:58",0
+10525,5bb7a82636d74986a3f6,QueuePolling,0,,0,,SabreQueueMCP,QUEUE,SessionCreateRQ,,Success,"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:eb="http://www.ebxml.org/namespaces/messageHeader"
+               xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+  <soap:Header>
+    <eb:MessageHeader soap:mustUnderstand="1" eb:version="1.0">
+      <eb:From>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId>
+      </eb:From>
+      <eb:To>
+        <eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId>
+      </eb:To>
+      <CPAId>1VZ8</CPAId>
+      <eb:ConversationId>8c03fb5e-747a-47fd-ae32-2fc4f145d15f@com.abacus.SWSSession</eb:ConversationId>
+      <eb:Service>SessionCreateRQ</eb:Service>
+      <eb:Action>SessionCreateRQ</eb:Action>
+      <eb:MessageData>
+        <eb:MessageId>32dd8e1b-31d5-4964-b307-a104f5f27840@com.abacus.SWSSession</eb:MessageId>
+        <eb:Timestamp>2026-08-10T09:28:39Z</eb:Timestamp>
+      </eb:MessageData>
+    </eb:MessageHeader>
+    <wsse:Security>
+      <wsse:UsernameToken>
+        <wsse:Username>9102</wsse:Username>
+        <wsse:Password>MUMBAI65</wsse:Password>
+        <Organization>1VZ8</Organization>
+        <Domain>DEFAULT</Domain>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <SessionCreateRQ Version="1.0.0" xmlns="http://www.opentravel.org/OTA/2002/11">
+      <POS>
+        <Source PseudoCityCode="1VZ8" />
+      </POS>
+    </SessionCreateRQ>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header><eb:MessageHeader xmlns:eb="http://www.ebxml.org/namespaces/messageHeader" eb:version="1.0" soap-env:mustUnderstand="1"><eb:From><eb:PartyId eb:type="urn:x12.org.IO5:01">webservices.sabre.com</eb:PartyId></eb:From><eb:To><eb:PartyId eb:type="urn:x12.org.IO5:01">com.abacus.SWSSession</eb:PartyId></eb:To><eb:ConversationId>8c03fb5e-747a-47fd-ae32-2fc4f145d15f@com.abacus.SWSSession</eb:ConversationId><eb:Service eb:type="sabreXML">Session</eb:Service><eb:Action>SessionCreateRS</eb:Action><eb:MessageData><eb:MessageId>3974426341193860440</eb:MessageId><eb:Timestamp>2026-08-10T09:28:39</eb:Timestamp><eb:RefToMessageId>32dd8e1b-31d5-4964-b307-a104f5f27840@com.abacus.SWSSession</eb:RefToMessageId></eb:MessageData></eb:MessageHeader><wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext"><wsse:BinarySecurityToken valueType="String" EncodingType="wsse:Base64Binary">Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/RESH!ICESMSLB\/RES.LB!1786354119400!4952!557</wsse:BinarySecurityToken></wsse:Security></soap-env:Header><soap-env:Body><SessionCreateRS xmlns="http://www.opentravel.org/OTA/2002/11" version="1.0.0" status="Approved">	<ConversationId>8c03fb5e-747a-47fd-ae32-2fc4f145d15f@com.abacus.SWSSession</ConversationId></SessionCreateRS></soap-env:Body></soap-env:Envelope>]]></Response></ApiLog>",PCC:1VZ8|Command:|HTTP:200|Status:Success,"2026-08-10 14:58:39",,,0,"2026-08-10 14:58:39",0

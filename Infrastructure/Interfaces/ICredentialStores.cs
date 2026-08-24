@@ -6,7 +6,7 @@ public interface IConnectionCredentialStore
 {
     event EventHandler? Reloaded;
     bool IsConfigured { get; }
-    IReadOnlyList<ConnectionCredential> GetAll();
+    IReadOnlyList<ConnectionCredential> GetConnectionCredentials();
     IReadOnlyList<ConnectionCredential> GetByPcc(string pccCode);
     string? GetConnectionString(string name);
     string? GetTagValue(string pccCode, string tagName);
@@ -20,4 +20,5 @@ public interface ICredentialStore
     IReadOnlyList<StorePccCredential> GetByPcc(string pccCode);
     string? GetTagValue(string pccCode, string tagName);
     Task LoadAsync(CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<PccCredential>> GetAllFullAsync(CancellationToken cancellationToken = default);
 }

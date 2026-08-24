@@ -397,6 +397,7 @@ public sealed class DashboardRepository : IDashboardRepository
 
         return new ManagementDashboardDto(pccRanking, queueEfficiency, providerRanking, transactionRanking, totalToday, criticalToday, criticalPct);
     }
+    
 
     public async Task<XmlLogsDto> GetXmlLogsAsync(CancellationToken ct = default)
     {
@@ -637,7 +638,7 @@ public sealed class DashboardRepository : IDashboardRepository
         return new { UserId = userId, PccMappings = pccRows, ResolvedCompanies = companyRows, GeneratedFilter = filter };
     }
 
-    private async Task<string> BuildAccessFilterAsync(int userId, CancellationToken ct)
+    public async Task<string> BuildAccessFilterAsync(int userId, CancellationToken ct)
     {
         var skyOpsConnStr = _configuration.GetConnectionString("SkyOpsDBconnection");
 
@@ -719,11 +720,27 @@ public sealed class DashboardRepository : IDashboardRepository
         // COMPANY FILTER
         // =====================================================
 
+<<<<<<< HEAD
         // Offline transactions (TransactionId not matching 2L+9D format, or NULL) are always included.
         // Online transactions (2L+9D) are filtered by the user's assigned prefixes.
         string onlineFilter = prefixes.Count > 0
             ? $"({string.Join(" OR ", prefixes.Select(x => $"qr.TransactionId LIKE '{x}%'"))})"
             : "1=0";
+=======
+        // A prefix is valid if it has a non-numeric Pifix (letter-prefixed) OR represents a 9-digit numeric TransactionId.
+        // If no valid prefixes exist, company filter is not applicable (1=1).
+        var validPrefixes = prefixes
+            .Where(x => !string.IsNullOrEmpty(x) &&
+                        (!long.TryParse(x, out _) || (x.Length == 9 && x.All(char.IsDigit))))
+            .ToList();
+
+        string companyFilter = validPrefixes.Count > 0
+            ? $"({string.Join(" OR ", validPrefixes.Select(x =>
+                x.All(char.IsDigit)
+                    ? $"qr.TransactionId = '{x}'"
+                    : $"qr.TransactionId LIKE '{x}%'"))})"
+            : "1=1";
+>>>>>>> adm-analysis
 
         string companyFilter = $"(qr.TransactionId IS NULL OR qr.TransactionId NOT REGEXP '^[A-Za-z]{{2}}[0-9]{{9}}$' OR {onlineFilter})";
 
