@@ -318,11 +318,9 @@ public sealed class AdmAnalysisRepository : IAdmAnalysisRepository
 
         var countSql = $@"
             SELECT
-                COUNT(*)                                                                  AS TotalAnalyzed,
                 SUM(IsCrossBorder = 1)                                                    AS CrossBorder,
                 SUM(IsChurnedSegment = 1)                                                 AS ChurnedSegment,
-                SUM(IsMarriedSegment = 1)                                                 AS MarriedSegment,
-                SUM(IsCrossBorder = 1 AND IsChurnedSegment = 1 AND IsMarriedSegment = 1)  AS AllThree
+                SUM(IsMarriedSegment = 1)                                                 AS MarriedSegment
             FROM adm_analysis a
             WHERE {admFilter};
         ";
@@ -335,11 +333,11 @@ public sealed class AdmAnalysisRepository : IAdmAnalysisRepository
             if (!await r.ReadAsync(cancellationToken)) return new DashboardDto();
             counts = new DashboardDto
             {
-                TotalAnalyzed  = Convert.ToInt32(r["TotalAnalyzed"]),
+               
                 CrossBorder    = Convert.ToInt32(r["CrossBorder"]),
                 ChurnedSegment = Convert.ToInt32(r["ChurnedSegment"]),
                 MarriedSegment = Convert.ToInt32(r["MarriedSegment"]),
-                AllThree       = Convert.ToInt32(r["AllThree"])
+                
             };
         }
 

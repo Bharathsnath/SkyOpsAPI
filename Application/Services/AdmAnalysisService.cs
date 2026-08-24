@@ -7,6 +7,8 @@ namespace SkyOpsQueueIntelligence.Application.Services;
 
 public class AdmAnalysisService : IAdmAnalysisService
 {
+    private static readonly bool IncludeMarriedSegmentRule = false;
+
     private readonly IAdmAnalysisRepository _repository;
     private readonly ISabreCommandService _sabreCommandService;
     private readonly ICredentialStore _credentialStore;
@@ -162,11 +164,15 @@ public class AdmAnalysisService : IAdmAnalysisService
         {
             try
             {
+                var commands = new List<string> { $"*{pnr}" };
+                if (IncludeMarriedSegmentRule)
+                    commands.Add("*HI");
+
                 var responses = await _sabreCommandService.ExecuteSequentialCommandsAsync(
-                    entry.AgencyPcc, [$"*{pnr}", "*HI"], cancellationToken,
+                    entry.AgencyPcc, commands, cancellationToken,
                     moduleName: "SabreADMAnalysis", moduleCode: "ADM", pnr: pnr);
                 var pnrText = responses[0];
-                var hiText = responses[1];
+                var hiText = IncludeMarriedSegmentRule && responses.Count > 1 ? responses[1] : string.Empty;
                 var transactionId = ExtractTransactionId(pnrText);
                 var analysis = await RunRulesAsync(pnr, entry.TicketNumber, pnrText, hiText, entry.AgencyPcc, marketCache, cancellationToken);
                 if (salesAuditIds.TryGetValue(pnr, out var salesAuditId))
@@ -277,10 +283,9 @@ public class AdmAnalysisService : IAdmAnalysisService
         var risk = 0;
         if (isCrossBorder) risk += 40;
 
-        // Rule 2 — Married Segment: a single R- block has 2+ distinct HK AS flights (connecting itinerary moved together)
-        var signatures = ExtractItinerarySignatures(hiText);
-        var isMarried = signatures.Any(sig => sig.Split('|').Length > 1);
-        var uniqueItineraryGroups = signatures.Distinct().Count();
+        var signatures = IncludeMarriedSegmentRule ? ExtractItinerarySignatures(hiText) : [];
+        var isMarried = IncludeMarriedSegmentRule && signatures.Any(sig => sig.Split('|').Length > 1);
+        var uniqueItineraryGroups = IncludeMarriedSegmentRule ? signatures.Distinct().Count() : 0;
         if (isMarried) risk += 30;
 
         return new AdmAnalysisDto

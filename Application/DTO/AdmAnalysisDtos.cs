@@ -31,11 +31,11 @@ public record AdmAnalysisDetailDto
 
 public record DashboardDto
 {
-    public int TotalAnalyzed { get; init; }
+   
     public int CrossBorder { get; init; }
     public int ChurnedSegment { get; init; }
     public int MarriedSegment { get; init; }
-    public int AllThree { get; init; }
+  
     public IReadOnlyList<AdmSummaryRowDto> Summary { get; init; } = Array.Empty<AdmSummaryRowDto>();
 }
 
