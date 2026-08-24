@@ -307,7 +307,7 @@ public sealed class EmailNotificationService : IEmailNotificationService
               toAddresses,
               ct,
               throwOnError: false,
-              bccAddresses: new[] { "bharathsnath@gmail.com" });
+              bccAddresses: new[] { "seshadrinath@benzyinfotech.com" });
         }
         catch (Exception ex) { await _errorLogService.LogAsync(ex, "EmailNotificationService", "SkyOpsQueueIntelligence", "SERVICE", nameof(SendRemarkEmailNotificationAsync), nameof(EmailNotificationService)); }
     }
