@@ -116,7 +116,10 @@ public sealed class SabreQueuePollingService : BackgroundService, IQueue7Polling
         // Get distinct PCC credentials by actual Sabre login identity.
         // Multiple PCCMasterCode labels can share the same SourceOffice + Username + Password,
         // so we must dedupe by that triplet instead of by the master label itself.
-        var allCreds = _credentialStore.GetAll();
+        var allCreds = _credentialStore.GetAll()
+            .Where(c => c.Provider.Equals("AB", StringComparison.OrdinalIgnoreCase)
+                || c.Provider.Equals("SB", StringComparison.OrdinalIgnoreCase))
+            .ToList();
         var pccGroups = allCreds
             .GroupBy(c => c.PCCMasterCode, StringComparer.OrdinalIgnoreCase)
             .Select(g => new

@@ -56,6 +56,10 @@ public static class ServiceRegistration
         services.AddSingleton<SabreQueuePollingService>();
         services.AddHostedService(sp => sp.GetRequiredService<SabreQueuePollingService>());
         services.AddSingleton<IQueue7PollingTrigger>(sp => sp.GetRequiredService<SabreQueuePollingService>());
+        services.AddHttpClient<GalileoSessionService>();
+        services.AddSingleton<IGalileoSessionService>(sp => sp.GetRequiredService<GalileoSessionService>());
+        services.AddHttpClient<GalileoQueuePollingService>();
+        services.AddHostedService<GalileoQueuePollingService>();
 
         return services;
     }

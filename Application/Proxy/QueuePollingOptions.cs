@@ -16,6 +16,9 @@ public sealed class Queue7PollingOptions
     public string LogFilePath { get; init; } = "logs/queue7-polling.log";
 
     public SabreApiOptions SabreApi { get; init; } = new();
+    public GalileoApiOptions GalileoApi { get; init; } = new();
+
+    public GalileoPollingOptions GalileoPolling { get; init; } = new();
 
     public IReadOnlyList<QueuePollingEntry> Queues { get; init; } =
     [
@@ -44,4 +47,22 @@ public sealed class SabreApiOptions
     public string ToPartyId { get; init; } = "webservices.sabre.com";
 
     public string HostCommand { get; init; } = "Q/7";
+}
+
+public sealed class GalileoApiOptions
+{
+    public string Endpoint { get; init; } = "https://apac.webservices.travelport.com/B2BGateway/service/XMLSelect";
+
+    public string Profile { get; init; } = string.Empty;
+
+    public int SessionTimeoutOverride { get; init; } = 60000;
+}
+
+public sealed class GalileoPollingOptions
+{
+    public bool Enabled { get; init; } = true;
+
+    public int IntervalMinutes { get; init; } = 15;
+
+    public IReadOnlyList<int> Queues { get; init; } = [22, 23];
 }

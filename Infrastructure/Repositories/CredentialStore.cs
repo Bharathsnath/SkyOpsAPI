@@ -55,11 +55,14 @@ public sealed class CredentialStore : ICredentialStore
             const string sql = """
                  SELECT * FROM wpset_credentialdetails
                 WHERE RecordStatus = '0' 
-                AND Provider IN ('AB', 'SB')
-                AND (PCCMasterCode LIKE '%AB_1V08_COCHINTDESK_DOM'
+                AND (
+                    (Provider IN ('AB', 'SB')
+                    AND (PCCMasterCode LIKE '%AB_1V08_COCHINTDESK_DOM'
                     OR PCCMasterCode LIKE '%AB_1VZ8_PONNANITDESK_DOM'
                     OR PCCMasterCode LIKE '%HO PCC'
-                    OR PCCMasterCode LIKE '%1SKSAONLINE%');
+                    OR PCCMasterCode LIKE '%1SKSAONLINE%'))
+                    OR (Provider = '1G' AND PCCMasterCode = '1GDOM_HOPCC_R1J')
+                );
                 """;
 
             await using var cmd = new MySqlCommand(sql, connection);
