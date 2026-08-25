@@ -318,9 +318,9 @@ public sealed class AdmAnalysisRepository : IAdmAnalysisRepository
 
         var countSql = $@"
             SELECT
-                SUM(IsCrossBorder = 1)                                                    AS CrossBorder,
-                SUM(IsChurnedSegment = 1)                                                 AS ChurnedSegment,
-                SUM(IsMarriedSegment = 1)                                                 AS MarriedSegment
+                COALESCE(SUM(IsCrossBorder = 1), 0)                                       AS CrossBorder,
+                COALESCE(SUM(IsChurnedSegment = 1), 0)                                    AS ChurnedSegment,
+                COALESCE(SUM(IsMarriedSegment = 1), 0)                                    AS MarriedSegment
             FROM adm_analysis a
             WHERE {admFilter};
         ";
