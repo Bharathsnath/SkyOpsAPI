@@ -580,8 +580,8 @@ public sealed class SettingsRepository : ISettingsRepository
             list.Add(new PccAgentEmailMaster
             {
                 Id = reader.GetInt64("Id"),
-                PccValue = reader.IsDBNull(reader.GetOrdinal("PCCCode")) ? string.Empty : reader.GetString("PCCCode"),
-                Emails = reader.IsDBNull(reader.GetOrdinal("Emails")) ? string.Empty : reader.GetString("Emails"),
+                PccValue = ReadString(reader, "PCCCode"),
+                Emails = ReadString(reader, "Emails"),
                 IsActive = reader.IsDBNull(reader.GetOrdinal("IsActive")) ? 0 : reader.GetInt32("IsActive"),
                 CreatedBy = reader.IsDBNull(reader.GetOrdinal("CreatedBy")) ? 0 : reader.GetInt32("CreatedBy"),
                 CreatedDate = reader.IsDBNull(reader.GetOrdinal("CreatedDate")) ? null : reader.GetDateTime("CreatedDate"),
@@ -590,6 +590,12 @@ public sealed class SettingsRepository : ISettingsRepository
             });
         }
         return list;
+    }
+
+    private static string ReadString(MySqlDataReader reader, string column)
+    {
+        var ordinal = reader.GetOrdinal(column);
+        return reader.IsDBNull(ordinal) ? string.Empty : Convert.ToString(reader.GetValue(ordinal)) ?? string.Empty;
     }
 
     private static AppConfiguration Map(MySqlDataReader r) => new()
