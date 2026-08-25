@@ -6,6 +6,7 @@ namespace SkyOpsQueueIntelligence.BackgroundJobs;
 
 public class AdmAnalysisBackgroundService : BackgroundService
 {
+    private static readonly TimeSpan AnalysisInterval = TimeSpan.FromHours(4);
     private readonly ILogger<AdmAnalysisBackgroundService> _logger;
     private readonly IServiceScopeFactory _scopeFactory;
 
@@ -32,7 +33,7 @@ public class AdmAnalysisBackgroundService : BackgroundService
             _logger.LogError(ex, "Error during initial ADM analysis run.");
         }
 
-        using var timer = new PeriodicTimer(TimeSpan.FromHours(4));
+        using var timer = new PeriodicTimer(AnalysisInterval);
         try
         {
             while (await timer.WaitForNextTickAsync(stoppingToken))
