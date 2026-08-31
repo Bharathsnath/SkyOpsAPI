@@ -54,7 +54,7 @@ public sealed class SettingsRepository : ISettingsRepository
     {
         await using var conn = await OpenAsync(ct);
         const string sql = """
-            SELECT Id, PCCCode, Emails, IsActive, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate
+            SELECT Id, PCCCode, Company, Market, Emails, IsActive, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate
             FROM skyops.pccagentemailmaster
             ORDER BY PCCCode, Emails
             """;
@@ -66,13 +66,31 @@ public sealed class SettingsRepository : ISettingsRepository
     {
         await using var conn = await OpenAsync(ct);
         const string sql = """
-            SELECT Id, PCCCode, Emails, IsActive, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate
+            SELECT Id, PCCCode, Company, Market, Emails, IsActive, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate
             FROM skyops.pccagentemailmaster
             WHERE PCCCode LIKE @PccCode
             ORDER BY Emails
             """;
         await using var cmd = new MySqlCommand(sql, conn);
         cmd.Parameters.AddWithValue("@PccCode", $"%{pccCode}%");
+        return await ReadPccAgentEmailMasterListAsync(cmd, ct);
+    }
+
+    public async Task<IReadOnlyList<PccAgentEmailMaster>> GetPccAgentEmailMastersByPccCompanyMarketAsync(string pccCode, string company, string market, CancellationToken ct = default)
+    {
+        await using var conn = await OpenAsync(ct);
+        const string sql = """
+            SELECT Id, PCCCode, Company, Market, Emails, IsActive, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate
+            FROM skyops.pccagentemailmaster
+                        WHERE TRIM(PCCCode) = TRIM(@PccCode)
+                            AND TRIM(Company) = TRIM(@Company)
+                            AND TRIM(Market) = TRIM(@Market)
+            ORDER BY Emails
+            """;
+        await using var cmd = new MySqlCommand(sql, conn);
+        cmd.Parameters.AddWithValue("@PccCode", pccCode.Trim());
+        cmd.Parameters.AddWithValue("@Company", company.Trim());
+        cmd.Parameters.AddWithValue("@Market", market.Trim());
         return await ReadPccAgentEmailMasterListAsync(cmd, ct);
     }
 
@@ -84,7 +102,7 @@ public sealed class SettingsRepository : ISettingsRepository
         await using var conn = await OpenAsync(ct);
         var placeholders = string.Join(",", codes.Select((_, i) => $"@Pcc{i}"));
         var sql = $"""
-            SELECT Id, PCCCode, Emails, IsActive, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate
+            SELECT Id, PCCCode, Company, Market, Emails, IsActive, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate
             FROM skyops.pccagentemailmaster
             WHERE PCCCode IN ({placeholders})
             ORDER BY PCCCode, Emails
@@ -100,30 +118,62 @@ public sealed class SettingsRepository : ISettingsRepository
     public async Task<long> CreatePccAgentEmailMasterAsync(PccAgentEmailMaster entry, CancellationToken ct = default)
     {
         await using var conn = await OpenAsync(ct);
+        await using var transaction = await conn.BeginTransactionAsync(ct);
         var indianNow = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("India Standard Time"));
 
-        const string sql = """
-            INSERT INTO skyops.pccagentemailmaster
-            (PCCCode, Emails, IsActive, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate)
-            VALUES
-            (@PCCCode, @Emails, @IsActive, @CreatedBy, @IndianNow, @ModifiedBy, @IndianNow)
-            ON DUPLICATE KEY UPDATE
-                Emails = VALUES(Emails),
-                IsActive = VALUES(IsActive),
-                CreatedBy = VALUES(CreatedBy),
-                ModifiedBy = VALUES(ModifiedBy),
-                ModifiedDate = VALUES(ModifiedDate)
+        const string findSql = """
+            SELECT Id
+            FROM skyops.pccagentemailmaster
+            WHERE PCCCode = @PCCCode AND Company = @Company AND Market = @Market
+            ORDER BY Id
+            LIMIT 1
+            FOR UPDATE
             """;
+        await using var findCommand = new MySqlCommand(findSql, conn, transaction);
+        AddPccAgentEmailMasterKeyParameters(findCommand, entry);
+        var existingId = await findCommand.ExecuteScalarAsync(ct);
 
-        await using var cmd = new MySqlCommand(sql, conn);
-        cmd.Parameters.AddWithValue("@PCCCode", entry.PCCCode);
-        cmd.Parameters.AddWithValue("@Emails", entry.Emails);
-        cmd.Parameters.AddWithValue("@IsActive", entry.IsActive);
-        cmd.Parameters.AddWithValue("@CreatedBy", entry.CreatedBy);
-        cmd.Parameters.AddWithValue("@ModifiedBy", entry.ModifiedBy);
-        cmd.Parameters.AddWithValue("@IndianNow", indianNow);
-        await cmd.ExecuteNonQueryAsync(ct);
-        return cmd.LastInsertedId;
+        if (existingId is not null && existingId != DBNull.Value)
+        {
+            const string updateSql = """
+                UPDATE skyops.pccagentemailmaster
+                SET Emails = @Emails, IsActive = @IsActive, ModifiedBy = @ModifiedBy, ModifiedDate = @IndianNow
+                WHERE Id = @Id
+                """;
+            await using var updateCommand = new MySqlCommand(updateSql, conn, transaction);
+            updateCommand.Parameters.AddWithValue("@Id", existingId);
+            updateCommand.Parameters.AddWithValue("@Emails", entry.Emails);
+            updateCommand.Parameters.AddWithValue("@IsActive", entry.IsActive);
+            updateCommand.Parameters.AddWithValue("@ModifiedBy", entry.ModifiedBy);
+            updateCommand.Parameters.AddWithValue("@IndianNow", indianNow);
+            await updateCommand.ExecuteNonQueryAsync(ct);
+            await transaction.CommitAsync(ct);
+            return Convert.ToInt64(existingId);
+        }
+
+        const string insertSql = """
+            INSERT INTO skyops.pccagentemailmaster
+            (PCCCode, Company, Market, Emails, IsActive, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate)
+            VALUES
+            (@PCCCode, @Company, @Market, @Emails, @IsActive, @CreatedBy, @IndianNow, @ModifiedBy, @IndianNow)
+            """;
+        await using var insertCommand = new MySqlCommand(insertSql, conn, transaction);
+        AddPccAgentEmailMasterKeyParameters(insertCommand, entry);
+        insertCommand.Parameters.AddWithValue("@Emails", entry.Emails);
+        insertCommand.Parameters.AddWithValue("@IsActive", entry.IsActive);
+        insertCommand.Parameters.AddWithValue("@CreatedBy", entry.CreatedBy);
+        insertCommand.Parameters.AddWithValue("@ModifiedBy", entry.ModifiedBy);
+        insertCommand.Parameters.AddWithValue("@IndianNow", indianNow);
+        await insertCommand.ExecuteNonQueryAsync(ct);
+        await transaction.CommitAsync(ct);
+        return insertCommand.LastInsertedId;
+    }
+
+    private static void AddPccAgentEmailMasterKeyParameters(MySqlCommand command, PccAgentEmailMaster entry)
+    {
+        command.Parameters.AddWithValue("@PCCCode", entry.PCCCode);
+        command.Parameters.AddWithValue("@Company", entry.Company);
+        command.Parameters.AddWithValue("@Market", entry.Market);
     }
 
     public async Task<bool> UpdateAsync(AppConfiguration config, CancellationToken ct = default)
@@ -581,6 +631,8 @@ public sealed class SettingsRepository : ISettingsRepository
             {
                 Id = reader.GetInt64("Id"),
                 PccValue = ReadString(reader, "PCCCode"),
+                Company = ReadString(reader, "Company"),
+                Market = ReadString(reader, "Market"),
                 Emails = ReadString(reader, "Emails"),
                 IsActive = reader.IsDBNull(reader.GetOrdinal("IsActive")) ? 0 : reader.GetInt32("IsActive"),
                 CreatedBy = reader.IsDBNull(reader.GetOrdinal("CreatedBy")) ? 0 : reader.GetInt32("CreatedBy"),

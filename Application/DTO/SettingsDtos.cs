@@ -83,6 +83,8 @@ public sealed class PccAgentEmailMaster
     public string PccValue { get; init; } = string.Empty;
     [JsonPropertyName("PCC")]
     public string? Pcc { get; init; }
+    public string Company { get; init; } = string.Empty;
+    public string Market { get; init; } = string.Empty;
     public string Emails { get; init; } = string.Empty;
     public int IsActive { get; init; }
     public int CreatedBy { get; init; }

@@ -82,6 +82,8 @@ public class PccAgentEmailMasterRequest
     public long? Id { get; set; }
     public string PccValue { get; set; } = string.Empty;
     public string? Pcc { get; set; }
+    public string Company { get; set; } = string.Empty;
+    public string Market { get; set; } = string.Empty;
     public string Emails { get; set; } = string.Empty;
     public int IsActive { get; set; }
     public int CreatedBy { get; set; }

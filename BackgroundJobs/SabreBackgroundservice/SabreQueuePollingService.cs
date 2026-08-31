@@ -198,7 +198,7 @@ public sealed class SabreQueuePollingService : BackgroundService, IQueue7Polling
 
                     try
                     {
-                        var summary = await ProcessQueueForPccAsync(pccCode, displayPcc, session, entry.HostCommand, entry.QueueNumber, cancellationToken);
+                        var summary = await ProcessQueueForPccAsync(pccCode, displayPcc, pccGroup.Company, pccGroup.Market, session, entry.HostCommand, entry.QueueNumber, cancellationToken);
                         queueSummaries.Add((summary.HostCommand, summary.QueueNumber, summary.AnalyzedCount, summary.SavedCount));
                         currentPnrsByQueue[entry.QueueNumber].UnionWith(summary.CurrentPnrs);
                     }
@@ -241,7 +241,7 @@ public sealed class SabreQueuePollingService : BackgroundService, IQueue7Polling
         await ReconcileMissingPnrsAsync(currentPnrsByQueue, reconciliationSkippedQueues, cancellationToken);
     }
 
-    private async Task<QueuePollResult> ProcessQueueForPccAsync(string pccCode, string displayPcc, SabreSession session, string hostCommand, int queueNumber, CancellationToken cancellationToken)
+    private async Task<QueuePollResult> ProcessQueueForPccAsync(string pccCode, string displayPcc, string company, string market, SabreSession session, string hostCommand, int queueNumber, CancellationToken cancellationToken)
     {
         var combinedText = await FetchQueueTextWithSessionAsync(session, hostCommand, pccCode, session.UplId, cancellationToken);
         var sourceId = $"{_options.SabreApi.Endpoint}|PCC:{pccCode}";
@@ -282,7 +282,7 @@ public sealed class SabreQueuePollingService : BackgroundService, IQueue7Polling
         // Send general queue alerts for newly inserted/updated records only.
         if (changedResults.Count > 0)
         {
-            await _emailService.SendAlertAsync(displayPcc, changedResults, cancellationToken);
+            await _emailService.SendAlertAsync(pccCode, company, market, changedResults, cancellationToken);
             await QueueNotificationsHub.SendQueueNotificationAsync(_hub, $"PCC {displayPcc}: {changedResults.Count} PNR(s) need attention.", cancellationToken);
         }
 
@@ -492,7 +492,13 @@ public sealed class SabreQueuePollingService : BackgroundService, IQueue7Polling
         }
 
         var analysisResults = Queue7Processor.ProcessQueueText(combinedText, queueNumber);
-        var (savedCount, _) = await _repository.SaveRecommendedActionsAsync(analysisResults, "", "", cancellationToken);
+        var (savedCount, changedResults) = await _repository.SaveRecommendedActionsAsync(analysisResults, "", "", cancellationToken);
+
+        if (changedResults.Count > 0)
+        {
+            await _emailService.SendAlertAsync("", "", "", changedResults, cancellationToken);
+        }
+
         await WriteFileLogAsync($"{hostCommand} (config): analyzed {analysisResults.Count} PNRs, saved {savedCount} actions.", cancellationToken);
 
         var contentHash = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(combinedText)));

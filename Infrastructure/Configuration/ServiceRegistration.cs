@@ -48,8 +48,8 @@ public static class ServiceRegistration
         services.AddSingleton<IEmailNotificationService, EmailNotificationService>();
 
         // ADM background job
-        services.AddSingleton<AdmAnalysisBackgroundService>();
-        services.AddHostedService(sp => sp.GetRequiredService<AdmAnalysisBackgroundService>());
+        //services.AddSingleton<AdmAnalysisBackgroundService>();
+       // services.AddHostedService(sp => sp.GetRequiredService<AdmAnalysisBackgroundService>());
 
         // Proxy / Sabre API clients
         services.AddHttpClient<Queue7TextSource>();

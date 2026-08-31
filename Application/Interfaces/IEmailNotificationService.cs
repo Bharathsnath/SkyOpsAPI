@@ -4,7 +4,7 @@ namespace SkyOpsQueueIntelligence.Application.Interfaces;
 
 public interface IEmailNotificationService
 {
-    Task SendAlertAsync(string pccCode, IReadOnlyList<QueueAnalysisResult> results, CancellationToken ct = default);
+    Task SendAlertAsync(string pccCode, string company, string market, IReadOnlyList<QueueAnalysisResult> results, CancellationToken ct = default);
     Task SendQueueProcessingSummaryAsync(
         string pccCode,
         string displayPcc,

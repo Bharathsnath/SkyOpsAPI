@@ -44,6 +44,8 @@ public sealed class SettingsDtoAdapter
         Id = id ?? request.Id ?? 0,
         PccValue = request.PccValue,
         Pcc = request.Pcc,
+        Company = request.Company,
+        Market = request.Market,
         Emails = request.Emails,
         IsActive = request.IsActive,
         CreatedBy = request.CreatedBy,
