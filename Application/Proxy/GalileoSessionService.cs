@@ -41,11 +41,11 @@ public sealed class GalileoSessionService : IGalileoSessionService
         var credentials = _credentialStore.GetByPcc(pccCode)
             .Where(credential => credential.Provider.Equals("1G", StringComparison.OrdinalIgnoreCase))
             .ToList();
-        var username = credentials.FirstOrDefault(c => c.TagName.Equals("UserName", StringComparison.OrdinalIgnoreCase))?.TagValue;
-        var password = credentials.FirstOrDefault(c => c.TagName.Equals("Password", StringComparison.OrdinalIgnoreCase))?.TagValue;
+        var username = credentials.FirstOrDefault(c => c.TagName.Trim().Equals("SessionUserName", StringComparison.OrdinalIgnoreCase))?.TagValue.Trim();
+        var password = credentials.FirstOrDefault(c => c.TagName.Trim().Equals("SessionPassword", StringComparison.OrdinalIgnoreCase))?.TagValue.Trim();
 
         if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
-            throw new KeyNotFoundException($"Galileo credentials were not found for PCC {pccCode}.");
+            throw new KeyNotFoundException($"Galileo SessionUserName/SessionPassword not found for PCC {pccCode}.");
 
         var sessionProfile = string.IsNullOrWhiteSpace(profile) ? _options.Profile : profile.Trim();
         if (string.IsNullOrWhiteSpace(sessionProfile))
@@ -70,6 +70,7 @@ public sealed class GalileoSessionService : IGalileoSessionService
             "Basic",
             Convert.ToBase64String(Encoding.UTF8.GetBytes($"{username}:{password}")));
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
+        request.Headers.TryAddWithoutValidation("SOAPAction", "http://webservices.galileo.com/BeginSession");
 
         try
         {

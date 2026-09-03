@@ -15,6 +15,12 @@ public static class Queue7Processor
             actions.Add(action);
         }
 
+        if (pnr.VendorRemarks is not null)
+        {
+            foreach (var vr in pnr.VendorRemarks)
+                actions.Add(BuildVendorRemarkAction(vr));
+        }
+
         var notifyActions = actions.Where(action => action.ShouldNotify).ToList();
         var summary = notifyActions.Count == 0
             ? "No queue action required."
@@ -51,6 +57,53 @@ public static class Queue7Processor
 
         var parsed = Queue7Parser.ParseQueueText(queueText, queueNumber);
         return parsed.Pnrs.Select(p => ProcessPnr(p, queueNumber)).ToArray();
+    }
+
+    private static ActionFinding BuildVendorRemarkAction(VendorRemarkAction vr)
+    {
+        return vr.Type switch
+        {
+            VendorRemarkType.MissingSsr => new ActionFinding(
+                0, vr.Flight ?? string.Empty, "MISSING_SSR",
+                "Add missing SSR contact (CTCM/CTCE/CTCR)",
+                Reason: vr.RawText,
+                QueueRecommendation: new QueueRecommendation(
+                    "Missing Contact SSR", "High",
+                    new[] { "Add SSR CTCM with mobile number", "Or add SSR CTCE with email", "Or add SSR CTCR for non-consent" })),
+            VendorRemarkType.AutoCancelWarning => new ActionFinding(
+                0, vr.Flight ?? string.Empty, "AUTO_CANCEL",
+                "Clear duplicate PNR before auto-cancel deadline",
+                Reason: vr.RawText,
+                RecommendedFutureCommand: vr.DuplicateLocator is not null ? $"Cancel duplicate {vr.DuplicateLocator}" : "Clear duplicate",
+                QueueRecommendation: new QueueRecommendation(
+                    "Auto-Cancel Warning", "Critical",
+                    new[] {
+                        $"Deadline: {vr.Deadline ?? "see remark"}",
+                        vr.DuplicateLocator is not null ? $"Duplicate locator: {vr.DuplicateLocator}" : "Identify duplicate PNR",
+                        "Cancel or merge duplicate before deadline to prevent auto-cancel"
+                    })),
+            VendorRemarkType.DuplicatePnr => new ActionFinding(
+                0, vr.Flight ?? string.Empty, "DUPLICATE_PNR",
+                "Resolve duplicate PNR",
+                Reason: vr.RawText,
+                RecommendedFutureCommand: vr.DuplicateLocator is not null ? $"Review duplicate {vr.DuplicateLocator}" : "Review duplicate",
+                QueueRecommendation: new QueueRecommendation(
+                    "Duplicate PNR", "High",
+                    new[] {
+                        vr.DuplicateLocator is not null ? $"Duplicate locator: {vr.DuplicateLocator}" : "Identify duplicate PNR",
+                        "Cancel the duplicate booking",
+                        "Retain the correct PNR"
+                    })),
+            VendorRemarkType.ScheduleChange => new ActionFinding(
+                0, vr.Flight ?? string.Empty, "TK",
+                "Review Schedule Change (vendor remark)",
+                Reason: vr.RawText,
+                QueueRecommendation: new QueueRecommendation(
+                    "Schedule Change", "Medium",
+                    new[] { $"Flight {vr.Flight} schedule changed due to operational reason", "Verify new times and revalidate ticket if required" }),
+                ShouldNotify: false),
+            _ => new ActionFinding(0, vr.Flight ?? string.Empty, "VENDOR_REMARK", vr.RawText, ShouldNotify: false)
+        };
     }
 
     private static ActionFinding BuildAction(FlightSegment segment, string pnrText)
@@ -261,6 +314,9 @@ public static class Queue7Processor
                 "UC" => CountPhrase(group.Count(), "confirmation issue"),
                 "US" => CountPhrase(group.Count(), "resell issue"),
                 "WL" => CountPhrase(group.Count(), "waitlisted segment"),
+                "MISSING_SSR" => CountPhrase(group.Count(), "missing SSR contact"),
+                "AUTO_CANCEL" => CountPhrase(group.Count(), "auto-cancel warning"),
+                "DUPLICATE_PNR" => CountPhrase(group.Count(), "duplicate PNR"),
                 _ => CountPhrase(group.Count(), "actionable segment")
             });
 

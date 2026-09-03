@@ -18,20 +18,20 @@ public sealed record QueuePerformanceDto(IReadOnlyList<QueueByStatusDto> ByStatu
 public sealed record PccPerformanceItemDto(string PCC, long TotalActions, long Critical, long TimeChange, long UniquePnrs);
 public sealed record PccPerformanceDto(IReadOnlyList<PccPerformanceItemDto> PccPerformance);
 
-public sealed record FlightStatusItemDto(string Pnr, string Flight, string TransactionId, string Status, int Queue, string Action, string? PCC, string? ProviderName, DateTime UpdatedAt);
+public sealed record FlightStatusItemDto(string? Pnr, string? Flight, string? TransactionId, string? Status, int Queue, string? Action, string? PCC, string? ProviderName, DateTime UpdatedAt);
 public sealed record FlightStatusSummaryDto(string Status, long Total);
 public sealed record FlightStatusDto(IReadOnlyList<FlightStatusItemDto> Flights, IReadOnlyList<FlightStatusSummaryDto> Summary);
 
-public sealed record CriticalQueueItemDto(string Pnr, string Flight, string TransactionId, string Status, int Queue, string Action, string? Reason, string? PCC, string? ProviderName, DateTime UpdatedAt);
+public sealed record CriticalQueueItemDto(string? Pnr, string? Flight, string? TransactionId, string? Status, int Queue, string? Action, string? Reason, string? PCC, string? ProviderName, DateTime UpdatedAt);
 public sealed record CriticalQueueDto( IReadOnlyList<CriticalQueueItemDto> CriticalItems, IReadOnlyList<CriticalQueueItemDto> UnticketedCriticalItems, long TicketedTotal, long UnticketedTotal);
 
-public sealed record DelayItemDto(string Pnr, string Flight, string TransactionId, int? DelayMinutes, decimal? DelayHours, int Queue, string? PCC, string? ProviderName, DateTime UpdatedAt);
+public sealed record DelayItemDto(string? Pnr, string? Flight, string? TransactionId, int? DelayMinutes, decimal? DelayHours, int Queue, string? PCC, string? ProviderName, DateTime UpdatedAt);
 public sealed record DelayAnalysisDto(  int? PreponedPnrCount,decimal? PostponedPnrCount,long FlightChange, int? OntimePnrCount, IReadOnlyList<DelayItemDto> Delays);
 
-public sealed record FlightImpactItemDto(string Pnr, string Flight, string TransactionId, string Status, int Queue, string Action, string? Reason, string? PCC, string? ProviderName, DateTime UpdatedAt);
+public sealed record FlightImpactItemDto(string? Pnr, string? Flight, string? TransactionId, string? Status, int Queue, string? Action, string? Reason, string? PCC, string? ProviderName, DateTime UpdatedAt);
 public sealed record FlightImpactDto(IReadOnlyList<FlightImpactItemDto> ImpactedFlights, long TotalImpacted);
 
-public sealed record PnrSegmentDto(string Pnr, string Flight, string Status, int Queue, int Segment, string Action, int? DelayMinutes, string? Reason, string? RecommendedCommand, string Summary, string? PCC, DateTime UpdatedAt);
+public sealed record PnrSegmentDto(string? Pnr, string? Flight, string? Status, int Queue, int Segment, string? Action, int? DelayMinutes, string? Reason, string? RecommendedCommand, string? Summary, string? PCC, DateTime UpdatedAt);
 public sealed record TopPnrDto(string Pnr, long Actions, string Statuses);
 public sealed record PnrAnalysisDto(string? Pnr, IReadOnlyList<PnrSegmentDto>? Segments, IReadOnlyList<TopPnrDto>? TopPnrs);
 
@@ -39,7 +39,7 @@ public sealed record PnrRowDto(string PNR, string? PCC, string? ProviderName, in
 public sealed record PnrCountDto(long TotalPCC);
 public sealed record PnrsDto(IReadOnlyList<PnrRowDto> ByPNR, IReadOnlyList<PnrCountDto> Count);
 
-public sealed record LivePnrItemDto(string Pnr, string Flight, string TransactionId, string Status, int Queue, string Action, string? PCC, string? ProviderName, DateTime UpdatedAt);
+public sealed record LivePnrItemDto(string? Pnr, string? Flight, string? TransactionId, string? Status, int Queue, string? Action, string? PCC, string? ProviderName, DateTime UpdatedAt);
 public sealed record OperationalDashboardDto(long OpenCriticalCases, long TkQueueMonitor, long HxUnQueueMonitor, IReadOnlyList<LivePnrItemDto> LivePNR);
 
 public sealed record PccRankingDto(string? PCC, long TotalActions, long Critical, decimal CriticalPct, long ScheduleChange, decimal TimeChangePct);

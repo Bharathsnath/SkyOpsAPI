@@ -22,6 +22,8 @@ public sealed class SabreQueuePollingService : BackgroundService, IQueue7Polling
         int SavedCount,
         IReadOnlyCollection<string> CurrentPnrs);
 
+    private volatile bool _enabled = false;
+
     private readonly Queue7PollingOptions _options;
     private readonly IQueueActionRepository _repository;
     private readonly ICredentialStore _credentialStore;
@@ -66,21 +68,25 @@ public sealed class SabreQueuePollingService : BackgroundService, IQueue7Polling
         _scopeFactory = scopeFactory;
     }
 
+    public bool IsEnabled => _enabled;
+    public void Enable() => _enabled = true;
+    public void Disable() => _enabled = false;
+
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        if (!_options.Enabled)
-        {
-            _logger.LogInformation("Queue polling is disabled.");
-            await WriteFileLogAsync("Queue polling is disabled.", stoppingToken, "WARN");
-            return;
-        }
-
         var queues = GetQueueEntries();
         var interval = TimeSpan.FromMinutes(Math.Max(1, _options.IntervalMinutes));
         await WriteFileLogAsync($"Queue polling started. Queues: {string.Join(", ", queues.Select(q => q.HostCommand))}. Interval: {interval.TotalMinutes} min.", stoppingToken);
 
         while (!stoppingToken.IsCancellationRequested)
         {
+            if (!_enabled)
+            {
+                await WriteFileLogAsync("Sabre polling is paused. Waiting...", stoppingToken, "WARN");
+                await Task.Delay(interval, stoppingToken);
+                continue;
+            }
+
             try
             {
                 await PollAllPccsAsync(queues, stoppingToken);
@@ -102,6 +108,11 @@ public sealed class SabreQueuePollingService : BackgroundService, IQueue7Polling
 
     public async Task TriggerAsync(CancellationToken cancellationToken)
     {
+        if (!_enabled)
+        {
+            await WriteFileLogAsync("Sabre polling is disabled. TriggerAsync skipped.", cancellationToken, "WARN");
+            return;
+        }
         var queues = GetQueueEntries();
         await PollAllPccsAsync(queues, cancellationToken);
     }

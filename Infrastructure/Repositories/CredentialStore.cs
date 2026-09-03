@@ -61,7 +61,7 @@ public sealed class CredentialStore : ICredentialStore
                     OR PCCMasterCode LIKE '%AB_1VZ8_PONNANITDESK_DOM'
                     OR PCCMasterCode LIKE '%HO PCC'
                     OR PCCMasterCode LIKE '%1SKSAONLINE%'))
-                    OR (Provider = '1G' AND PCCMasterCode = '1GDOM_HOPCC_R1J')
+                    OR (Provider = '1G' AND PCCMasterCode = '6TP2')
                 );
                 """;
 
