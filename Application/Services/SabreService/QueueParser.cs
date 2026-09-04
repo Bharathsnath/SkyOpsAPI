@@ -91,6 +91,11 @@ public static partial class Queue7Parser
             return queueCategoryBlocks;
         }
 
+        // Split on Amadeus RP/ header lines: "RP/BOMAK3303/BOMAK3303 ..."
+        var amadeusPnrBlocks = SplitByHeaderRegex(queueText, AmadeusRpHeaderRegex());
+        if (amadeusPnrBlocks.Count > 0)
+            return amadeusPnrBlocks;
+
         var matches = PnrHeaderRegex().Matches(queueText);
 
         if (matches.Count == 0)
@@ -107,6 +112,24 @@ public static partial class Queue7Parser
             var start = matches[index].Index;
             var end = index + 1 < matches.Count ? matches[index + 1].Index : queueText.Length;
             blocks.Add(queueText[start..end]);
+        }
+        return blocks;
+    }
+
+    private static IReadOnlyList<string> SplitByHeaderRegex(string queueText, Regex headerRegex)
+    {
+        var matches = headerRegex.Matches(queueText);
+        if (matches.Count < 2)
+            return matches.Count == 1 ? new[] { queueText } : Array.Empty<string>();
+
+        var blocks = new List<string>();
+        for (var i = 0; i < matches.Count; i++)
+        {
+            var start = matches[i].Index;
+            var end = i + 1 < matches.Count ? matches[i + 1].Index : queueText.Length;
+            var block = queueText[start..end].Trim();
+            if (!string.IsNullOrWhiteSpace(block))
+                blocks.Add(block);
         }
         return blocks;
     }
@@ -168,6 +191,15 @@ public static partial class Queue7Parser
 
     private static string ExtractPnr(string block)
     {
+        // Try Amadeus header format: RP/BOMAK3303/BOMAK3303 ... 7C4583
+        var amadeusHeaderMatch = AmadeusRpHeaderRegex().Match(block);
+        if (amadeusHeaderMatch.Success)
+        {
+            var candidate = amadeusHeaderMatch.Groups["pnr"].Value.Trim().ToUpperInvariant();
+            if (LooksLikePnr(candidate))
+                return candidate;
+        }
+
         // Try Sabre header format: 3A78.3A78*ATT 0619/16FEB26 AFZPJI H
         var sabreHeaderMatch = SabreHeaderPnrRegex().Match(block);
         if (sabreHeaderMatch.Success)
@@ -265,9 +297,24 @@ public static partial class Queue7Parser
             return EmptyToNull(match.Groups["officeId"].Value.Trim());
 
         var galileoMatch = GalileoPCCRegex().Match(block);
-        return galileoMatch.Success
-            ? EmptyToNull(galileoMatch.Groups["officeId"].Value.Trim())
-            : null;
+        if (galileoMatch.Success)
+            return EmptyToNull(galileoMatch.Groups["officeId"].Value.Trim());
+
+        // Amadeus: RP/BOMAK3303/BOMAK3303 — first office ID after RP/
+        var amadeusMatch = AmadeusRpHeaderRegex().Match(block);
+        if (amadeusMatch.Success)
+        {
+            var rpLine = amadeusMatch.Value;
+            var slash = rpLine.IndexOf('/');
+            if (slash >= 0)
+            {
+                var afterSlash = rpLine[(slash + 1)..];
+                var officeId = afterSlash.Split('/')[0].Trim();
+                return EmptyToNull(officeId);
+            }
+        }
+
+        return null;
     }
 
     private static DateTime? ExtractReceivedDateTime(string block)
@@ -578,6 +625,10 @@ public static partial class Queue7Parser
         if (AccountingDataRegex().IsMatch(block))
             return true;
 
+        // Amadeus: TK OK or TK OK31AUG/BOMAK3303
+        if (AmadeusTkOkRegex().IsMatch(block))
+            return true;
+
         var tktMatch = TktTimeLimitRegex().Match(block);
         if (!tktMatch.Success)
             return false;
@@ -699,8 +750,8 @@ public static partial class Queue7Parser
         return (currencyCode, baseFare, taxes, totalFare);
     }
 
-    // Matches a single passenger token anywhere in a line, e.g. "1.1MUKHERJEE/SUBHRO MR" or "2.1MUKHERJEE/SIKHA SAHA MRS"
-    [GeneratedRegex(@"(?<jsno>\d+\.\d+)(?<name>[A-Z][A-Z'-]*/[A-Z][A-Z\s'-]*?)(?=\s{2,}\d+\.\d+|\s*$)", RegexOptions.IgnoreCase)]
+    // Matches Sabre/Galileo "1.1SURNAME/GIVEN" and Amadeus "1.SURNAME/GIVEN MRS(ADT)"
+    [GeneratedRegex(@"(?<jsno>\d+\.\d*)(?<name>[A-Z][A-Z'-]*/[A-Z][A-Z\s'-]*?)(?:\([A-Z]{3}\))?(?=\s{2,}\d+\.\d*|\s*$)", RegexOptions.IgnoreCase)]
     private static partial Regex PassengerRegex();
 
     // Capture only the date portion before any slash or space+agent-sign in T- lines, e.g. "1.T-16FEB" from "1.T-16FEB-3A78*ATT"
@@ -752,6 +803,10 @@ public static partial class Queue7Parser
     [GeneratedRegex(@"(?:TAW/|T-\d{1,2}[A-Z]{3}(?:\d{2,4})?-)[A-Z0-9]{3,5}\*[A-Z0-9]+", RegexOptions.IgnoreCase)]
     private static partial Regex TicketedTktRegex();
 
+    // Amadeus ticketed indicator: "TK OK" optionally followed by date/office, e.g. "TK OK31AUG/BOMAK3303"
+    [GeneratedRegex(@"\bTK\s+OK\b", RegexOptions.IgnoreCase)]
+    private static partial Regex AmadeusTkOkRegex();
+
     [GeneratedRegex(@"ACCOUNTING DATA", RegexOptions.IgnoreCase)]
     private static partial Regex AccountingDataRegex();
 
@@ -779,6 +834,10 @@ public static partial class Queue7Parser
     [GeneratedRegex(@"\*\*\s*(?:ELECTRONIC DATA EXISTS|TINS REMARKS EXIST)\s*\*\*", RegexOptions.IgnoreCase)]
     private static partial Regex GalileoTicketedRegex();
 
+    // Amadeus header: RP/BOMAK3303/BOMAK3303  ST/SU  13MAY26/2244Z   7C4583 — PNR is the last alphanumeric token
+    [GeneratedRegex(@"^RP/[A-Z0-9]+/[A-Z0-9]+[^\r\n]*\s(?<pnr>[A-Z0-9]{5,8})\s*$", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
+    private static partial Regex AmadeusRpHeaderRegex();
+
     // Sabre header: 3A78.3A78*ATT 0619/16FEB26 AFZPJI H  — PNR is the token after the datetime
     [GeneratedRegex(@"^\s*[A-Z0-9]{3,5}\.[A-Z0-9*]+\s+\d{4}/\d{2}[A-Z]{3}\d{2}\s+(?<pnr>[A-Z0-9]{5,8})\b", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
     private static partial Regex SabreHeaderPnrRegex();
@@ -799,7 +858,8 @@ public static partial class Queue7Parser
     private static partial Regex GalileoHeaderPnrRegex();
 
     // Matches both Sabre (space-separated origin/dest) and Galileo (concatenated 6-char IATA pair)
-    [GeneratedRegex(@"^\s*(?<segment>\d{1,2})\.?\s+(?<carrier>[A-Z0-9]{2})\s*(?<flightNumber>\d{1,4}[A-Z]?)\s+(?:[A-Z]\s+)?(?<date>[0-9]{1,2}[A-Z]{3}|[A-Z]{3}\s*[0-9]{1,2})?\s*(?:[A-Z]\s+)?(?:(?<origin>[A-Z]{3})\s+(?<destination>[A-Z]{3})|(?<origin6>[A-Z]{3})(?<destination6>[A-Z]{3}))\*?\s*(?<status>HK|KK|KL|TK|HX|UN|UC|US|WL|NO)\d*\b(?<times>.*)$", RegexOptions.IgnoreCase)]
+    // Also handles Amadeus format: segment carrier flight bookingClass date dayOfWeek origin6dest6 STATUS+count times
+    [GeneratedRegex(@"^\s*(?<segment>\d{1,2})\.?\s+(?<carrier>[A-Z0-9]{2})\s*(?<flightNumber>\d{1,4}[A-Z]?)\s+(?:[A-Z]\s+)?(?<date>[0-9]{1,2}[A-Z]{3}|[A-Z]{3}\s*[0-9]{1,2})?\s*(?:\d\s+)?(?:[A-Z]\s+)?(?:(?<origin>[A-Z]{3})\s+(?<destination>[A-Z]{3})|(?<origin6>[A-Z]{3})(?<destination6>[A-Z]{3}))\*?\s*(?<status>HK|KK|KL|TK|HX|UN|UC|US|WL|NO)\d*\b(?<times>.*)$", RegexOptions.IgnoreCase)]
     private static partial Regex SegmentLineRegex();
 
     [GeneratedRegex(@"\b\d{3,4}[AP]?\b", RegexOptions.IgnoreCase)]

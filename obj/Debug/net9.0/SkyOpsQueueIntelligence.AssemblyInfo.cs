@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SkyOpsQueueIntelligence")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+73115a75d20fbf7a47edd0744c150ec9237614ac")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f73f0887fecd4c72300e1c98fe6cc979728bd19a")]
 [assembly: System.Reflection.AssemblyProductAttribute("SkyOpsQueueIntelligence")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SkyOpsQueueIntelligence")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

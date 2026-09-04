@@ -60,6 +60,10 @@ public static class ServiceRegistration
         services.AddSingleton<IGalileoSessionService>(sp => sp.GetRequiredService<GalileoSessionService>());
         services.AddHttpClient<GalileoQueuePollingService>();
         services.AddHostedService<GalileoQueuePollingService>();
+        services.AddHttpClient<AmadeusSessionService>();
+        services.AddSingleton<IAmadeusSessionService>(sp => sp.GetRequiredService<AmadeusSessionService>());
+        services.AddHttpClient<AmadeusQueuePollingService>();
+        services.AddHostedService<AmadeusQueuePollingService>();
 
         return services;
     }
