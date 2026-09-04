@@ -22,7 +22,7 @@ public sealed class SabreQueuePollingService : BackgroundService, IQueue7Polling
         int SavedCount,
         IReadOnlyCollection<string> CurrentPnrs);
 
-    private volatile bool _enabled = false;
+    private volatile bool _enabled;
 
     private readonly Queue7PollingOptions _options;
     private readonly IQueueActionRepository _repository;
@@ -66,6 +66,7 @@ public sealed class SabreQueuePollingService : BackgroundService, IQueue7Polling
         _errorLogService = errorLogService;
         _priorityPnrRepository = priorityPnrRepository;
         _scopeFactory = scopeFactory;
+        _enabled = options.Value.Enabled;
     }
 
     public bool IsEnabled => _enabled;

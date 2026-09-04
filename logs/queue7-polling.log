@@ -11473,3 +11473,13 @@
 2026-09-04 14:38:38 +05:30 | Sabre polling is paused. Waiting...
 2026-09-04 14:44:58 +05:30 | Queue polling started. Queues: Q/7, Q/379, Q/62. Interval: 15 min.
 2026-09-04 14:44:58 +05:30 | Sabre polling is paused. Waiting...
+2026-09-04 16:53:38 +05:30 | Queue polling started. Queues: Q/7, Q/379, Q/62. Interval: 15 min.
+2026-09-04 16:53:38 +05:30 | Sabre polling is paused. Waiting...
+2026-09-04 16:54:27 +05:30 | Queue polling started. Queues: Q/7, Q/379, Q/62. Interval: 15 min.
+2026-09-04 16:54:27 +05:30 | Processing 4 PCC(s)...
+2026-09-04 16:54:31 +05:30 | PCC 1V08 Q/7: Queue empty or no parsable items.
+2026-09-04 16:54:34 +05:30 | PCC 1V08 Q/379: Queue empty or no parsable items.
+2026-09-04 16:55:05 +05:30 | PCC 1V08 Q/62: analyzed 17 PNRs, saved 16 actions.
+2026-09-04 16:55:12 +05:30 | PCC 1VZ8 Q/7: analyzed 1 PNRs, saved 2 actions.
+2026-09-04 16:55:15 +05:30 | PCC 1VZ8 Q/379: Queue empty or no parsable items.
+2026-09-04 16:56:10 +05:30 | PCC 1VZ8 Q/62: analyzed 33 PNRs, saved 19 actions.

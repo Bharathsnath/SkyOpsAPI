@@ -63,3 +63,7 @@
 2026-09-04 14:23:07 +05:30 | Galileo queue polling is disabled.
 2026-09-04 14:38:38 +05:30 | Galileo queue polling is disabled.
 2026-09-04 14:44:58 +05:30 | Galileo queue polling is disabled.
+2026-09-04 16:53:38 +05:30 | Galileo queue polling started. Queues: Q/22, Q/23. Interval: 15 min.
+2026-09-04 16:54:27 +05:30 | Galileo queue polling started. Queues: Q/22, Q/23. Interval: 15 min.
+2026-09-04 16:55:09 +05:30 | Galileo PCC 6TP2 Q/22: analyzed 20 PNRs, saved 0 actions.
+2026-09-04 16:55:13 +05:30 | Galileo PCC 6TP2 Q/23: analyzed 2 PNRs, saved 0 actions.

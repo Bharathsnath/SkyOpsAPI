@@ -62,7 +62,7 @@ public sealed class GalileoApiOptions
 
 public sealed class GalileoPollingOptions
 {
-    public bool Enabled { get; init; } = false;
+    public bool Enabled { get; init; } = true;
 
     public int IntervalMinutes { get; init; } = 15;
 
