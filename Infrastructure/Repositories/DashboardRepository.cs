@@ -143,8 +143,8 @@ public sealed class DashboardRepository : IDashboardRepository
             ORDER BY UpdatedAt DESC
             """,
             r => new FlightStatusItemDto(
-                r.GetString(0), r.GetString(1), r.GetString(2), r.GetString(3), r.GetInt32(4),
-                r.GetString(5), r.IsDBNull(6) ? null : r.GetString(6), r.IsDBNull(7) ? null : r.GetString(7), r.GetDateTime(8)),
+                r.IsDBNull(0) ? null : r.GetString(0), r.IsDBNull(1) ? null : r.GetString(1), r.IsDBNull(2) ? null : r.GetString(2), r.IsDBNull(3) ? null : r.GetString(3), r.GetInt32(4),
+                r.IsDBNull(5) ? null : r.GetString(5), r.IsDBNull(6) ? null : r.GetString(6), r.IsDBNull(7) ? null : r.GetString(7), r.GetDateTime(8)),
             ct, ("@userId", userId));
 
         var summary = await QueryAsync(conn, $"""
@@ -169,8 +169,8 @@ public sealed class DashboardRepository : IDashboardRepository
               ORDER BY UpdatedAt DESC
             """,
             r => new CriticalQueueItemDto(
-                r.GetString(0), r.GetString(1), r.GetString(2), r.GetString(3), r.GetInt32(4),
-                r.GetString(5), r.IsDBNull(6) ? null : r.GetString(6),
+                r.IsDBNull(0) ? null : r.GetString(0), r.IsDBNull(1) ? null : r.GetString(1), r.IsDBNull(2) ? null : r.GetString(2), r.IsDBNull(3) ? null : r.GetString(3), r.GetInt32(4),
+                r.IsDBNull(5) ? null : r.GetString(5), r.IsDBNull(6) ? null : r.GetString(6),
                 r.IsDBNull(7) ? null : r.GetString(7), r.IsDBNull(8) ? null : r.GetString(8), r.GetDateTime(9)),
             ct, ("@userId", userId));
         var Unticketedcritical = await QueryAsync(conn, $"""
@@ -195,8 +195,8 @@ public sealed class DashboardRepository : IDashboardRepository
             ORDER BY q.Pnr,q.SegmentNumber
             """,
             r => new CriticalQueueItemDto(
-                r.GetString(0), r.GetString(1), r.GetString(2), r.GetString(3), r.GetInt32(4),
-                r.GetString(5), r.IsDBNull(6) ? null : r.GetString(6),
+                r.IsDBNull(0) ? null : r.GetString(0), r.IsDBNull(1) ? null : r.GetString(1), r.IsDBNull(2) ? null : r.GetString(2), r.IsDBNull(3) ? null : r.GetString(3), r.GetInt32(4),
+                r.IsDBNull(5) ? null : r.GetString(5), r.IsDBNull(6) ? null : r.GetString(6),
                 r.IsDBNull(7) ? null : r.GetString(7), r.IsDBNull(8) ? null : r.GetString(8), r.GetDateTime(9)),
             ct, ("@userId", userId));
 
@@ -217,7 +217,7 @@ public sealed class DashboardRepository : IDashboardRepository
             ORDER BY UpdatedAt DESC
             """,
             r => new DelayItemDto(
-                r.GetString(0), r.GetString(1), r.GetString(2),
+                r.IsDBNull(0) ? null : r.GetString(0), r.IsDBNull(1) ? null : r.GetString(1), r.IsDBNull(2) ? null : r.GetString(2),
                 r.IsDBNull(3) ? null : r.GetInt32(3), r.IsDBNull(4) ? null : r.GetDecimal(4),
                 r.GetInt32(5), r.IsDBNull(6) ? null : r.GetString(6), r.IsDBNull(7) ? null : r.GetString(7), r.GetDateTime(8)),
             ct, ("@userId", userId));
@@ -241,8 +241,8 @@ public sealed class DashboardRepository : IDashboardRepository
             ORDER BY UpdatedAt DESC
             """,
             r => new FlightImpactItemDto(
-                r.GetString(0), r.GetString(1), r.GetString(2), r.GetString(3), r.GetInt32(4),
-                r.GetString(5), r.IsDBNull(6) ? null : r.GetString(6),
+                r.IsDBNull(0) ? null : r.GetString(0), r.IsDBNull(1) ? null : r.GetString(1), r.IsDBNull(2) ? null : r.GetString(2), r.IsDBNull(3) ? null : r.GetString(3), r.GetInt32(4),
+                r.IsDBNull(5) ? null : r.GetString(5), r.IsDBNull(6) ? null : r.GetString(6),
                 r.IsDBNull(7) ? null : r.GetString(7), r.IsDBNull(8) ? null : r.GetString(8), r.GetDateTime(9)),
             ct, ("@userId", userId));
 
@@ -263,9 +263,9 @@ public sealed class DashboardRepository : IDashboardRepository
                 FROM wptravelitineraryflightqueuereports AS qr WHERE Pnr=@Pnr AND {accessFilter} ORDER BY SegmentNumber
                 """,
                 r => new PnrSegmentDto(
-                    r.GetString(0), r.GetString(1), r.GetString(2), r.GetInt32(3), r.GetInt32(4),
-                    r.GetString(5), r.IsDBNull(6) ? null : r.GetInt32(6), r.IsDBNull(7) ? null : r.GetString(7),
-                    r.IsDBNull(8) ? null : r.GetString(8), r.GetString(9), r.IsDBNull(10) ? null : r.GetString(10), r.GetDateTime(11)),
+                    r.IsDBNull(0) ? null : r.GetString(0), r.IsDBNull(1) ? null : r.GetString(1), r.IsDBNull(2) ? null : r.GetString(2), r.GetInt32(3), r.GetInt32(4),
+                    r.IsDBNull(5) ? null : r.GetString(5), r.IsDBNull(6) ? null : r.GetInt32(6), r.IsDBNull(7) ? null : r.GetString(7),
+                    r.IsDBNull(8) ? null : r.GetString(8), r.IsDBNull(9) ? null : r.GetString(9), r.IsDBNull(10) ? null : r.GetString(10), r.GetDateTime(11)),
                 ct, ("@userId", userId), ("@Pnr", pnr));
             return new PnrAnalysisDto(pnr, segments, null);
         }
@@ -322,8 +322,8 @@ public sealed class DashboardRepository : IDashboardRepository
             ORDER BY UpdatedAt DESC
             """,
             r => new LivePnrItemDto(
-                r.GetString(0), r.GetString(1), r.GetString(2), r.GetString(3), r.GetInt32(4),
-                r.GetString(5), r.IsDBNull(6) ? null : r.GetString(6), r.IsDBNull(7) ? null : r.GetString(7), r.GetDateTime(8)),
+                r.IsDBNull(0) ? null : r.GetString(0), r.IsDBNull(1) ? null : r.GetString(1), r.IsDBNull(2) ? null : r.GetString(2), r.IsDBNull(3) ? null : r.GetString(3), r.GetInt32(4),
+                r.IsDBNull(5) ? null : r.GetString(5), r.IsDBNull(6) ? null : r.GetString(6), r.IsDBNull(7) ? null : r.GetString(7), r.GetDateTime(8)),
             ct, ("@userId", userId));
 
         return new OperationalDashboardDto(openCritical, tkMonitor, hxUnUC, livePNR);

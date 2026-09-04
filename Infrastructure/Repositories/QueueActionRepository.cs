@@ -60,6 +60,9 @@ public sealed class QueueActionRepository : IQueueActionRepository
             return (0, Array.Empty<QueueAnalysisResult>());
         }
 
+        _logger.LogInformation("Saving {ResultCount} queue results ({ActionCount} actions) for provider {ProviderName}.",
+            analysisResults.Count, analysisResults.Sum(result => result.Actions.Count), providerName);
+
         await using var connection = new MySqlConnection(_connectionString);
         await connection.OpenAsync(cancellationToken);
 

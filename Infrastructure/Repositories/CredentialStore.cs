@@ -53,12 +53,13 @@ public sealed class CredentialStore : ICredentialStore
             await connection.OpenAsync(cancellationToken);
 
             const string sql = """
-                SELECT * FROM wpset_credentialdetails
-                WHERE RecordStatus = '0'
+                 SELECT * FROM wpset_credentialdetails
+                WHERE RecordStatus = '0' 
                 AND Provider IN ('AB', 'SB')
-                AND PCCMasterCode IN (
-                    'AB_1V08_COCHINTDESK_DOM','AB_1VZ8_PONNANITDESK_DOM','HO PCC','1SKSAONLINE'
-                );
+                AND (PCCMasterCode LIKE '%AB_1V08_COCHINTDESK_DOM'
+                    OR PCCMasterCode LIKE '%AB_1VZ8_PONNANITDESK_DOM'
+                    OR PCCMasterCode LIKE '%HO PCC'
+                    OR PCCMasterCode LIKE '%1SKSAONLINE%');
                 """;
 
             await using var cmd = new MySqlCommand(sql, connection);
