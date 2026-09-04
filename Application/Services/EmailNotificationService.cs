@@ -60,7 +60,18 @@ public sealed class EmailNotificationService : IEmailNotificationService
         var sendOnCritical = section.GetValue<bool>("SendOnCritical");
         var sendOnTimeChange = section.GetValue<bool>("SendOnTimeChange");
         var baseUrl = section["BaseUrl"] ?? "https://skyopsapibeta.akbartravelsonline.com";
+
+        _logger.LogInformation(
+            "[EmailAlert] SendAlertAsync called: PCC={Pcc}, Company={Company}, Market={Market}, TotalResults={Total}, ReceivedFromValues=[{ReceivedFromList}]",
+            PCC, company, market, results.Count,
+            string.Join(", ", results.Select(r => $"{r.Pnr}:{r.ReceivedFrom ?? "null"}")));
+
         var filteredResults = FilterResultsByPcc(PCC, company, market, results);
+
+        _logger.LogInformation(
+            "[EmailAlert] After FilterResultsByPcc: PCC={Pcc}, Company={Company}, Market={Market}, FilteredCount={Filtered}",
+            PCC, company, market, filteredResults.Count);
+
         if (filteredResults.Count == 0)
         {
           _logger.LogInformation("Email skipped for PCC {Pcc}: no transactions matched company {Company}, market {Market}, or the configured transaction prefix.", PCC, company, market);
@@ -85,6 +96,10 @@ public sealed class EmailNotificationService : IEmailNotificationService
             .SelectMany(r => r.Actions.Select(a => (r.Pnr, r.PCC, a)))
             .Where(x => x.a.Status == "TK" && x.a.DelayMinutes is not null && x.a.DelayMinutes != 0)
             .ToList();
+
+        _logger.LogInformation(
+            "[EmailAlert] Actions: PCC={Pcc}, CriticalCount={Critical}, TimeChangeCount={TimeChange}, SendOnCritical={Soc}, SendOnTimeChange={Sotc}",
+            PCC, criticalActions.Count, timeChangeActions.Count, sendOnCritical, sendOnTimeChange);
 
         if ((!sendOnCritical || criticalActions.Count == 0) && (!sendOnTimeChange || timeChangeActions.Count == 0))
         {
@@ -128,9 +143,15 @@ public sealed class EmailNotificationService : IEmailNotificationService
           return Array.Empty<QueueAnalysisResult>();
 
         return results
-          .Where(result => string.IsNullOrWhiteSpace(result.ReceivedFrom)
-            || !OnlineTransactionIdRegex.IsMatch(result.ReceivedFrom.Trim())
-            || result.ReceivedFrom.Trim().StartsWith(rule.TransactionPrefix, StringComparison.OrdinalIgnoreCase))
+          .Where(result =>
+          {
+            var receivedFrom = result.ReceivedFrom?.Trim();
+            // No ReceivedFrom or not an online transaction ID → include (offline booking)
+            if (string.IsNullOrWhiteSpace(receivedFrom) || !OnlineTransactionIdRegex.IsMatch(receivedFrom))
+              return true;
+            // Online transaction ID: must match this company's prefix exactly
+            return receivedFrom.StartsWith(rule.TransactionPrefix, StringComparison.OrdinalIgnoreCase);
+          })
           .ToArray();
       }
 
@@ -693,10 +714,13 @@ public sealed class EmailNotificationService : IEmailNotificationService
           var matchingEntries = new List<PccAgentEmailMaster>();
           foreach (var pccCandidate in pccCandidates)
           {
-            matchingEntries.AddRange(await settingsRepository
-              .GetPccAgentEmailMastersByPccCompanyMarketAsync(pccCandidate, company, market, ct));
+            var rows = await settingsRepository
+              .GetPccAgentEmailMastersByPccCompanyMarketAsync(pccCandidate, company, market, ct);
+            _logger.LogInformation(
+              "[EmailAlert] DB lookup: PCCCode={Pcc}, Company={Company}, Market={Market} → {Count} row(s) found",
+              pccCandidate, company, market, rows.Count);
+            matchingEntries.AddRange(rows);
           }
-
           entries = matchingEntries;
         }
         else
