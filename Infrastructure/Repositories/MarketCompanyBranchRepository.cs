@@ -41,7 +41,7 @@ public class MarketCompanyBranchRepository : IMarketCompanyBranchRepository
         await using var conn = new MySqlConnection(_connectionString);
         await conn.OpenAsync(ct);
 
-        const string sql = "SELECT Id, MarketId,CompanyCode, CompanyName, IsActive FROM CompanyMaster ORDER BY CompanyName";
+        const string sql = "SELECT Id, MarketId, CompanyCode, CompanyName, TransactionPrefix, IsActive FROM CompanyMaster ORDER BY CompanyName";
         await using var cmd = new MySqlCommand(sql, conn);
         await using var rdr = await cmd.ExecuteReaderAsync(ct);
 
@@ -53,6 +53,7 @@ public class MarketCompanyBranchRepository : IMarketCompanyBranchRepository
                 MarketId = rdr.GetInt32("MarketId"),
                 CompanyCode = rdr.GetString("CompanyCode"),
                 CompanyName = rdr.GetString("CompanyName"),
+                TransactionPrefix = rdr.IsDBNull(rdr.GetOrdinal("TransactionPrefix")) ? null : rdr.GetString("TransactionPrefix"),
                 IsActive = rdr.GetBoolean("IsActive")
             });
         return list;

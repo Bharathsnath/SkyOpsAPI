@@ -82,7 +82,8 @@ public sealed class SettingsRepository : ISettingsRepository
         const string sql = """
             SELECT Id, PCCCode, Company, Market, Emails, IsActive, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate
             FROM skyops.pccagentemailmaster
-                        WHERE TRIM(PCCCode) = TRIM(@PccCode)
+                        WHERE IsActive = 1
+                            AND TRIM(PCCCode) = TRIM(@PccCode)
                             AND TRIM(Company) = TRIM(@Company)
                             AND TRIM(Market) = TRIM(@Market)
             ORDER BY Emails

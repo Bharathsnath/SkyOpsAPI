@@ -206,7 +206,7 @@ public class AdmAnalysisService : IAdmAnalysisService
 
         if (officeIds.Count == 0)
         {
-            _logger.LogWarning("No SourceOffice credentials found; aborting Queue 379 churn scan.");
+            _logger.LogWarning("No SourceOffice credentials found; aborting Queue 0 churn scan.");
             return;
         }
 
@@ -219,6 +219,12 @@ public class AdmAnalysisService : IAdmAnalysisService
                 moduleName: "SabreADMAnalysis", moduleCode: "ADM");
 
             var combinedText = string.Join("\n", pages);
+
+            if (combinedText.Contains("QUEUE SELECTED WAS EMPTY", StringComparison.OrdinalIgnoreCase))
+            {
+                _logger.LogInformation("Queue 0 is empty for {OfficeId}; queue exited and session closed. Continuing to next PCC.", officeId);
+                continue;
+            }
 
             // Extract 6-char PNR locators from queue items
             var pnrs = s_queuePnrRegex.Matches(combinedText)

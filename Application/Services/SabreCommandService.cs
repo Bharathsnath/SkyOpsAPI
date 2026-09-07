@@ -310,10 +310,19 @@ public sealed class SabreCommandService : ISabreCommandService
             var page = await SendCommandAsync(session, firstCommand, pccCode, cancellationToken, moduleName, moduleCode);
             pages.Add(page);
 
-            for (var i = 0; i < maxPages && !IsEndOfPagedReport(page, endMarker); i++)
+            if (IsQueueEmpty(page))
+            {
+                await SendCommandAsync(session, "QXI", pccCode, cancellationToken, moduleName, moduleCode);
+                return pages;
+            }
+
+            for (var i = 0; i < maxPages && !IsEndOfPagedReport(page, endMarker) && !IsQueueEmpty(page); i++)
             {
                 page = await SendCommandAsync(session, nextPageCommand, pccCode, cancellationToken, moduleName, moduleCode);
                 pages.Add(page);
+
+                if (IsQueueEmpty(page))
+                    await SendCommandAsync(session, "QXI", pccCode, cancellationToken, moduleName, moduleCode);
             }
 
             return pages;

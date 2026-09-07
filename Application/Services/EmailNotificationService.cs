@@ -12,20 +12,7 @@ namespace SkyOpsQueueIntelligence.Application.Services;
 
 public sealed class EmailNotificationService : IEmailNotificationService
 {
-  private sealed record AlertRoutingRule(string TransactionPrefix, string Company, string Market);
-
-  private static readonly AlertRoutingRule[] AlertRoutingRules =
-  [
-    new("AO", "aoi", "b2b ind"),
-    new("AT", "ati", "b2b ind"),
-    new("AC", "aoi", "b2e ind"),
-    new("SA", "aoi", "b2b sa"),
-    new("AK", "aoi", "b2c ind")
-  ];
-
-  private static readonly System.Text.RegularExpressions.Regex OnlineTransactionIdRegex = new(
-    "^[A-Za-z]{2}[0-9]{9}$",
-    System.Text.RegularExpressions.RegexOptions.Compiled | System.Text.RegularExpressions.RegexOptions.CultureInvariant);
+  private sealed record AlertRoute(string Pcc, string Prefix, string Company, string Market);
 
     private readonly IConfiguration _config;
     private readonly IServiceScopeFactory _scopeFactory;
@@ -33,6 +20,7 @@ public sealed class EmailNotificationService : IEmailNotificationService
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly IHubContext<QueueNotificationsHub> _hubContext;
     private readonly IErrorLogService _errorLogService;
+    private readonly IMarketCompanyBranchService _marketCompanyBranchService;
 
     public EmailNotificationService(
         IConfiguration config,
@@ -40,7 +28,8 @@ public sealed class EmailNotificationService : IEmailNotificationService
         ILogger<EmailNotificationService> logger,
         IHttpClientFactory httpClientFactory,
         IHubContext<QueueNotificationsHub> hubContext,
-        IErrorLogService errorLogService)
+        IErrorLogService errorLogService,
+        IMarketCompanyBranchService marketCompanyBranchService)
     {
         _config = config;
         _scopeFactory = scopeFactory;
@@ -48,6 +37,7 @@ public sealed class EmailNotificationService : IEmailNotificationService
         _httpClientFactory = httpClientFactory;
         _hubContext = hubContext;
         _errorLogService = errorLogService;
+        _marketCompanyBranchService = marketCompanyBranchService;
     }
 
     public async Task SendAlertAsync(string PCC, string company, string market, IReadOnlyList<QueueAnalysisResult> results, CancellationToken ct = default)
@@ -61,26 +51,58 @@ public sealed class EmailNotificationService : IEmailNotificationService
         var sendOnTimeChange = section.GetValue<bool>("SendOnTimeChange");
         var baseUrl = section["BaseUrl"] ?? "https://skyopsapibeta.akbartravelsonline.com";
 
-        _logger.LogInformation(
-            "[EmailAlert] SendAlertAsync called: PCC={Pcc}, Company={Company}, Market={Market}, TotalResults={Total}, ReceivedFromValues=[{ReceivedFromList}]",
-            PCC, company, market, results.Count,
-            string.Join(", ", results.Select(r => $"{r.Pnr}:{r.ReceivedFrom ?? "null"}")));
-
-        var filteredResults = FilterResultsByPcc(PCC, company, market, results);
-
-        _logger.LogInformation(
-            "[EmailAlert] After FilterResultsByPcc: PCC={Pcc}, Company={Company}, Market={Market}, FilteredCount={Filtered}",
-            PCC, company, market, filteredResults.Count);
-
-        if (filteredResults.Count == 0)
+        var routedResults = new Dictionary<AlertRoute, List<QueueAnalysisResult>>();
+        foreach (var result in results)
         {
-          _logger.LogInformation("Email skipped for PCC {Pcc}: no transactions matched company {Company}, market {Market}, or the configured transaction prefix.", PCC, company, market);
-          return;
+          var route = await ResolveCompanyMarketAsync(result.ReceivedFrom, ct);
+          if (route is null)
+          {
+            _logger.LogWarning(
+              "Email skipped: no active CompanyMaster route for PCC={Pcc}, TransactionId={TransactionId}, TransactionPrefix={TransactionPrefix}, Company={Company}, Market={Market}, MatchedRecipientCount={MatchedRecipientCount}",
+              result.PCC ?? PCC, result.ReceivedFrom, ExtractTransactionPrefix(result.ReceivedFrom), null, null, 0);
+            continue;
+          }
+
+          route = route with { Pcc = string.IsNullOrWhiteSpace(result.PCC) ? PCC.Trim() : result.PCC.Trim() };
+
+          if (!routedResults.TryGetValue(route, out var routeResults))
+          {
+            routeResults = [];
+            routedResults[route] = routeResults;
+          }
+
+          routeResults.Add(result);
         }
 
+        foreach (var (route, routeResults) in routedResults)
+        {
+          await SendAlertForRouteAsync(section, route.Pcc, route.Prefix, route.Company, route.Market, routeResults, ct);
+        }
+        }
+        catch (Exception ex) { await _errorLogService.LogAsync(ex, "EmailNotificationService", "SkyOpsQueueIntelligence", "SERVICE", nameof(SendAlertAsync), nameof(EmailNotificationService)); }
+    }
+
+    private async Task SendAlertForRouteAsync(
+        IConfigurationSection section,
+        string PCC,
+        string prefix,
+        string company,
+        string market,
+        IReadOnlyList<QueueAnalysisResult> filteredResults,
+        CancellationToken ct)
+    {
+        var sendOnCritical = section.GetValue<bool>("SendOnCritical");
+        var sendOnTimeChange = section.GetValue<bool>("SendOnTimeChange");
+        var baseUrl = section["BaseUrl"] ?? "https://skyopsapibeta.akbartravelsonline.com";
+
+        _logger.LogInformation(
+            "[EmailAlert] SendAlertAsync called: PCC={Pcc}, TransactionPrefix={TransactionPrefix}, Company={Company}, Market={Market}, TotalResults={Total}",
+            PCC, prefix, company, market, filteredResults.Count);
+
         var toAddresses = await ResolveRecipientsAsync(section, PCC, company, market, filteredResults, ct);
-        _logger.LogInformation("Email routing for PCC {Pcc}, company {Company}, market {Market}: {ResultCount} result(s), {RecipientCount} recipient(s), transactions {Transactions}.",
+        _logger.LogInformation("Email routing for PCC={Pcc}, TransactionPrefix={TransactionPrefix}, Company={Company}, Market={Market}: {ResultCount} result(s), MatchedRecipientCount={RecipientCount}, TransactionIds={Transactions}.",
           PCC,
+          prefix,
           company,
           market,
           filteredResults.Count,
@@ -118,41 +140,33 @@ public sealed class EmailNotificationService : IEmailNotificationService
         var subject = $"[SKY OPS] Queue notification of PCC: {PCC}";
 
         await SendEmailAsync(section, subject, body, toAddresses, ct, throwOnError: false);
-        }
-        catch (Exception ex) { await _errorLogService.LogAsync(ex, "EmailNotificationService", "SkyOpsQueueIntelligence", "SERVICE", nameof(SendAlertAsync), nameof(EmailNotificationService)); }
     }
 
-      private static IReadOnlyList<QueueAnalysisResult> FilterResultsByPcc(
-        string pcc,
-        string company,
-        string market,
-        IReadOnlyList<QueueAnalysisResult> results)
+      private async Task<AlertRoute?> ResolveCompanyMarketAsync(string? transactionId, CancellationToken ct)
       {
-        var normalizedCompany = company.Trim();
-        var normalizedMarket = market.Trim();
+        var prefix = ExtractTransactionPrefix(transactionId);
+        if (string.IsNullOrEmpty(prefix)) return null;
 
-        if (string.IsNullOrWhiteSpace(normalizedCompany)
-          || string.IsNullOrWhiteSpace(normalizedMarket))
-          return results;
+        var companies = await _marketCompanyBranchService.GetCompaniesAsync(ct);
+        var company = companies.FirstOrDefault(candidate =>
+          candidate.IsActive
+          && string.Equals(candidate.TransactionPrefix?.Trim(), prefix, StringComparison.OrdinalIgnoreCase));
+        if (company is null) return null;
 
-        var rule = AlertRoutingRules.FirstOrDefault(candidate =>
-          normalizedCompany.Equals(candidate.Company, StringComparison.OrdinalIgnoreCase)
-          && normalizedMarket.Equals(candidate.Market, StringComparison.OrdinalIgnoreCase));
+        var markets = await _marketCompanyBranchService.GetMarketsAsync(ct);
+        var market = markets.FirstOrDefault(candidate => candidate.IsActive && candidate.Id == company.MarketId);
+        if (market is null || string.IsNullOrWhiteSpace(company.CompanyName) || string.IsNullOrWhiteSpace(market.MarketCode))
+          return null;
 
-        if (rule is null)
-          return Array.Empty<QueueAnalysisResult>();
+        if (string.IsNullOrWhiteSpace(company.CompanyCode)) return null;
 
-        return results
-          .Where(result =>
-          {
-            var receivedFrom = result.ReceivedFrom?.Trim();
-            // No ReceivedFrom or not an online transaction ID → include (offline booking)
-            if (string.IsNullOrWhiteSpace(receivedFrom) || !OnlineTransactionIdRegex.IsMatch(receivedFrom))
-              return true;
-            // Online transaction ID: must match this company's prefix exactly
-            return receivedFrom.StartsWith(rule.TransactionPrefix, StringComparison.OrdinalIgnoreCase);
-          })
-          .ToArray();
+        return new AlertRoute(string.Empty, prefix, company.CompanyCode.Trim(), market.MarketCode.Trim());
+      }
+
+      private static string ExtractTransactionPrefix(string? transactionId)
+      {
+        var trimmed = transactionId?.Trim() ?? string.Empty;
+        return trimmed.Length >= 2 ? trimmed[..2].ToUpperInvariant() : string.Empty;
       }
 
     public async Task SendQueueProcessingSummaryAsync(
@@ -651,18 +665,11 @@ public sealed class EmailNotificationService : IEmailNotificationService
 
         if (recipients.Count == 0)
         {
-          var fallbackRecipients = section.GetSection("ToAddresses").Get<string[]>() ?? Array.Empty<string>();
-          foreach (var recipient in fallbackRecipients)
-            {
-                recipients.Add(recipient);
-            }
-
           _logger.LogWarning(
-            "No PCC-specific email recipients found for PCC {Pcc}, company {Company}, market {Market}; using {FallbackRecipientCount} configured fallback recipient(s).",
+            "No active PCC email recipients found for PCC {Pcc}, company {Company}, market {Market}; no alert will be sent.",
             PCC,
             company,
-            market,
-            fallbackRecipients.Length);
+            market);
         }
 
         return recipients.ToArray();
@@ -675,7 +682,9 @@ public sealed class EmailNotificationService : IEmailNotificationService
 
         foreach (var recipient in value.Split(new[] { ';', ',' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
         {
-            if (!string.IsNullOrWhiteSpace(recipient))
+            if (!string.IsNullOrWhiteSpace(recipient)
+              && MailAddress.TryCreate(recipient, out var address)
+              && string.Equals(address.Address, recipient, StringComparison.OrdinalIgnoreCase))
                 yield return recipient;
         }
     }
