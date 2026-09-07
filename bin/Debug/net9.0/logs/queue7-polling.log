@@ -67,3 +67,9 @@
 2026-09-04 16:54:27 +05:30 | Galileo queue polling started. Queues: Q/22, Q/23. Interval: 15 min.
 2026-09-04 16:55:09 +05:30 | Galileo PCC 6TP2 Q/22: analyzed 20 PNRs, saved 0 actions.
 2026-09-04 16:55:13 +05:30 | Galileo PCC 6TP2 Q/23: analyzed 2 PNRs, saved 0 actions.
+2026-09-04 17:08:31 +05:30 | Galileo queue polling started. Queues: Q/22, Q/23. Interval: 15 min.
+2026-09-04 17:08:31 +05:30 | Galileo polling skipped: no active 1G PCC credentials were loaded.
+2026-09-04 17:13:14 +05:30 | Galileo queue polling started. Queues: Q/22, Q/23. Interval: 15 min.
+2026-09-04 17:21:38 +05:30 | Galileo queue polling started. Queues: Q/22, Q/23. Interval: 15 min.
+2026-09-04 17:22:25 +05:30 | Galileo PCC 6TP2 Q/22: analyzed 21 PNRs, saved 5 actions.
+2026-09-04 17:22:29 +05:30 | Galileo PCC 6TP2 Q/23: analyzed 2 PNRs, saved 0 actions.

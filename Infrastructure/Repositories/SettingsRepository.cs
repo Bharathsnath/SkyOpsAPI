@@ -319,7 +319,7 @@ public sealed class SettingsRepository : ISettingsRepository
             var sql = """
                 SELECT Cred_ID, PCCMasterCode, Provider, ServiceType, SectorType, TagName, TagValue, RecordStatus
                 FROM wpset_credentialdetails
-                WHERE RecordStatus = '0' AND Provider = 'AB'
+                WHERE RecordStatus = '0' AND ServiceType='FLT'
                 """;
 
             if (!string.IsNullOrWhiteSpace(pccCode))
