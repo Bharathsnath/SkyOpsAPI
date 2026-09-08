@@ -149,6 +149,7 @@ public sealed class SabreCommandService : ISabreCommandService
     private (string Username, string Password, string PccCode) ResolveCredentials(string officeId)
     {
         var pccGroup = _credentialStore.GetAll()
+            .Where(c => c.Provider.Equals("AB", StringComparison.OrdinalIgnoreCase) || c.Provider.Equals("SB", StringComparison.OrdinalIgnoreCase))
             .GroupBy(c => c.PCCMasterCode, StringComparer.OrdinalIgnoreCase)
             .FirstOrDefault(g => g.Any(c =>
                 c.TagName.Equals("SourceOffice", StringComparison.OrdinalIgnoreCase) &&

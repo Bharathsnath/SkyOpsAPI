@@ -12,7 +12,7 @@ namespace SkyOpsQueueIntelligence.Application.Services;
 
 public sealed class EmailNotificationService : IEmailNotificationService
 {
-  private sealed record AlertRoute(string Pcc, string Prefix, string Company, string Market);
+  private sealed record AlertRoute(string Pcc, string Prefix, string Company, string Market, bool IsOffline = false);
 
     private readonly IConfiguration _config;
     private readonly IServiceScopeFactory _scopeFactory;
@@ -54,7 +54,9 @@ public sealed class EmailNotificationService : IEmailNotificationService
         var routedResults = new Dictionary<AlertRoute, List<QueueAnalysisResult>>();
         foreach (var result in results)
         {
-          var route = await ResolveCompanyMarketAsync(result.ReceivedFrom, ct);
+          var route = IsOnlineTransactionId(result.ReceivedFrom)
+            ? await ResolveCompanyMarketAsync(result.ReceivedFrom, ct)
+            : new AlertRoute(string.Empty, string.Empty, string.Empty, string.Empty, IsOffline: true);
           if (route is null)
           {
             _logger.LogWarning(
@@ -99,7 +101,7 @@ public sealed class EmailNotificationService : IEmailNotificationService
             "[EmailAlert] SendAlertAsync called: PCC={Pcc}, TransactionPrefix={TransactionPrefix}, Company={Company}, Market={Market}, TotalResults={Total}",
             PCC, prefix, company, market, filteredResults.Count);
 
-        var toAddresses = await ResolveRecipientsAsync(section, PCC, company, market, filteredResults, ct);
+        var toAddresses = await ResolveRecipientsAsync(section, PCC, prefix, company, market, filteredResults, ct);
         _logger.LogInformation("Email routing for PCC={Pcc}, TransactionPrefix={TransactionPrefix}, Company={Company}, Market={Market}: {ResultCount} result(s), MatchedRecipientCount={RecipientCount}, TransactionIds={Transactions}.",
           PCC,
           prefix,
@@ -151,14 +153,23 @@ public sealed class EmailNotificationService : IEmailNotificationService
         var company = companies.FirstOrDefault(candidate =>
           candidate.IsActive
           && string.Equals(candidate.TransactionPrefix?.Trim(), prefix, StringComparison.OrdinalIgnoreCase));
+        if (company is null && prefix.Equals("AO", StringComparison.OrdinalIgnoreCase))
+          return new AlertRoute(string.Empty, prefix, "aoi", "b2b ind");
         if (company is null) return null;
 
         var markets = await _marketCompanyBranchService.GetMarketsAsync(ct);
         var market = markets.FirstOrDefault(candidate => candidate.IsActive && candidate.Id == company.MarketId);
         if (market is null || string.IsNullOrWhiteSpace(company.CompanyName) || string.IsNullOrWhiteSpace(market.MarketCode))
+        {
+          if (prefix.Equals("AO", StringComparison.OrdinalIgnoreCase))
+            return new AlertRoute(string.Empty, prefix, "aoi", "b2b ind");
           return null;
+        }
 
-        if (string.IsNullOrWhiteSpace(company.CompanyCode)) return null;
+        if (string.IsNullOrWhiteSpace(company.CompanyCode))
+          return prefix.Equals("AO", StringComparison.OrdinalIgnoreCase)
+            ? new AlertRoute(string.Empty, prefix, "aoi", "b2b ind")
+            : null;
 
         return new AlertRoute(string.Empty, prefix, company.CompanyCode.Trim(), market.MarketCode.Trim());
       }
@@ -167,6 +178,15 @@ public sealed class EmailNotificationService : IEmailNotificationService
       {
         var trimmed = transactionId?.Trim() ?? string.Empty;
         return trimmed.Length >= 2 ? trimmed[..2].ToUpperInvariant() : string.Empty;
+      }
+
+      private static bool IsOnlineTransactionId(string? transactionId)
+      {
+        var value = transactionId?.Trim() ?? string.Empty;
+        return value.Length == 11
+          && char.IsLetter(value[0])
+          && char.IsLetter(value[1])
+          && value[2..].All(char.IsDigit);
       }
 
     public async Task SendQueueProcessingSummaryAsync(
@@ -645,6 +665,7 @@ public sealed class EmailNotificationService : IEmailNotificationService
     private async Task<IReadOnlyList<string>> ResolveRecipientsAsync(
         IConfigurationSection section,
         string PCC,
+      string prefix,
       string company,
       string market,
         IReadOnlyList<QueueAnalysisResult> results,
@@ -658,9 +679,23 @@ public sealed class EmailNotificationService : IEmailNotificationService
                 recipients.Add(recipient);
         }
 
-        foreach (var recipient in await ResolvePccRecipientsAsync(PCC, company, market, results, ct))
+        var pccRecipients = await ResolvePccRecipientsAsync(PCC, company, market, results, ct);
+        foreach (var recipient in pccRecipients)
         {
             recipients.Add(recipient);
+        }
+
+        if (pccRecipients.Count == 0)
+        {
+          foreach (var recipient in section.GetSection("ToAddresses").Get<string[]>() ?? Array.Empty<string>())
+          {
+            foreach (var address in SplitRecipients(recipient))
+              recipients.Add(address);
+          }
+
+          _logger.LogWarning(
+            "No active PCC email recipients found for PCC {Pcc}; using configured default email recipients.",
+            PCC);
         }
 
         if (recipients.Count == 0)

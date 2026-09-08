@@ -46,6 +46,14 @@ public static partial class Queue7Parser
         {
             var line = rawLine.Trim();
 
+            if (line.Equals("*VL", StringComparison.OrdinalIgnoreCase)
+                || line.Equals("*VR", StringComparison.OrdinalIgnoreCase)
+                || line.Equals("VENDOR LOCATOR", StringComparison.OrdinalIgnoreCase)
+                || line.Equals("VENDOR REMARKS", StringComparison.OrdinalIgnoreCase))
+            {
+                break;
+            }
+
             if (line.StartsWith("SEATS/BOARDING PASS", StringComparison.OrdinalIgnoreCase)
                 || line.StartsWith("SEATS/", StringComparison.OrdinalIgnoreCase))
             {
@@ -237,14 +245,6 @@ public static partial class Queue7Parser
             {
                 return candidate;
             }
-        }
-
-        var vendorLocatorResponse = VendorLocatorResponsePnrRegex().Match(block);
-        if (vendorLocatorResponse.Success)
-        {
-            var candidate = vendorLocatorResponse.Groups["pnr"].Value.Trim().ToUpperInvariant();
-            if (LooksLikePnr(candidate))
-                return candidate;
         }
 
         var pnrHeaderMatch = PnrHeaderRegex().Match(block);
@@ -710,7 +710,7 @@ public static partial class Queue7Parser
         if (AccountingDataRegex().IsMatch(block))
             return true;
 
-        // Amadeus: TK OK or TK OK31AUG/BOMAK3303
+        // Amadeus: TK OK or FA PAX ticket record.
         if (AmadeusTkOkRegex().IsMatch(block) || AmadeusFaPaxRegex().IsMatch(block))
             return true;
 
@@ -718,7 +718,7 @@ public static partial class Queue7Parser
         if (!tktMatch.Success)
             return false;
 
-        // TAW/ alone (no office/signing) = unticketed
+        // TAW/ alone (no office/signing)  = unticketed
         // T-DATE-OFFICEID*SIGN or TAW/OFFICEID*SIGN = ticketed
         var tktValue = tktMatch.Groups["tkt"].Value.Trim();
         return TicketedTktRegex().IsMatch(tktValue);
@@ -898,7 +898,7 @@ public static partial class Queue7Parser
     [GeneratedRegex(@"ACCOUNTING DATA", RegexOptions.IgnoreCase)]
     private static partial Regex AccountingDataRegex();
 
-    [GeneratedRegex(@"\b(?:PNR|RECORD\s+LOCATOR|LOCATOR|RECLOC)\s*[:#-]?\s*(?<pnr>[A-Z0-9*.-]{3,12})\b", RegexOptions.IgnoreCase)]
+    [GeneratedRegex(@"^\s*(?:PNR|RECORD\s+LOCATOR|LOCATOR|RECLOC)\s*[:#-]?\s*(?<pnr>[A-Z0-9*.-]{3,12})\b", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
     private static partial Regex PnrHeaderRegex();
 
     [GeneratedRegex(@"<Response\b[\s\S]*?</Response>", RegexOptions.IgnoreCase)]
@@ -906,9 +906,6 @@ public static partial class Queue7Parser
 
     [GeneratedRegex(@"^(?<pnr>[A-Z0-9*.-]{3,12})$", RegexOptions.IgnoreCase)]
     private static partial Regex BareLocatorRegex();
-
-    [GeneratedRegex(@"\*VL\s+(?<pnr>[A-Z0-9]{5,8})\b", RegexOptions.IgnoreCase)]
-    private static partial Regex VendorLocatorResponsePnrRegex();
 
     [GeneratedRegex(@"^\s*RECEIVED\s+FROM\s*-\s*(?<receivedFrom>.+?)\s*$", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
     private static partial Regex ReceivedFromRegex();
@@ -945,7 +942,7 @@ public static partial class Queue7Parser
     private static partial Regex ReceivedDateTimeRegex();
 
     // Galileo header: G28S5G/WS LONOU 6TP2GWS AG ... — PNR is the first token before the slash
-    [GeneratedRegex(@"^\s*(?<pnr>[A-Z0-9]{5,8})/[A-Z]{2}\s+[A-Z]{5}\b", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
+    [GeneratedRegex(@"^\s*(?<pnr>[A-Z0-9]{5,8})/[A-Z0-9]{2}\s+[A-Z]{5}\b", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
     private static partial Regex GalileoHeaderPnrRegex();
 
     // Matches both Sabre (space-separated origin/dest) and Galileo (concatenated 6-char IATA pair)

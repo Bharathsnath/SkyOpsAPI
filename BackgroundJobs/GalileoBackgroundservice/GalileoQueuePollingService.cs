@@ -279,7 +279,7 @@ public sealed class GalileoQueuePollingService : BackgroundService
 
         if (changedResults.Count > 0)
         {
-            await _emailService.SendAlertAsync(pccCode, changedResults, cancellationToken);
+            await _emailService.SendAlertAsync(pccCode, "", "", changedResults, cancellationToken);
             await QueueNotificationsHub.SendQueueNotificationAsync(_hub, $"Galileo PCC {pccCode}: {changedResults.Count} PNR(s) need attention.", cancellationToken);
         }
 

@@ -73,7 +73,7 @@ public sealed class QueueActionRepository : IQueueActionRepository
         {
             foreach (var action in result.Actions)
             {
-                if (action.Status is not ("TK" or "HX" or "UN" or "UC"))
+                if (action.Segment <= 0 || action.Status is not ("TK" or "HX" or "UN" or "UC"))
                     continue;
 
                 var affected = await UpsertActionAsync(connection, result, action, uplId, providerName, cancellationToken);

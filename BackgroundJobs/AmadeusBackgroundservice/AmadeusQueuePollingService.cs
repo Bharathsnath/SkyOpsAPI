@@ -112,7 +112,7 @@ public sealed class AmadeusQueuePollingService : BackgroundService
                 var results = Queue7Processor.ProcessQueueText(string.Join(Environment.NewLine, texts), queueNumber);
                 var saved = await _repository.SaveRecommendedActionsAsync(results, session.UplId, "AM", cancellationToken);
                 if (saved.ChangedResults.Count > 0)
-                    await _emailService.SendAlertAsync(polling.PccCode, saved.ChangedResults, cancellationToken);
+                    await _emailService.SendAlertAsync(polling.PccCode, "", "", saved.ChangedResults, cancellationToken);
 
                 _logger.LogInformation("Amadeus PCC {PccCode} Q/{QueueNumber}: analyzed {Analyzed} PNRs, saved {Saved} actions.",
                     polling.PccCode, queueNumber, results.Count, saved.Saved);

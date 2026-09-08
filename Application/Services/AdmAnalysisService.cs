@@ -125,7 +125,9 @@ public class AdmAnalysisService : IAdmAnalysisService
         _logger.LogInformation("Starting ADM analysis run.");
 
         var officeIds = _credentialStore.GetAll()
-            .Where(c => c.TagName.Equals("SourceOffice", StringComparison.OrdinalIgnoreCase) && !string.IsNullOrWhiteSpace(c.TagValue))
+            .Where(c => (c.Provider.Equals("AB", StringComparison.OrdinalIgnoreCase) || c.Provider.Equals("SB", StringComparison.OrdinalIgnoreCase))
+                && c.TagName.Equals("SourceOffice", StringComparison.OrdinalIgnoreCase)
+                && !string.IsNullOrWhiteSpace(c.TagValue))
             .Select(c => c.TagValue)
             .Distinct(StringComparer.OrdinalIgnoreCase)
             .ToList();
@@ -140,12 +142,19 @@ public class AdmAnalysisService : IAdmAnalysisService
 
         foreach (var officeId in officeIds)
         {
-            _logger.LogInformation("Reading DQB* for PCC: {OfficeId}", officeId);
-            var pages = await _sabreCommandService.ExecutePagedHostCommandAsync(
-                officeId, "DQB*", "DQB*MD", "END OF REPORT", maxPages: 50, cancellationToken,
-                moduleName: "SabreADMAnalysis", moduleCode: "ADM");
-            foreach (var entry in ParseSalesAuditReport(string.Join("\n", pages), officeId))
-                pnrMap[entry.Pnr] = entry;
+            try
+            {
+                _logger.LogInformation("Reading DQB* for PCC: {OfficeId}", officeId);
+                var pages = await _sabreCommandService.ExecutePagedHostCommandAsync(
+                    officeId, "DQB*", "DQB*MD", "END OF REPORT", maxPages: 50, cancellationToken,
+                    moduleName: "SabreADMAnalysis", moduleCode: "ADM");
+                foreach (var entry in ParseSalesAuditReport(string.Join("\n", pages), officeId))
+                    pnrMap[entry.Pnr] = entry;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed reading ADM sales audit report for OfficeId: {OfficeId}", officeId);
+            }
         }
 
         _logger.LogInformation("Unique PNRs extracted: {Count}", pnrMap.Count);
