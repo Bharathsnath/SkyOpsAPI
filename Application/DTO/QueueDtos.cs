@@ -6,6 +6,19 @@ public sealed record ParsedQueueResult(
     [property: JsonPropertyName("queue")] int Queue,
     [property: JsonPropertyName("pnrs")] IReadOnlyList<ParsedPnr> Pnrs);
 
+public sealed record VendorLocatorInfo(
+    [property: JsonPropertyName("locator")] string Locator,
+    [property: JsonPropertyName("deadline")] string? Deadline);
+
+public enum VendorRemarkType { MissingSsr, DuplicatePnr, AutoCancelWarning, ScheduleChange, Other }
+
+public sealed record VendorRemarkAction(
+    [property: JsonPropertyName("type")] VendorRemarkType Type,
+    [property: JsonPropertyName("rawText")] string RawText,
+    [property: JsonPropertyName("deadline")] string? Deadline = null,
+    [property: JsonPropertyName("duplicateLocator")] string? DuplicateLocator = null,
+    [property: JsonPropertyName("flight")] string? Flight = null);
+
 public sealed record ParsedPnr(
     [property: JsonPropertyName("pnr")] string Pnr,
     [property: JsonPropertyName("rawText")] string RawText,
@@ -20,7 +33,9 @@ public sealed record ParsedPnr(
     [property: JsonPropertyName("taxes")] decimal? Taxes = null,
     [property: JsonPropertyName("totalFare")] decimal? TotalFare = null,
     [property: JsonPropertyName("remarkEmail")] string? RemarkEmail = null,
-    [property: JsonPropertyName("isTicketed")] bool IsTicketed = false);
+    [property: JsonPropertyName("isTicketed")] bool IsTicketed = false,
+    [property: JsonPropertyName("vendorLocator")] VendorLocatorInfo? VendorLocator = null,
+    [property: JsonPropertyName("vendorRemarks")] IReadOnlyList<VendorRemarkAction>? VendorRemarks = null);
 
 public sealed record PnrPassenger(
     [property: JsonPropertyName("name")] string Name,

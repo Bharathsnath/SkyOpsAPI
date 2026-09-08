@@ -1,0 +1,1285 @@
+Log_LogXML_VC
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soap:Body>
+    <BeginSession xmlns="http://webservices.galileo.com">
+      <Profile>DynGalileoProd_6TP2</Profile>
+      <SessionTimeoutOverride>60000</SessionTimeoutOverride>
+    </BeginSession>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><BeginSessionResponse xmlns="http://webservices.galileo.com"><BeginSessionResult>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</BeginSessionResult></BeginSessionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>Q/22</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+H9TX9T/AA LONOU 6TP2AA  AG 91215600 30JUN
+  1.1ABDUL RASHEED/BASHEER AHAMED MR
+  2.1BASHEER AHAMED/MEHAR BANU MRS
+  3.1BASHEER AHAMED/AL SAFWAN MSTR*P-Y14
+ 3. EY  341 M  06SEP MAAAUH HK3  0405   0650  O*       E SU  2
+ 4. EY   63 M  06SEP AUHLHR TK3  0800   1245  O*       E SU  2
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+GZ39PQ/WS LONOU 6TP2GWS AG 91215600 22MAY
+  1.1RAFIQUE/MUHAMMAD MR   2.1TABASSUM/SHUMAILA MRS
+  3.1FATIMA/AYEZAL MS*P-C03   4.1FATIMA/ZYMIL MS*P-C05
+  5.I/1RAFIQUE/MUHAMMAD MUJTABAH MSTR*20DEC25
+ 1. PK  757 V  07SEP LHELHR TK4  1205   1700  O*       E MO
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+FONE-LONT*0208 957 7000 AKBAR TRAVELS OF INDIA LTD REF
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+HL2PS6/96 QSBSB 0554960 AG 91215600 28JUL
+  1.1AKHTAR/ZAHIR MRS
+ 2. PK  701 O  15SEP ISBMAN TK1  1215   1700  O*       E TU
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+** DIVIDED BOOKINGS EXIST **           &gt;*DV;
+FONE-LONT*0208 957 7000 AKBAR TRAVELS OF INDIA LTD REF
+  2. LONT*447516079090
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+GQHTZG/WS LONOU 6TP2GWS AG 91215600 28APR
+  1.1MODHWADIA/GRISHMA HAMIR MRS
+ 3. AI 2786 G  10SEP HSRBOM HK1  0835   0945  O*         TH
+ 4. AI  131 G  10SEP BOMLHR TK1  1325   1930  O*         TH
+ 5. T  **  TEXT **  09DEC-**KEEP PNR LIVE**
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+** EMAIL ADDRESS EXISTS **             &gt;*EM;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+H0JX8W/WS LONOU 6TP2GWS AG 91215600 28MAY
+  1.1SHAH/MEGHA PALAK MRS   2.1SHAH/HRITVI PALAK MS*P-Y13
+ 1. VS  302 E  16DEC LHRDEL HK2  1230  #0240  O*       E WE  1
+ 2. VS 8300 E  17DEC DELAMD TK2  0710   0855  O*       E TH  1
+         OPERATED BY INDIGO
+ 3. VS 8279 O  31DEC AMDBOM TK2  0705   0830  O*       E TH  2
+         OPERATED BY INDIGO
+ 4. VS  355 O  31DEC BOMLHR HK2  1040   1540  O*       E TH  2
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+H9B87Q/WS LONOU 6TP2GWS AG 91215600 28JUN
+  1.1BHUTAWALA/MUHAMMED IQBAL MUSA MR
+  2.1BHUTAWALA/NARGIS MUHAMMED MRS
+  3.I/1BHUTAWALA/AZHAAN MUHAMMED MSTR*02JAN25
+ 1. VS  358 N  15NOV LHRBOM HK2  1225  #0300  O*       E SU
+ 2. VS 8316 N  30DEC BDQBOM TK2  0900   1015  O*       E WE  1
+         OPERATED BY INDIGO
+ 3. VS  359 N  31DEC BOMLHR HK2  0515   1015  O*       E TH  1
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+H01FXJ/WS LONOU 6TP2GWS AG 91215600 26MAY
+  1.1DA COSTA/SEMRON MILLICENT MS
+ 1. VS  302 X  04DEC LHRDEL HK1  1230  #0240  O*       E FR
+ 2. VS 8765 X  05DEC DELGOI UN1  1005   1245  O*       E SA
+         OPERATED BY INDIGO
+ 3. 6E 2277 T  05DEC DELGOI AK1  1005   1245  L          SA
+ 4. VS 8537 M  08JAN GOIDEL TK1  2035   2310  O*       E FR  2
+         OPERATED BY INDIGO
+ 5. VS  303 M  09JAN DELLHR HK1  0455   0930  O*       E SA  2
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+H8JNWK/WS LONOU 6TP2GWS AG 91215600 25JUN
+  1.1MADIYAPPALLYMYALIL PAULOSE/JOSEPH MR   2.1JOSEPH/LINI MRS
+  3.1JOSEPH/JEWEL MARIA MS*P-Y15   4.1JOSEPH/JULIYA ANN MS*P-Y12 1. KU  104 L  21OCT LHRKWI UN4  1145   2005  O*       E WE
+ 2. KU  102 L  21OCT LHRKWI UN4  1645  #0100  O*         WE
+ 3. KU  351 L  22OCT KWICOK UN4  0020   0805  O*       E TH
+ 4. KU  358 L  02NOV COKKWI HK4  0315   0620  O*       E MO
+ 5. KU  101 L  02NOV KWILHR HK4  1000   1345  O*       E MO
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+GZ2NPL/WS LONOU 6TP2GWS AG 91215600 22MAY
+  1.1BEGUM/MEHNAZ MRS   2.1KHAN/SHAYYAN MR
+  3.1AYAAN/MUHAMMED MSTR*P-Y12
+ 1. SV  124 T  14OCT MANJED HK3  1445   2315  O*       E WE
+ 2. SV  734 T  15OCT JEDLHE HK3  0155   0850  O*       E TH
+ 3. SV  739 T  28OCT LHEJED TK3  0135   0515  O*       E WE
+ 4. SV  123 T  28OCT JEDMAN HK3  0800   1155  O*       E WE
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+HBXR9J/WS LONOU 6TP2GWS AG 91215600 03JUL
+  1.1MAKDA/MOHMED ZUBAIR MR   2.1MAKDA/HALIMA MS
+  3.1MAKDA/AYESHA ZUBAIR MS*P-Y14
+ 1. SV  110 T  20OCT LHRRUH HK3  1000   1840  O*       E TU  1
+ 2. SV  724 T  21OCT RUHISB HK3  0200   0805  O*       E WE  1
+ 3.    ARNK
+ 4. SV  739 V  31OCT LHEJED TK3  0135   0515  O*       E SA
+ 5.    ARNK
+ 6. SV 1421 V  07NOV MEDJED TK3  0345   0455  O*       E SA
+ 7. SV  123 V  07NOV JEDMAN HK3  0800   1155  O*       E SA
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+FST2R9/13 QSBSB 0642132 AG 91215600 31JAN
+  1.1MANOJ/AGNIDEV MSTR*P-C03
+ 1. AI 9731 G  09SEP COKBOM HK1  2250  #0115  O*         WE
+         OPERATED BY AIR INDIA EXPRESS
+ 2. AI  163 G  10SEP BOMLHR TK1  0600   1130  O*         TH
+ 3. T  **  TEXT **  09DEC-**KEEP PNR LIVE**
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+FST48X/13 QSBSB 0642132 AG 91215600 31JAN
+  1.1MAZHUVANCHERY NANDAKUMAR/SOWMYA MRS
+ 3. AI 9731 G  09SEP COKBOM HK1  2250  #0115  O*         WE
+         OPERATED BY AIR INDIA EXPRESS
+ 4. AI  163 G  10SEP BOMLHR TK1  0600   1130  O*         TH
+ 5. T  **  TEXT **  09DEC-**KEEP PNR LIVE**
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+HDZ0BF/AA LONOU 6TP2AA  AG 91215600 10JUL
+  1.1ANN THOMAS/TINA MRS
+ 3. AI 2656 T  23SEP TRVBOM TK1  2030   2305  O*       E WE  3
+ 4. AI  163 T  24SEP BOMLHR TK1  0600   1130  O*       E TH  3
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+FONE-LONT*0208 957 7000 AKBAR TRAVELS OF INDIA LTD REF
+FOP -S
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+HLNKHV/WS LONOU 6TP2GWS AG 91215600 30JUL
+  1.1YAWAR/SIDRA MRS   2.I/1ABBAS/MUHAMMAD ASHTAR MSTR*20JUN25
+ 1. PK  702 V  03SEP MANISB HK1  1930  #0715  O*       E TH
+ 2. PK  701 U  07DEC ISBMAN TK1  1205   1600  O*       E MO
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** SEAT DATA EXISTS **                 &gt;*SD;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+FONE-LONT*0208 957 7000 AKBAR TRAVELS OF INDIA LTD REF
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+HJ30H9/96 QSBSB 0554960 AG 91215600 21JUL
+  1.1PALACKAPARAMBIL GEORGE/TEENA MRS
+  2.1BASIL/IMNA MARIAM MS*P-C09
+  3.1BASIL KANNUNATHU/ELDHO MSTR*P-C07
+  4.I/1BASIL/PRECIOUS MARIAM MS*23JAN26
+ 1. QR 6280 W  20OCT BHDLHR HK3  1345   1510  O*       E TU
+         OPERATED BY BRITISH AIRWAYS
+ 2. QR  106 O  20OCT LHRDOH HK3  1855  #0340  O*       E TU  1
+ 3. QR 4782 O  21OCT DOHCOK HK3  0810   1520  O*       E WE  1
+         OPERATED BY INDIGO
+ 4. QR  517 O  22NOV COKDOH HK3  0405   0610  O*       E SU  2
+ 5. QR   33 O  22NOV DOHBHX HK3  0825   1240  O*       E SU  2
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+HCJPFC/WS LONOU 6TP2GWS AG 91215600 06JUL
+  1.1MALIK/MARIUM MRS   2.1MALIK/MUHAMMAD USMAN MSTR*P-C09
+ 1. PK  786 V  14OCT LHRISB HK2  1905  #0645  O*       E WE
+ 2. PK  785 O  30OCT ISBLHR UN2  1140   1615  O*       E FR
+ 3. PK  785 O  31OCT ISBLHR HK2  1030   1410  O*         SA
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+FONE-LONT*0208 957 7000 AKBAR TRAVELS OF INDIA LTD REF
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+GYP1VN/FR LONOU 6TP2FR  AG 91215600 21MAY
+  1.1ARAUJO/MANUEL ASSUNCAO MR
+  2.1FERNANDES/MONICA MARIA RAINHA MRS
+ 1. VS  358 X  28NOV LHRBOM TK2  1225  #0300  O*       E SA
+ 2. VS 8253 X  02DEC BOMGOI TK2  1720   1835  O*       E WE
+         OPERATED BY INDIGO
+ 3. VS 9081 O  16DEC GOIBLR TK2  1915   2025  O*       E WE  1
+         OPERATED BY INDIGO
+ 4. VS  317 O  17DEC BLRLHR TK2  0505   1040  O*       E TH  1
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+GKD7VM/WS LONOU 6TP2GWS AG 91215600 11APR
+  1.1AKHTAR/KANEEZ MRS
+ 2. PK  758 V  25OCT LHRLHE TK1  1955  #0850  O*       E SU
+ 3. T  **  TEXT **  23JAN-**KEEP PNR LIVE**
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+** EMAIL ADDRESS EXISTS **             &gt;*EM;
+FONE-LONT*0208 957 7000 AKBAR TRAVELS OF INDIA LTD REF
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+GBD6XH/FR LONOU 6TP2FR  AG 91215600 23MAR
+  1.1PEREIRA/TOMAS MR   2.1CRUZ/MARIA ASSUNCIANA MRS
+  3.1PEREIRA/MARIANO MARK MENINO MR
+ 1. AI 2016 V  28JAN LHRDEL HK3  2200  #1315  O*       E TH  1
+ 2. AI  487 V  29JAN DELGOI HK3  1600   1840  O*       E FR  1
+ 3. AI  604 V  15FEB GOIBOM HK3  0705   0830  O*         MO
+ 4. AI  131 V  15FEB BOMLHR TK3  1300   1815  O*       E MO
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** SEAT DATA EXISTS **                 &gt;*SD;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** ADDITIONAL SERVICES EXIST **        &gt;*DAS;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+H1Y1FV/AA LONOU 6TP2AA  AG 91215600 02JUN
+  1.1FERNANDES/MILAGRES MR
+  2.1FERNANDES/JANELLE VALORA MISS*P-Y14
+ 1. VS  354 U  18DEC LHRBOM HK2  1815  #0850  O*       E FR  1
+ 2. VS 8253 U  19DEC BOMGOI HK2  1720   1835  O*       E SA  1
+         OPERATED BY INDIGO
+ 3. 6E  797 N  08JAN GOIBLR AK2  2000   2120  L          FR
+ 4. VS  317 M  09JAN BLRLHR HK2  0505   1040  O*       E SA
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+G52C96/WS LONOU 6TP2GWS AG 91215600 06MAR
+  1.1PEREIRA/MANGARETTE AUGUSTA MRS   2.1RODRIGUES/JOYWIN MR
+  3.1RODRIGUES/JISELLE GUILHERMINA MS*P-C04
+ 1. VS  300 Q  21DEC LHRDEL HK3  1850  #0900  O*       E MO
+ 2. VS 8764 Q  22DEC DELGOI NO3  1640   1905  O*       E TU
+         OPERATED BY INDIGO
+ 3. VS 8764 Q  22DEC DELGOI TK3  1705   1940             TU
+         OPERATED BY INDIGO
+ 4. VS 8532 N  15JAN GOIBOM TK3  0615   0740  O*       E FR  2
+         OPERATED BY INDIGO
+ 5. VS  355 N  15JAN BOMLHR TK3  1040   1540  O*       E FR  2
+ 6. T  **  TEXT **  26JUN-**KEEP PNR LIVE**
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+HF0S1M/96 QSBSB 0554960 AG 91215600 10JUL
+  1.1NOOR/MUNTAHA FATIMA*P-C03
+ 1. SV  727 N  14NOV ISBJED TK1  0230   0610  O*       E SA
+ 2. SV 1424 N  14NOV JEDMED HK1  0820   0920  O*       E SA
+ 3. SV  728 V  27NOV JEDISB TK1  0925   1605  O*       E FR
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+** DIVIDED BOOKINGS EXIST **           &gt;*DV;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+G8Y1LR/WS LONOU 6TP2GWS AG 91215600 18MAR
+  1.1REHMAN/SHAKEEL UR MR
+ 1. SV  727 T  15SEP ISBJED HK1  0255   0600  O*       E TU
+ 2. SV  253 T  15SEP JEDBHX UN1  0800   1230  O*       E TU
+ 3. SV  119 T  15SEP JEDLHR TK1  0810   1240             TU
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+FONE-LONT*0208 957 7000 AKBAR TRAVELS OF INDIA LTD REF
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+HK0427/AA LONOU 6TP2AA  AG 91215600 24JUL
+  1.1BALACHANDRAN/ANANDHAKRISHNAN MR
+  2.1MURALEEDHARAN PILLAI SUDHAKUMARI/VARSHA MRS
+ 1. EY   64 T  10SEP LHRAUH TK2  1445  #0115  O*       E TH  3
+ 2. EY  330 T  11SEP AUHCOK TK2  0305   0840  O*       E FR  3
+ 3. EY 1019 V  03OCT COKAUH HK2  0415   0655  O*       E SA  4
+         OPERATED BY AKASA AIR
+ 4. EY   65 V  03OCT AUHLHR HK2  1035   1505  O*       E SA  4
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+GRSBF3/13 QSBSB 0642132 AG 91215600 02MAY
+  1.1ISLAM/MD SHAHIDUL   2.1JANNAT/SHAHRIN
+  3.1AKTER SHATHI/MST SHARMIN   4.1JANNAT/SAFREEN*P-Y14
+  5.1ISLAM/MOHAMMAD SAIFAN*P-C03
+ 3. SV  805 L  03SEP DACRUH HK5  0056   0351  O*       E TH
+ 4. SV  121 T  03SEP RUHLHR TK5  0945   1435  O*       E TH
+ 5. T  **  TEXT **  02DEC-**KEEP PNR LIVE**
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+H9TX9T/AA LONOU 6TP2AA  AG 91215600 30JUN
+  1.1ABDUL RASHEED/BASHEER AHAMED MR
+  2.1BASHEER AHAMED/MEHAR BANU MRS
+  3.1BASHEER AHAMED/AL SAFWAN MSTR*P-Y14
+ 3. EY  341 M  06SEP MAAAUH HK3  0405   0650  O*       E SU  2
+ 4. EY   63 M  06SEP AUHLHR TK3  0800   1245  O*       E SU  2
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+GZ39PQ/WS LONOU 6TP2GWS AG 91215600 22MAY
+  1.1RAFIQUE/MUHAMMAD MR   2.1TABASSUM/SHUMAILA MRS
+  3.1FATIMA/AYEZAL MS*P-C03   4.1FATIMA/ZYMIL MS*P-C05
+  5.I/1RAFIQUE/MUHAMMAD MUJTABAH MSTR*20DEC25
+ 1. PK  757 V  07SEP LHELHR TK4  1205   1700  O*       E MO
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+FONE-LONT*0208 957 7000 AKBAR TRAVELS OF INDIA LTD REF
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+HL2PS6/96 QSBSB 0554960 AG 91215600 28JUL
+  1.1AKHTAR/ZAHIR MRS
+ 2. PK  701 O  15SEP ISBMAN TK1  1215   1700  O*       E TU
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+** DIVIDED BOOKINGS EXIST **           &gt;*DV;
+FONE-LONT*0208 957 7000 AKBAR TRAVELS OF INDIA LTD REF
+  2. LONT*447516079090
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+GQHTZG/WS LONOU 6TP2GWS AG 91215600 28APR
+  1.1MODHWADIA/GRISHMA HAMIR MRS
+ 3. AI 2786 G  10SEP HSRBOM HK1  0835   0945  O*         TH
+ 4. AI  131 G  10SEP BOMLHR TK1  1325   1930  O*         TH
+ 5. T  **  TEXT **  09DEC-**KEEP PNR LIVE**
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+** EMAIL ADDRESS EXISTS **             &gt;*EM;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+H0JX8W/WS LONOU 6TP2GWS AG 91215600 28MAY
+  1.1SHAH/MEGHA PALAK MRS   2.1SHAH/HRITVI PALAK MS*P-Y13
+ 1. VS  302 E  16DEC LHRDEL HK2  1230  #0240  O*       E WE  1
+ 2. VS 8300 E  17DEC DELAMD TK2  0710   0855  O*       E TH  1
+         OPERATED BY INDIGO
+ 3. VS 8279 O  31DEC AMDBOM TK2  0705   0830  O*       E TH  2
+         OPERATED BY INDIGO
+ 4. VS  355 O  31DEC BOMLHR HK2  1040   1540  O*       E TH  2
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+H9B87Q/WS LONOU 6TP2GWS AG 91215600 28JUN
+  1.1BHUTAWALA/MUHAMMED IQBAL MUSA MR
+  2.1BHUTAWALA/NARGIS MUHAMMED MRS
+  3.I/1BHUTAWALA/AZHAAN MUHAMMED MSTR*02JAN25
+ 1. VS  358 N  15NOV LHRBOM HK2  1225  #0300  O*       E SU
+ 2. VS 8316 N  30DEC BDQBOM TK2  0900   1015  O*       E WE  1
+         OPERATED BY INDIGO
+ 3. VS  359 N  31DEC BOMLHR HK2  0515   1015  O*       E TH  1
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+H01FXJ/WS LONOU 6TP2GWS AG 91215600 26MAY
+  1.1DA COSTA/SEMRON MILLICENT MS
+ 1. VS  302 X  04DEC LHRDEL HK1  1230  #0240  O*       E FR
+ 2. VS 8765 X  05DEC DELGOI UN1  1005   1245  O*       E SA
+         OPERATED BY INDIGO
+ 3. 6E 2277 T  05DEC DELGOI AK1  1005   1245  L          SA
+ 4. VS 8537 M  08JAN GOIDEL TK1  2035   2310  O*       E FR  2
+         OPERATED BY INDIGO
+ 5. VS  303 M  09JAN DELLHR HK1  0455   0930  O*       E SA  2
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+H8JNWK/WS LONOU 6TP2GWS AG 91215600 25JUN
+  1.1MADIYAPPALLYMYALIL PAULOSE/JOSEPH MR   2.1JOSEPH/LINI MRS
+  3.1JOSEPH/JEWEL MARIA MS*P-Y15   4.1JOSEPH/JULIYA ANN MS*P-Y12 1. KU  104 L  21OCT LHRKWI UN4  1145   2005  O*       E WE
+ 2. KU  102 L  21OCT LHRKWI UN4  1645  #0100  O*         WE
+ 3. KU  351 L  22OCT KWICOK UN4  0020   0805  O*       E TH
+ 4. KU  358 L  02NOV COKKWI HK4  0315   0620  O*       E MO
+ 5. KU  101 L  02NOV KWILHR HK4  1000   1345  O*       E MO
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+GZ2NPL/WS LONOU 6TP2GWS AG 91215600 22MAY
+  1.1BEGUM/MEHNAZ MRS   2.1KHAN/SHAYYAN MR
+  3.1AYAAN/MUHAMMED MSTR*P-Y12
+ 1. SV  124 T  14OCT MANJED HK3  1445   2315  O*       E WE
+ 2. SV  734 T  15OCT JEDLHE HK3  0155   0850  O*       E TH
+ 3. SV  739 T  28OCT LHEJED TK3  0135   0515  O*       E WE
+ 4. SV  123 T  28OCT JEDMAN HK3  0800   1155  O*       E WE
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+HBXR9J/WS LONOU 6TP2GWS AG 91215600 03JUL
+  1.1MAKDA/MOHMED ZUBAIR MR   2.1MAKDA/HALIMA MS
+  3.1MAKDA/AYESHA ZUBAIR MS*P-Y14
+ 1. SV  110 T  20OCT LHRRUH HK3  1000   1840  O*       E TU  1
+ 2. SV  724 T  21OCT RUHISB HK3  0200   0805  O*       E WE  1
+ 3.    ARNK
+ 4. SV  739 V  31OCT LHEJED TK3  0135   0515  O*       E SA
+ 5.    ARNK
+ 6. SV 1421 V  07NOV MEDJED TK3  0345   0455  O*       E SA
+ 7. SV  123 V  07NOV JEDMAN HK3  0800   1155  O*       E SA
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+FST2R9/13 QSBSB 0642132 AG 91215600 31JAN
+  1.1MANOJ/AGNIDEV MSTR*P-C03
+ 1. AI 9731 G  09SEP COKBOM HK1  2250  #0115  O*         WE
+         OPERATED BY AIR INDIA EXPRESS
+ 2. AI  163 G  10SEP BOMLHR TK1  0600   1130  O*         TH
+ 3. T  **  TEXT **  09DEC-**KEEP PNR LIVE**
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+FST48X/13 QSBSB 0642132 AG 91215600 31JAN
+  1.1MAZHUVANCHERY NANDAKUMAR/SOWMYA MRS
+ 3. AI 9731 G  09SEP COKBOM HK1  2250  #0115  O*         WE
+         OPERATED BY AIR INDIA EXPRESS
+ 4. AI  163 G  10SEP BOMLHR TK1  0600   1130  O*         TH
+ 5. T  **  TEXT **  09DEC-**KEEP PNR LIVE**
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+HDZ0BF/AA LONOU 6TP2AA  AG 91215600 10JUL
+  1.1ANN THOMAS/TINA MRS
+ 3. AI 2656 T  23SEP TRVBOM TK1  2030   2305  O*       E WE  3
+ 4. AI  163 T  24SEP BOMLHR TK1  0600   1130  O*       E TH  3
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+FONE-LONT*0208 957 7000 AKBAR TRAVELS OF INDIA LTD REF
+FOP -S
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+HLNKHV/WS LONOU 6TP2GWS AG 91215600 30JUL
+  1.1YAWAR/SIDRA MRS   2.I/1ABBAS/MUHAMMAD ASHTAR MSTR*20JUN25
+ 1. PK  702 V  03SEP MANISB HK1  1930  #0715  O*       E TH
+ 2. PK  701 U  07DEC ISBMAN TK1  1205   1600  O*       E MO
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** SEAT DATA EXISTS **                 &gt;*SD;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+FONE-LONT*0208 957 7000 AKBAR TRAVELS OF INDIA LTD REF
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+HJ30H9/96 QSBSB 0554960 AG 91215600 21JUL
+  1.1PALACKAPARAMBIL GEORGE/TEENA MRS
+  2.1BASIL/IMNA MARIAM MS*P-C09
+  3.1BASIL KANNUNATHU/ELDHO MSTR*P-C07
+  4.I/1BASIL/PRECIOUS MARIAM MS*23JAN26
+ 1. QR 6280 W  20OCT BHDLHR HK3  1345   1510  O*       E TU
+         OPERATED BY BRITISH AIRWAYS
+ 2. QR  106 O  20OCT LHRDOH HK3  1855  #0340  O*       E TU  1
+ 3. QR 4782 O  21OCT DOHCOK HK3  0810   1520  O*       E WE  1
+         OPERATED BY INDIGO
+ 4. QR  517 O  22NOV COKDOH HK3  0405   0610  O*       E SU  2
+ 5. QR   33 O  22NOV DOHBHX HK3  0825   1240  O*       E SU  2
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+HCJPFC/WS LONOU 6TP2GWS AG 91215600 06JUL
+  1.1MALIK/MARIUM MRS   2.1MALIK/MUHAMMAD USMAN MSTR*P-C09
+ 1. PK  786 V  14OCT LHRISB HK2  1905  #0645  O*       E WE
+ 2. PK  785 O  30OCT ISBLHR UN2  1140   1615  O*       E FR
+ 3. PK  785 O  31OCT ISBLHR HK2  1030   1410  O*         SA
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+FONE-LONT*0208 957 7000 AKBAR TRAVELS OF INDIA LTD REF
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+GYP1VN/FR LONOU 6TP2FR  AG 91215600 21MAY
+  1.1ARAUJO/MANUEL ASSUNCAO MR
+  2.1FERNANDES/MONICA MARIA RAINHA MRS
+ 1. VS  358 X  28NOV LHRBOM TK2  1225  #0300  O*       E SA
+ 2. VS 8253 X  02DEC BOMGOI TK2  1720   1835  O*       E WE
+         OPERATED BY INDIGO
+ 3. VS 9081 O  16DEC GOIBLR TK2  1915   2025  O*       E WE  1
+         OPERATED BY INDIGO
+ 4. VS  317 O  17DEC BLRLHR TK2  0505   1040  O*       E TH  1
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+GKD7VM/WS LONOU 6TP2GWS AG 91215600 11APR
+  1.1AKHTAR/KANEEZ MRS
+ 2. PK  758 V  25OCT LHRLHE TK1  1955  #0850  O*       E SU
+ 3. T  **  TEXT **  23JAN-**KEEP PNR LIVE**
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+** EMAIL ADDRESS EXISTS **             &gt;*EM;
+FONE-LONT*0208 957 7000 AKBAR TRAVELS OF INDIA LTD REF
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+GBD6XH/FR LONOU 6TP2FR  AG 91215600 23MAR
+  1.1PEREIRA/TOMAS MR   2.1CRUZ/MARIA ASSUNCIANA MRS
+  3.1PEREIRA/MARIANO MARK MENINO MR
+ 1. AI 2016 V  28JAN LHRDEL HK3  2200  #1315  O*       E TH  1
+ 2. AI  487 V  29JAN DELGOI HK3  1600   1840  O*       E FR  1
+ 3. AI  604 V  15FEB GOIBOM HK3  0705   0830  O*         MO
+ 4. AI  131 V  15FEB BOMLHR TK3  1300   1815  O*       E MO
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** SEAT DATA EXISTS **                 &gt;*SD;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** ADDITIONAL SERVICES EXIST **        &gt;*DAS;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+H1Y1FV/AA LONOU 6TP2AA  AG 91215600 02JUN
+  1.1FERNANDES/MILAGRES MR
+  2.1FERNANDES/JANELLE VALORA MISS*P-Y14
+ 1. VS  354 U  18DEC LHRBOM HK2  1815  #0850  O*       E FR  1
+ 2. VS 8253 U  19DEC BOMGOI HK2  1720   1835  O*       E SA  1
+         OPERATED BY INDIGO
+ 3. 6E  797 N  08JAN GOIBLR AK2  2000   2120  L          FR
+ 4. VS  317 M  09JAN BLRLHR HK2  0505   1040  O*       E SA
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+G52C96/WS LONOU 6TP2GWS AG 91215600 06MAR
+  1.1PEREIRA/MANGARETTE AUGUSTA MRS   2.1RODRIGUES/JOYWIN MR
+  3.1RODRIGUES/JISELLE GUILHERMINA MS*P-C04
+ 1. VS  300 Q  21DEC LHRDEL HK3  1850  #0900  O*       E MO
+ 2. VS 8764 Q  22DEC DELGOI NO3  1640   1905  O*       E TU
+         OPERATED BY INDIGO
+ 3. VS 8764 Q  22DEC DELGOI TK3  1705   1940             TU
+         OPERATED BY INDIGO
+ 4. VS 8532 N  15JAN GOIBOM TK3  0615   0740  O*       E FR  2
+         OPERATED BY INDIGO
+ 5. VS  355 N  15JAN BOMLHR TK3  1040   1540  O*       E FR  2
+ 6. T  **  TEXT **  26JUN-**KEEP PNR LIVE**
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+HF0S1M/96 QSBSB 0554960 AG 91215600 10JUL
+  1.1NOOR/MUNTAHA FATIMA*P-C03
+ 1. SV  727 N  14NOV ISBJED TK1  0230   0610  O*       E SA
+ 2. SV 1424 N  14NOV JEDMED HK1  0820   0920  O*       E SA
+ 3. SV  728 V  27NOV JEDISB TK1  0925   1605  O*       E FR
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+** DIVIDED BOOKINGS EXIST **           &gt;*DV;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+G8Y1LR/WS LONOU 6TP2GWS AG 91215600 18MAR
+  1.1REHMAN/SHAKEEL UR MR
+ 1. SV  727 T  15SEP ISBJED HK1  0255   0600  O*       E TU
+ 2. SV  253 T  15SEP JEDBHX UN1  0800   1230  O*       E TU
+ 3. SV  119 T  15SEP JEDLHR TK1  0810   1240             TU
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+** TINS REMARKS EXIST **               &gt;*HTI;
+** ELECTRONIC DATA EXISTS **           &gt;*HTE;
+FONE-LONT*0208 957 7000 AKBAR TRAVELS OF INDIA LTD REF
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"
+"<ApiLog><Request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SubmitTerminalTransaction xmlns="http://webservices.galileo.com">
+      <Token>ZvuhYvlsIuN8GB1+ylEeuRThGYp1BUBb5dik/qVCBTK7a0OVT/Wy0bGSsrh2g6vhaATv7cO10j8QaHGYkKybGcB0vMb0bvaZULJYa92mekx5coNSkQa5dkuC8xYb3NFp8ZvtGnsq+Nrve5RThcsmAA==</Token>
+      <Request>I</Request>
+      <IntermediateResponse />
+    </SubmitTerminalTransaction>
+  </soap:Body>
+</soap:Envelope>]]></Request><Response><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <soapenv:Body><SubmitTerminalTransactionResponse xmlns="http://webservices.galileo.com"><SubmitTerminalTransactionResult USM="false">TIME CHANGED
+HK0427/AA LONOU 6TP2AA  AG 91215600 24JUL
+  1.1BALACHANDRAN/ANANDHAKRISHNAN MR
+  2.1MURALEEDHARAN PILLAI SUDHAKUMARI/VARSHA MRS
+ 1. EY   64 T  10SEP LHRAUH TK2  1445  #0115  O*       E TH  3
+ 2. EY  330 T  11SEP AUHCOK TK2  0305   0840  O*       E FR  3
+ 3. EY 1019 V  03OCT COKAUH HK2  0415   0655  O*       E SA  4
+         OPERATED BY AKASA AIR
+ 4. EY   65 V  03OCT AUHLHR HK2  1035   1505  O*       E SA  4
+** FILED FARE DATA EXISTS **           &gt;*FF;
+** VENDOR LOCATOR DATA EXISTS **       &gt;*VL;
+** VENDOR REMARKS DATA EXISTS **       &gt;*VR;
+** SERVICE INFORMATION EXISTS **       &gt;*SI;
+)&gt;&lt;</SubmitTerminalTransactionResult></SubmitTerminalTransactionResponse> </soapenv:Body>
+</soapenv:Envelope>]]></Response></ApiLog>"

@@ -25,7 +25,11 @@ public static partial class Queue7Parser
             var (currencyCode, baseFare, taxes, totalFare) = ExtractFare(block);
             var remarkEmail = ExtractRemarkEmail(block);
             var isTicketed = ExtractIsTicketed(block);
-            return new ParsedPnr(pnr, block.Trim(), receivedFrom, pcc, receivedDateTime, segments, passengers, ticketingDeadline, currencyCode, baseFare, taxes, totalFare, remarkEmail, isTicketed);
+            var vendorLocator = ParseVendorLocator(block);
+            var vendorRemarks = ParseVendorRemarks(block);
+            // Prefer VLOC deadline over TKT deadline when present
+            var effectiveDeadline = vendorLocator?.Deadline ?? ticketingDeadline;
+            return new ParsedPnr(pnr, block.Trim(), receivedFrom, pcc, receivedDateTime, segments, passengers, effectiveDeadline, currencyCode, baseFare, taxes, totalFare, remarkEmail, isTicketed, vendorLocator, vendorRemarks);
         }).ToArray();
 
         return new ParsedQueueResult(queueNumber, pnrs);
@@ -61,7 +65,24 @@ public static partial class Queue7Parser
                 segments.Add(parsed);
         }
 
-        return ApplyScheduleChanges(pnrText, segments);
+        var adjustedSegments = ApplyScheduleChanges(pnrText, segments);
+        return CollapseDuplicateSegments(adjustedSegments)
+            .Where(segment => segment.Segment > 0)
+            .ToArray();
+    }
+
+    private static IReadOnlyList<FlightSegment> CollapseDuplicateSegments(
+        IReadOnlyList<FlightSegment> segments)
+    {
+        return segments
+            .GroupBy(segment => string.Join('|', segment.Flight, segment.Date, segment.Status,
+                segment.Origin, segment.Destination), StringComparer.OrdinalIgnoreCase)
+            .Select(group => group
+                .OrderByDescending(segment => segment.Segment > 0)
+                .ThenByDescending(segment => segment.Segment)
+                .First())
+            .OrderBy(segment => segment.Segment)
+            .ToArray();
     }
 
     private static IReadOnlyList<string> SplitPnrBlocks(string queueText)
@@ -87,6 +108,11 @@ public static partial class Queue7Parser
             return queueCategoryBlocks;
         }
 
+        // Split on Amadeus RP/ header lines: "RP/BOMAK3303/BOMAK3303 ..."
+        var amadeusPnrBlocks = SplitByHeaderRegex(queueText, AmadeusRpHeaderRegex());
+        if (amadeusPnrBlocks.Count > 0)
+            return amadeusPnrBlocks;
+
         var matches = PnrHeaderRegex().Matches(queueText);
 
         if (matches.Count == 0)
@@ -94,27 +120,35 @@ public static partial class Queue7Parser
             return new[] { queueText };
         }
 
-        var blocksByPnr = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
-
+        // Keep each PNR header block separate — do NOT merge by PNR name,
+        // because the same PNR may appear multiple times with different segments
+        // (e.g. Galileo returns one segment per I-command response).
+        var blocks = new List<string>();
         for (var index = 0; index < matches.Count; index++)
         {
             var start = matches[index].Index;
             var end = index + 1 < matches.Count ? matches[index + 1].Index : queueText.Length;
-            var block = queueText[start..end];
-            var pnr = matches[index].Groups["pnr"].Value.ToUpperInvariant();
-
-            if (!blocksByPnr.TryGetValue(pnr, out var pnrBlocks))
-            {
-                pnrBlocks = new List<string>();
-                blocksByPnr[pnr] = pnrBlocks;
-            }
-
-            pnrBlocks.Add(block);
+            blocks.Add(queueText[start..end]);
         }
+        return blocks;
+    }
 
-        return blocksByPnr
-            .Select(entry => string.Join(Environment.NewLine, entry.Value))
-            .ToArray();
+    private static IReadOnlyList<string> SplitByHeaderRegex(string queueText, Regex headerRegex)
+    {
+        var matches = headerRegex.Matches(queueText);
+        if (matches.Count < 2)
+            return matches.Count == 1 ? new[] { queueText } : Array.Empty<string>();
+
+        var blocks = new List<string>();
+        for (var i = 0; i < matches.Count; i++)
+        {
+            var start = matches[i].Index;
+            var end = i + 1 < matches.Count ? matches[i + 1].Index : queueText.Length;
+            var block = queueText[start..end].Trim();
+            if (!string.IsNullOrWhiteSpace(block))
+                blocks.Add(block);
+        }
+        return blocks;
     }
 
     private static IReadOnlyList<string> SplitQueueCategoryBlocks(string queueText)
@@ -174,6 +208,15 @@ public static partial class Queue7Parser
 
     private static string ExtractPnr(string block)
     {
+        // Try Amadeus header format: RP/BOMAK3303/BOMAK3303 ... 7C4583
+        var amadeusHeaderMatch = AmadeusRpHeaderRegex().Match(block);
+        if (amadeusHeaderMatch.Success)
+        {
+            var candidate = amadeusHeaderMatch.Groups["pnr"].Value.Trim().ToUpperInvariant();
+            if (LooksLikePnr(candidate))
+                return candidate;
+        }
+
         // Try Sabre header format: 3A78.3A78*ATT 0619/16FEB26 AFZPJI H
         var sabreHeaderMatch = SabreHeaderPnrRegex().Match(block);
         if (sabreHeaderMatch.Success)
@@ -185,7 +228,24 @@ public static partial class Queue7Parser
             }
         }
 
-       
+        // Try Galileo header format: G28S5G/WS LONOU 6TP2GWS AG ...
+        var galileoHeaderMatch = GalileoHeaderPnrRegex().Match(block);
+        if (galileoHeaderMatch.Success)
+        {
+            var candidate = galileoHeaderMatch.Groups["pnr"].Value.Trim().ToUpperInvariant();
+            if (LooksLikePnr(candidate))
+            {
+                return candidate;
+            }
+        }
+
+        var vendorLocatorResponse = VendorLocatorResponsePnrRegex().Match(block);
+        if (vendorLocatorResponse.Success)
+        {
+            var candidate = vendorLocatorResponse.Groups["pnr"].Value.Trim().ToUpperInvariant();
+            if (LooksLikePnr(candidate))
+                return candidate;
+        }
 
         var pnrHeaderMatch = PnrHeaderRegex().Match(block);
         if (pnrHeaderMatch.Success)
@@ -200,7 +260,8 @@ public static partial class Queue7Parser
         var bareLocator = block
             .Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
             .Select(line => BareLocatorRegex().Match(line))
-            .FirstOrDefault(locatorMatch => locatorMatch.Success);
+            .FirstOrDefault(locatorMatch => locatorMatch.Success
+                && LooksLikePnr(locatorMatch.Groups["pnr"].Value));
 
         return bareLocator is not null
             ? bareLocator.Groups["pnr"].Value.ToUpperInvariant()
@@ -225,7 +286,8 @@ public static partial class Queue7Parser
             return false;
         }
 
-        if (normalized is "SPLIT" or "PARSING" or "TAKING" or "PNR" or "RECORD" or "LOCATOR" or "RECLOC")
+        if (normalized is "SPLIT" or "PARSING" or "TAKING" or "PNR" or "RECORD" or "LOCATOR" or "RECLOC"
+            or "*VL" or "*VR" or "*H" or "*HTE" or "*HTI")
         {
             return false;
         }
@@ -239,39 +301,72 @@ public static partial class Queue7Parser
 
     private static string? ExtractReceivedFrom(string block)
     {
+        // Sabre: "RECEIVED FROM - AGENTNAME"
         var match = ReceivedFromRegex().Match(block);
-        return match.Success
-            ? EmptyToNull(match.Groups["receivedFrom"].Value
+        if (match.Success)
+            return EmptyToNull(match.Groups["receivedFrom"].Value
                 .Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries)
-                .FirstOrDefault() ?? string.Empty)
-            : null;
+                .FirstOrDefault() ?? string.Empty);
+
+        // Galileo header: GQHTZG/WS LONOU 6TP2GWS AG 91215600 28APR
+        // TransactionId = "AG 91215600" (agent code + number)
+        var galileoMatch = GalileoReceivedFromRegex().Match(block);
+        if (galileoMatch.Success)
+            return EmptyToNull(galileoMatch.Groups["agentCode"].Value.Trim());
+
+        return null;
     }
 
     private static string? ExtractPCC(string block)
     {
         var match = PCCRegex().Match(block);
-        return match.Success
-            ? EmptyToNull(match.Groups["officeId"].Value.Trim())
-            : null;
+        if (match.Success)
+            return EmptyToNull(match.Groups["officeId"].Value.Trim());
+
+        var galileoMatch = GalileoPCCRegex().Match(block);
+        if (galileoMatch.Success)
+            return EmptyToNull(galileoMatch.Groups["officeId"].Value.Trim());
+
+        // Amadeus: RP/BOMAK3303/BOMAK3303 — first office ID after RP/
+        var amadeusMatch = AmadeusRpHeaderRegex().Match(block);
+        if (amadeusMatch.Success)
+        {
+            var rpLine = amadeusMatch.Value;
+            var slash = rpLine.IndexOf('/');
+            if (slash >= 0)
+            {
+                var afterSlash = rpLine[(slash + 1)..];
+                var officeId = afterSlash.Split('/')[0].Trim();
+                return EmptyToNull(officeId);
+            }
+        }
+
+        return null;
     }
 
     private static DateTime? ExtractReceivedDateTime(string block)
     {
+        // Sabre format: 0619/16FEB26
         var match = ReceivedDateTimeRegex().Match(block);
-        if (!match.Success)
+        if (match.Success)
         {
-            return null;
+            var rawValue = match.Groups["received"].Value.Trim().ToUpperInvariant();
+            if (DateTime.TryParseExact(rawValue, "HHmm/ddMMMyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var dt))
+                return dt;
         }
 
-        var rawValue = match.Groups["received"].Value.Trim().ToUpperInvariant();
-        return DateTime.TryParseExact(
-            rawValue,
-            "HHmm/ddMMMyy",
-            CultureInfo.InvariantCulture,
-            DateTimeStyles.None,
-            out var receivedDateTime)
-            ? receivedDateTime
-            : null;
+        // Galileo format: 28APR or 28APR25 (ddMMM or ddMMMyy) at end of header line
+        var galileoMatch = GalileoReceivedDateRegex().Match(block);
+        if (galileoMatch.Success)
+        {
+            var raw = galileoMatch.Groups["date"].Value.Trim().ToUpperInvariant();
+            if (DateTime.TryParseExact(raw, "ddMMMyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var dt2))
+                return dt2;
+            if (DateTime.TryParseExact(raw, "ddMMM", CultureInfo.InvariantCulture, DateTimeStyles.None, out var dt3))
+                return new DateTime(DateTime.UtcNow.Year, dt3.Month, dt3.Day);
+        }
+
+        return null;
     }
 
     private static FlightSegment? ParseSegmentLine(string line)
@@ -280,7 +375,31 @@ public static partial class Queue7Parser
 
         if (!match.Success)
         {
-            return null;
+            var historyMatch = HistorySegmentLineRegex().Match(line);
+            if (!historyMatch.Success)
+                return null;
+
+            var historyStatus = historyMatch.Groups["status"].Value.ToUpperInvariant();
+            var historyCarrier = historyMatch.Groups["carrier"].Value.ToUpperInvariant();
+            var historyFlightNumber = historyMatch.Groups["flightNumber"].Value;
+            var historyFlight = historyCarrier + historyFlightNumber;
+            var (historyDeparture, historyArrival) = ExtractPrimaryTimes(historyMatch.Groups["times"].Value);
+
+            return new FlightSegment(
+                0,
+                historyFlight,
+                historyCarrier,
+                historyFlightNumber,
+                EmptyToNull(historyMatch.Groups["date"].Value),
+                EmptyToNull(historyMatch.Groups["origin"].Value),
+                EmptyToNull(historyMatch.Groups["destination"].Value),
+                historyStatus,
+                historyDeparture,
+                historyArrival,
+                null,
+                null,
+                null,
+                null);
         }
 
         var status = match.Groups["status"].Value.ToUpperInvariant();
@@ -296,6 +415,14 @@ public static partial class Queue7Parser
         var flight = carrier + flightNumber;
         var timeText = match.Groups["times"].Success ? match.Groups["times"].Value : string.Empty;
 
+        // Support both space-separated (Sabre) and concatenated (Galileo) origin/destination
+        var origin = match.Groups["origin"].Success && !string.IsNullOrEmpty(match.Groups["origin"].Value)
+            ? match.Groups["origin"].Value
+            : match.Groups["origin6"].Value;
+        var destination = match.Groups["destination"].Success && !string.IsNullOrEmpty(match.Groups["destination"].Value)
+            ? match.Groups["destination"].Value
+            : match.Groups["destination6"].Value;
+
         var (departure, arrival) = ExtractPrimaryTimes(timeText);
         var (oldDeparture, newDeparture) = ExtractChangedTimes(line, "DEP");
         var (oldArrival, newArrival) = ExtractChangedTimes(line, "ARR");
@@ -306,8 +433,8 @@ public static partial class Queue7Parser
             carrier,
             flightNumber,
             EmptyToNull(match.Groups["date"].Value),
-            EmptyToNull(match.Groups["origin"].Value),
-            EmptyToNull(match.Groups["destination"].Value),
+            EmptyToNull(origin),
+            EmptyToNull(destination),
             status,
             departure,
             arrival,
@@ -324,7 +451,12 @@ public static partial class Queue7Parser
             return segments;
         }
 
-        var changes = ExtractScheduleChanges(pnrText);
+        var changes = new Dictionary<string, ScheduleChangeTimes>(
+            ExtractScheduleChanges(pnrText), StringComparer.OrdinalIgnoreCase);
+        foreach (var inferredChange in InferDuplicateFlightChanges(segments))
+        {
+            changes[inferredChange.Key] = inferredChange.Value;
+        }
 
         return segments
             .Select(segment =>
@@ -345,6 +477,35 @@ public static partial class Queue7Parser
                 };
             })
             .ToArray();
+    }
+
+    private static IReadOnlyDictionary<string, ScheduleChangeTimes> InferDuplicateFlightChanges(
+        IReadOnlyList<FlightSegment> segments)
+    {
+        var changes = new Dictionary<string, ScheduleChangeTimes>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var group in segments
+            .GroupBy(segment => $"{segment.Flight}|{segment.Date}", StringComparer.OrdinalIgnoreCase))
+        {
+            var timings = group
+                .Where(segment => segment.DepartureTime is not null || segment.ArrivalTime is not null)
+                .Select(segment => new { segment.Flight, segment.DepartureTime, segment.ArrivalTime })
+                .DistinctBy(segment => $"{segment.DepartureTime}|{segment.ArrivalTime}")
+                .ToArray();
+
+            if (timings.Length < 2)
+                continue;
+
+            var first = timings[0];
+            var latest = timings[^1];
+            changes[first.Flight] = new ScheduleChangeTimes(
+                first.DepartureTime ?? first.ArrivalTime ?? string.Empty,
+                first.ArrivalTime ?? first.DepartureTime ?? string.Empty,
+                latest.DepartureTime ?? latest.ArrivalTime,
+                latest.ArrivalTime ?? latest.DepartureTime);
+        }
+
+        return changes;
     }
 
     private static IReadOnlyDictionary<string, ScheduleChangeTimes> ExtractScheduleChanges(string pnrText)
@@ -541,9 +702,16 @@ public static partial class Queue7Parser
 
     private static bool ExtractIsTicketed(string block)
     {
-        // Ticketed: TKT line has office ID + signing, e.g. "1.T-14JUL-3A78*AWS" or "1.TAW/3A78*AWS"
-        // Also ticketed if ACCOUNTING DATA section exists
+        // Galileo: ** ELECTRONIC DATA EXISTS ** >*HTE; or ** TINS REMARKS EXIST ** >*HTI;
+        if (GalileoTicketedRegex().IsMatch(block))
+            return true;
+
+        // Sabre: ACCOUNTING DATA section exists
         if (AccountingDataRegex().IsMatch(block))
+            return true;
+
+        // Amadeus: TK OK or TK OK31AUG/BOMAK3303
+        if (AmadeusTkOkRegex().IsMatch(block) || AmadeusFaPaxRegex().IsMatch(block))
             return true;
 
         var tktMatch = TktTimeLimitRegex().Match(block);
@@ -667,8 +835,8 @@ public static partial class Queue7Parser
         return (currencyCode, baseFare, taxes, totalFare);
     }
 
-    // Matches a single passenger token anywhere in a line, e.g. "1.1MUKHERJEE/SUBHRO MR" or "2.1MUKHERJEE/SIKHA SAHA MRS"
-    [GeneratedRegex(@"(?<jsno>\d+\.\d+)(?<name>[A-Z][A-Z'-]*/[A-Z][A-Z\s'-]*?)(?=\s{2,}\d+\.\d+|\s*$)", RegexOptions.IgnoreCase)]
+    // Matches Sabre/Galileo "1.1SURNAME/GIVEN" and Amadeus "1.SURNAME/GIVEN MRS(ADT)"
+    [GeneratedRegex(@"(?<jsno>\d+\.\d*)(?<name>[A-Z][A-Z'-]*/[A-Z][A-Z\s'-]*?)(?:\([A-Z]{3}\))?(?=\s{2,}\d+\.\d*|\s*$)", RegexOptions.IgnoreCase)]
     private static partial Regex PassengerRegex();
 
     // Capture only the date portion before any slash or space+agent-sign in T- lines, e.g. "1.T-16FEB" from "1.T-16FEB-3A78*ATT"
@@ -720,6 +888,13 @@ public static partial class Queue7Parser
     [GeneratedRegex(@"(?:TAW/|T-\d{1,2}[A-Z]{3}(?:\d{2,4})?-)[A-Z0-9]{3,5}\*[A-Z0-9]+", RegexOptions.IgnoreCase)]
     private static partial Regex TicketedTktRegex();
 
+    // Amadeus ticketed indicator: "TK OK" optionally followed by date/office, e.g. "TK OK31AUG/BOMAK3303"
+    [GeneratedRegex(@"\bTK\s+OK\b", RegexOptions.IgnoreCase)]
+    private static partial Regex AmadeusTkOkRegex();
+
+    [GeneratedRegex(@"\bFA\s+PAX\b", RegexOptions.IgnoreCase)]
+    private static partial Regex AmadeusFaPaxRegex();
+
     [GeneratedRegex(@"ACCOUNTING DATA", RegexOptions.IgnoreCase)]
     private static partial Regex AccountingDataRegex();
 
@@ -732,22 +907,54 @@ public static partial class Queue7Parser
     [GeneratedRegex(@"^(?<pnr>[A-Z0-9*.-]{3,12})$", RegexOptions.IgnoreCase)]
     private static partial Regex BareLocatorRegex();
 
+    [GeneratedRegex(@"\*VL\s+(?<pnr>[A-Z0-9]{5,8})\b", RegexOptions.IgnoreCase)]
+    private static partial Regex VendorLocatorResponsePnrRegex();
+
     [GeneratedRegex(@"^\s*RECEIVED\s+FROM\s*-\s*(?<receivedFrom>.+?)\s*$", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
     private static partial Regex ReceivedFromRegex();
+
+    // Galileo header: GQHTZG/WS LONOU 6TP2GWS AG 91215600 28APR — captures "AG 91215600" as agentCode
+    [GeneratedRegex(@"^\s*[A-Z0-9]{5,8}/[A-Z]{2}\s+[A-Z]{5}\s+[A-Z0-9]{4,8}\s+(?<agentCode>[A-Z]{2}\s+\d+)\s+\d{1,2}[A-Z]{3}", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
+    private static partial Regex GalileoReceivedFromRegex();
+
+    // Galileo header date: last token ddMMM or ddMMMyy on the header line
+    [GeneratedRegex(@"^\s*[A-Z0-9]{5,8}/[A-Z]{2}\s+[A-Z]{5}\s+[A-Z0-9]{4,8}\s+[A-Z]{2}\s+\d+\s+(?<date>\d{1,2}[A-Z]{3}(?:\d{2,4})?)\s*$", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
+    private static partial Regex GalileoReceivedDateRegex();
+
+    // Galileo ticketed indicators: ** ELECTRONIC DATA EXISTS ** or ** TINS REMARKS EXIST **
+    [GeneratedRegex(@"\*\*\s*(?:ELECTRONIC DATA EXISTS|TINS REMARKS EXIST)\s*\*\*", RegexOptions.IgnoreCase)]
+    private static partial Regex GalileoTicketedRegex();
+
+    // Amadeus header: RP/BOMAK3303/BOMAK3303  ST/SU  13MAY26/2244Z   7C4583 — PNR is the last alphanumeric token
+    [GeneratedRegex(@"^RP/[A-Z0-9]+/[A-Z0-9]+[^\r\n]*\s(?<pnr>[A-Z0-9]{5,8})\s*$", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
+    private static partial Regex AmadeusRpHeaderRegex();
 
     // Sabre header: 3A78.3A78*ATT 0619/16FEB26 AFZPJI H  — PNR is the token after the datetime
     [GeneratedRegex(@"^\s*[A-Z0-9]{3,5}\.[A-Z0-9*]+\s+\d{4}/\d{2}[A-Z]{3}\d{2}\s+(?<pnr>[A-Z0-9]{5,8})\b", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
     private static partial Regex SabreHeaderPnrRegex();
 
     // Sabre header: 3A78.3A78*ATT 0619/16FEB26 AFZPJI H — PCC must contain at least one letter and one digit
+    // Galileo header: H9TX9T/AA LONOU 6TP2AA AG ... — PCC is the 4th token (e.g. 6TP2AA)
     [GeneratedRegex(@"^\s*(?<officeId>[A-Z0-9]{3,5})\.[A-Z0-9*]+\s+\d{4}/\d{2}[A-Z]{3}\d{2}\b", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
     private static partial Regex PCCRegex();
+
+    [GeneratedRegex(@"^\s*[A-Z0-9]{5,8}/[A-Z]{2}\s+[A-Z]{5}\s+(?<officeId>[A-Z0-9]{4})[A-Z0-9]*\b", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
+    private static partial Regex GalileoPCCRegex();
 
     [GeneratedRegex(@"^\s*[A-Z0-9]{3,5}\.[^\r\n]*?\s(?<received>\d{4}/\d{2}[A-Z]{3}\d{2})\s+[A-Z0-9]{5,8}\b", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
     private static partial Regex ReceivedDateTimeRegex();
 
-    [GeneratedRegex(@"^\s*(?<segment>\d{1,2})\s+(?<carrier>[A-Z0-9]{2})\s*(?<flightNumber>\d{1,4}[A-Z]?)\s+(?<date>[0-9]{1,2}[A-Z]{3}|[A-Z]{3}\s*[0-9]{1,2})?\s*(?:[A-Z]\s+)?(?<origin>[A-Z]{3})\s*(?<destination>[A-Z]{3})\*?\s*(?<status>HK|KK|KL|TK|HX|UN|UC|US|WL|NO)\d*\b(?<times>.*)$", RegexOptions.IgnoreCase)]
+    // Galileo header: G28S5G/WS LONOU 6TP2GWS AG ... — PNR is the first token before the slash
+    [GeneratedRegex(@"^\s*(?<pnr>[A-Z0-9]{5,8})/[A-Z]{2}\s+[A-Z]{5}\b", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
+    private static partial Regex GalileoHeaderPnrRegex();
+
+    // Matches both Sabre (space-separated origin/dest) and Galileo (concatenated 6-char IATA pair)
+    // Also handles Amadeus format: segment carrier flight bookingClass date dayOfWeek origin6dest6 STATUS+count times
+    [GeneratedRegex(@"^\s*(?<segment>\d{1,2})\.?\s+(?<carrier>[A-Z0-9]{2})\s*(?<flightNumber>\d{1,4}[A-Z]?)\s+(?:[A-Z]\s+)?(?<date>[0-9]{1,2}[A-Z]{3}|[A-Z]{3}\s*[0-9]{1,2})?\s*(?:\d\s+)?(?:[A-Z]\s+)?(?:(?<origin>[A-Z]{3})\s+(?<destination>[A-Z]{3})|(?<origin6>[A-Z]{3})(?<destination6>[A-Z]{3}))\*?\s*(?<status>HK|KK|KL|TK|HX|UN|UC|US|WL|NO)\d*\b(?<times>.*)$", RegexOptions.IgnoreCase)]
     private static partial Regex SegmentLineRegex();
+
+    [GeneratedRegex(@"^\s*\d{3}/\d{3}\s+[A-Z0-9]{2}/(?<carrier>[A-Z0-9]{2})\s+(?<flightNumber>\d{1,4}[A-Z]?)\s+(?:[A-Z]\s+)?(?<date>[0-9]{1,2}[A-Z]{3}|[A-Z]{3}\s*[0-9]{1,2})?\s*(?:\d\s+)?(?:(?<origin>[A-Z]{3})\s+(?<destination>[A-Z]{3})|(?<origin6>[A-Z]{3})(?<destination6>[A-Z]{3}))\s*(?<status>HK|KK|KL|TK|HX|UN|UC|US|WL|NO)\d*\b(?<times>.*)$", RegexOptions.IgnoreCase)]
+    private static partial Regex HistorySegmentLineRegex();
 
     [GeneratedRegex(@"\b\d{3,4}[AP]?\b", RegexOptions.IgnoreCase)]
     private static partial Regex TimeRegex();
@@ -782,4 +989,84 @@ public static partial class Queue7Parser
             ? amount
             : null;
     }
+
+    private static VendorLocatorInfo? ParseVendorLocator(string block)
+    {
+        var match = VlocRegex().Match(block);
+        if (!match.Success)
+            return null;
+
+        var locator = match.Groups["locator"].Value.Trim().ToUpperInvariant();
+        var deadline = match.Groups["deadline"].Success && !string.IsNullOrWhiteSpace(match.Groups["deadline"].Value)
+            ? match.Groups["deadline"].Value.Trim()
+            : null;
+        return new VendorLocatorInfo(locator, deadline);
+    }
+
+    private static IReadOnlyList<VendorRemarkAction>? ParseVendorRemarks(string block)
+    {
+        var vrStart = block.IndexOf("*VR", StringComparison.OrdinalIgnoreCase);
+        if (vrStart < 0)
+            return null;
+
+        var vrBlock = block[(vrStart + 3)..];
+        var actions = new List<VendorRemarkAction>();
+
+        foreach (var rawLine in vrBlock.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries))
+        {
+            var line = VrLinePrefixRegex().Replace(rawLine.Trim(), string.Empty).Trim();
+            if (string.IsNullOrWhiteSpace(line))
+                continue;
+
+            if (MissingSsrRegex().IsMatch(line))
+            {
+                actions.Add(new VendorRemarkAction(VendorRemarkType.MissingSsr, line));
+                continue;
+            }
+
+            var dupMatch = DuplicatePnrRegex().Match(line);
+            if (dupMatch.Success)
+            {
+                var deadline = dupMatch.Groups["deadline"].Success && !string.IsNullOrWhiteSpace(dupMatch.Groups["deadline"].Value)
+                    ? dupMatch.Groups["deadline"].Value.Trim() : null;
+                var dupLocator = dupMatch.Groups["locator"].Success && !string.IsNullOrWhiteSpace(dupMatch.Groups["locator"].Value)
+                    ? dupMatch.Groups["locator"].Value.Trim().ToUpperInvariant() : null;
+                var type = line.Contains("AUTO", StringComparison.OrdinalIgnoreCase) && line.Contains("CANCEL", StringComparison.OrdinalIgnoreCase)
+                    ? VendorRemarkType.AutoCancelWarning
+                    : VendorRemarkType.DuplicatePnr;
+                actions.Add(new VendorRemarkAction(type, line, deadline, dupLocator));
+                continue;
+            }
+
+            var scMatch = VrScheduleChangeRegex().Match(line);
+            if (scMatch.Success)
+            {
+                actions.Add(new VendorRemarkAction(VendorRemarkType.ScheduleChange, line,
+                    Flight: scMatch.Groups["flight"].Value.Trim().ToUpperInvariant()));
+                continue;
+            }
+        }
+
+        return actions.Count > 0 ? actions : null;
+    }
+
+    // VLOC-1A*XFR62W/03APR 1245  or  VLOC-1A*XFR62W
+    [GeneratedRegex(@"VLOC-[^*]*\*(?<locator>[A-Z0-9]{5,8})(?:[/\s]+(?<deadline>[^\r\n]+))?", RegexOptions.IgnoreCase)]
+    private static partial Regex VlocRegex();
+
+    // Strip leading "1. VI/ASV *" or "VRMK-VI/ASV *" or "2." style prefixes from VR lines
+    [GeneratedRegex(@"^(?:\d+\.\s*)?(?:VRMK-)?(?:[A-Z]{2}/[A-Z]+\s*\*)?\s*", RegexOptions.IgnoreCase)]
+    private static partial Regex VrLinePrefixRegex();
+
+    // MISSING SSR CTCM / CTCE / CTCR / NON-CONSENT
+    [GeneratedRegex(@"MISSING\s+SSR\s+(?:CTCM|CTCE|CTCR|NON.CONSENT)", RegexOptions.IgnoreCase)]
+    private static partial Regex MissingSsrRegex();
+
+    // DUPLICATE OF XDJSNK or CLEAR DUPLICATES BY LON 0148/04APR26
+    [GeneratedRegex(@"(?:DUPLICATE\s+OF\s+(?<locator>[A-Z0-9]{5,8})|CLEAR\s+DUPLICATES)(?:.*?(?:BY|LON)\s+(?<deadline>[\d]{4}/[\d]{2}[A-Z]{3}[\d]{0,4}|[A-Z]{3}\s+[\d]{4}/[\d]{2}[A-Z]{3}[\d]{0,4}))?", RegexOptions.IgnoreCase)]
+    private static partial Regex DuplicatePnrRegex();
+
+    // SV722 SCHEDULE CHANGE DUE TO OPERATIONAL REASON
+    [GeneratedRegex(@"(?<flight>[A-Z]{2}\d{1,4})\s+SCHEDULE\s+CHANGE", RegexOptions.IgnoreCase)]
+    private static partial Regex VrScheduleChangeRegex();
 }
