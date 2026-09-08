@@ -352,7 +352,7 @@ public sealed class GalileoQueuePollingService : BackgroundService
         var sb = new StringBuilder(pnrText);
         try
         {
-            var vlResponse = await SendCommandAsync(pccCode, username, password, session, $"*VL {pnr}", cancellationToken);
+            var vlResponse = await SendCommandAsync(pccCode, username, password, session, "*VL", cancellationToken);
             if (!string.IsNullOrWhiteSpace(vlResponse))
                 sb.AppendLine().AppendLine("*VL").AppendLine(vlResponse);
         }
@@ -363,7 +363,7 @@ public sealed class GalileoQueuePollingService : BackgroundService
 
         try
         {
-            var vrResponse = await SendCommandAsync(pccCode, username, password, session, $"*VR {pnr}", cancellationToken);
+            var vrResponse = await SendCommandAsync(pccCode, username, password, session, "*VR", cancellationToken);
             if (!string.IsNullOrWhiteSpace(vrResponse))
                 sb.AppendLine().AppendLine("*VR").AppendLine(vrResponse);
         }

@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Options;
 using SkyOpsQueueIntelligence.Application.Helpers;
+using SkyOpsQueueIntelligence.Application.Interfaces;
 using SkyOpsQueueIntelligence.Application.Proxy;
 using SkyOpsQueueIntelligence.Infrastructure.Interfaces;
 
@@ -11,16 +12,19 @@ public sealed class AmadeusQueuePollingService : BackgroundService
     private readonly ICredentialStore _credentialStore;
     private readonly IAmadeusSessionService _sessionService;
     private readonly IQueueActionRepository _repository;
+    private readonly IEmailNotificationService _emailService;
     private readonly ILogger<AmadeusQueuePollingService> _logger;
 
     public AmadeusQueuePollingService(IOptions<Queue7PollingOptions> options, ICredentialStore credentialStore,
         IAmadeusSessionService sessionService, IQueueActionRepository repository,
+        IEmailNotificationService emailService,
         ILogger<AmadeusQueuePollingService> logger)
     {
         _options = options.Value;
         _credentialStore = credentialStore;
         _sessionService = sessionService;
         _repository = repository;
+        _emailService = emailService;
         _logger = logger;
     }
 
@@ -89,6 +93,13 @@ public sealed class AmadeusQueuePollingService : BackgroundService
                         }
 
                         texts.Add(response);
+                        var rtfResponse = await _sessionService.SendCommandAsync(session, "RTF", cancellationToken);
+                        texts.Add(rtfResponse);
+                        if (queueCommand.Equals("QSB41C5", StringComparison.OrdinalIgnoreCase))
+                        {
+                            var rhiResponse = await _sessionService.SendCommandAsync(session, "RHI", cancellationToken);
+                            texts.Add(rhiResponse);
+                        }
                         response = await _sessionService.SendCommandAsync(session, "IG", cancellationToken);
                     }
                 }
@@ -100,6 +111,9 @@ public sealed class AmadeusQueuePollingService : BackgroundService
                 if (texts.Count == 0) continue;
                 var results = Queue7Processor.ProcessQueueText(string.Join(Environment.NewLine, texts), queueNumber);
                 var saved = await _repository.SaveRecommendedActionsAsync(results, session.UplId, "AM", cancellationToken);
+                if (saved.ChangedResults.Count > 0)
+                    await _emailService.SendAlertAsync(polling.PccCode, saved.ChangedResults, cancellationToken);
+
                 _logger.LogInformation("Amadeus PCC {PccCode} Q/{QueueNumber}: analyzed {Analyzed} PNRs, saved {Saved} actions.",
                     polling.PccCode, queueNumber, results.Count, saved.Saved);
                 _logger.LogInformation("Amadeus PCC {PccCode} Q/{QueueNumber}: extracted PNRs {Pnrs}.",

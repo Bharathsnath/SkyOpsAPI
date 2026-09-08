@@ -73,6 +73,9 @@ public sealed class QueueActionRepository : IQueueActionRepository
         {
             foreach (var action in result.Actions)
             {
+                if (action.Status is not ("TK" or "HX" or "UN" or "UC"))
+                    continue;
+
                 var affected = await UpsertActionAsync(connection, result, action, uplId, providerName, cancellationToken);
                 // MySQL: INSERT=1, UPDATE=2, no-change=0
                 if (affected > 0)
