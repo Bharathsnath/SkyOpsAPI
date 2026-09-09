@@ -1062,8 +1062,7 @@ public static partial class Queue7Parser
     // DUPLICATE OF XDJSNK or CLEAR DUPLICATES BY LON 0148/04APR26
     [GeneratedRegex(@"(?:DUPLICATE\s+OF\s+(?<locator>[A-Z0-9]{5,8})|CLEAR\s+DUPLICATES)(?:.*?(?:BY|LON)\s+(?<deadline>[\d]{4}/[\d]{2}[A-Z]{3}[\d]{0,4}|[A-Z]{3}\s+[\d]{4}/[\d]{2}[A-Z]{3}[\d]{0,4}))?", RegexOptions.IgnoreCase)]
     private static partial Regex DuplicatePnrRegex();
-
-    // SV722 SCHEDULE CHANGE DUE TO OPERATIONAL REASON
-    [GeneratedRegex(@"(?<flight>[A-Z]{2}\d{1,4})\s+SCHEDULE\s+CHANGE", RegexOptions.IgnoreCase)]
+   // Supports both Sabre "SV722 SCHEDULE CHANGE" and Galileo "TIMING CHANGE SV722" remarks.
+    [GeneratedRegex(@"(?:(?<flight>[A-Z]{2}\d{1,4})\s+(?:SCHEDULE|TIMING)\s+CHANGE|(?:SCHEDULE|TIMING)\s+CHANGE\s+(?<flight>[A-Z]{2}\d{1,4}))", RegexOptions.IgnoreCase)]
     private static partial Regex VrScheduleChangeRegex();
 }
