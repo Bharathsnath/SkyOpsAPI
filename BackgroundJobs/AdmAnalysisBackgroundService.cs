@@ -25,8 +25,10 @@ public class AdmAnalysisBackgroundService : BackgroundService
         {
             using var scope = _scopeFactory.CreateScope();
             var svc = scope.ServiceProvider.GetRequiredService<IAdmAnalysisService>();
-            await svc.RunAnalysisAsync(stoppingToken);
-            // await svc.RunQueue379ChurnScanAsync(stoppingToken);
+              await svc.RunAnalysisAsync(stoppingToken);
+             //await svc.RunQueue379ChurnScanAsync(stoppingToken);
+            
+             
         }
         catch (Exception ex)
         {
@@ -43,7 +45,7 @@ public class AdmAnalysisBackgroundService : BackgroundService
                     using var scope = _scopeFactory.CreateScope();
                     var svc = scope.ServiceProvider.GetRequiredService<IAdmAnalysisService>();
                     await svc.RunAnalysisAsync(stoppingToken);
-                    // await svc.RunQueue379ChurnScanAsync(stoppingToken);
+                     //await svc.RunQueue379ChurnScanAsync(stoppingToken);
                 }
                 catch (Exception ex)
                 {

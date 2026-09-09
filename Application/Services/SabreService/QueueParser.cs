@@ -46,6 +46,14 @@ public static partial class Queue7Parser
         {
             var line = rawLine.Trim();
 
+            if (line.Equals("*VL", StringComparison.OrdinalIgnoreCase)
+                || line.Equals("*VR", StringComparison.OrdinalIgnoreCase)
+                || line.Equals("VENDOR LOCATOR", StringComparison.OrdinalIgnoreCase)
+                || line.Equals("VENDOR REMARKS", StringComparison.OrdinalIgnoreCase))
+            {
+                break;
+            }
+
             if (line.StartsWith("SEATS/BOARDING PASS", StringComparison.OrdinalIgnoreCase)
                 || line.StartsWith("SEATS/", StringComparison.OrdinalIgnoreCase))
             {
@@ -65,7 +73,24 @@ public static partial class Queue7Parser
                 segments.Add(parsed);
         }
 
-        return ApplyScheduleChanges(pnrText, segments);
+        var adjustedSegments = ApplyScheduleChanges(pnrText, segments);
+        return CollapseDuplicateSegments(adjustedSegments)
+            .Where(segment => segment.Segment > 0)
+            .ToArray();
+    }
+
+    private static IReadOnlyList<FlightSegment> CollapseDuplicateSegments(
+        IReadOnlyList<FlightSegment> segments)
+    {
+        return segments
+            .GroupBy(segment => string.Join('|', segment.Flight, segment.Date, segment.Status,
+                segment.Origin, segment.Destination), StringComparer.OrdinalIgnoreCase)
+            .Select(group => group
+                .OrderByDescending(segment => segment.Segment > 0)
+                .ThenByDescending(segment => segment.Segment)
+                .First())
+            .OrderBy(segment => segment.Segment)
+            .ToArray();
     }
 
     private static IReadOnlyList<string> SplitPnrBlocks(string queueText)
@@ -235,7 +260,8 @@ public static partial class Queue7Parser
         var bareLocator = block
             .Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
             .Select(line => BareLocatorRegex().Match(line))
-            .FirstOrDefault(locatorMatch => locatorMatch.Success);
+            .FirstOrDefault(locatorMatch => locatorMatch.Success
+                && LooksLikePnr(locatorMatch.Groups["pnr"].Value));
 
         return bareLocator is not null
             ? bareLocator.Groups["pnr"].Value.ToUpperInvariant()
@@ -260,7 +286,8 @@ public static partial class Queue7Parser
             return false;
         }
 
-        if (normalized is "SPLIT" or "PARSING" or "TAKING" or "PNR" or "RECORD" or "LOCATOR" or "RECLOC")
+        if (normalized is "SPLIT" or "PARSING" or "TAKING" or "PNR" or "RECORD" or "LOCATOR" or "RECLOC"
+            or "*VL" or "*VR" or "*H" or "*HTE" or "*HTI")
         {
             return false;
         }
@@ -348,7 +375,31 @@ public static partial class Queue7Parser
 
         if (!match.Success)
         {
-            return null;
+            var historyMatch = HistorySegmentLineRegex().Match(line);
+            if (!historyMatch.Success)
+                return null;
+
+            var historyStatus = historyMatch.Groups["status"].Value.ToUpperInvariant();
+            var historyCarrier = historyMatch.Groups["carrier"].Value.ToUpperInvariant();
+            var historyFlightNumber = historyMatch.Groups["flightNumber"].Value;
+            var historyFlight = historyCarrier + historyFlightNumber;
+            var (historyDeparture, historyArrival) = ExtractPrimaryTimes(historyMatch.Groups["times"].Value);
+
+            return new FlightSegment(
+                0,
+                historyFlight,
+                historyCarrier,
+                historyFlightNumber,
+                EmptyToNull(historyMatch.Groups["date"].Value),
+                EmptyToNull(historyMatch.Groups["origin"].Value),
+                EmptyToNull(historyMatch.Groups["destination"].Value),
+                historyStatus,
+                historyDeparture,
+                historyArrival,
+                null,
+                null,
+                null,
+                null);
         }
 
         var status = match.Groups["status"].Value.ToUpperInvariant();
@@ -400,7 +451,12 @@ public static partial class Queue7Parser
             return segments;
         }
 
-        var changes = ExtractScheduleChanges(pnrText);
+        var changes = new Dictionary<string, ScheduleChangeTimes>(
+            ExtractScheduleChanges(pnrText), StringComparer.OrdinalIgnoreCase);
+        foreach (var inferredChange in InferDuplicateFlightChanges(segments))
+        {
+            changes[inferredChange.Key] = inferredChange.Value;
+        }
 
         return segments
             .Select(segment =>
@@ -421,6 +477,35 @@ public static partial class Queue7Parser
                 };
             })
             .ToArray();
+    }
+
+    private static IReadOnlyDictionary<string, ScheduleChangeTimes> InferDuplicateFlightChanges(
+        IReadOnlyList<FlightSegment> segments)
+    {
+        var changes = new Dictionary<string, ScheduleChangeTimes>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var group in segments
+            .GroupBy(segment => $"{segment.Flight}|{segment.Date}", StringComparer.OrdinalIgnoreCase))
+        {
+            var timings = group
+                .Where(segment => segment.DepartureTime is not null || segment.ArrivalTime is not null)
+                .Select(segment => new { segment.Flight, segment.DepartureTime, segment.ArrivalTime })
+                .DistinctBy(segment => $"{segment.DepartureTime}|{segment.ArrivalTime}")
+                .ToArray();
+
+            if (timings.Length < 2)
+                continue;
+
+            var first = timings[0];
+            var latest = timings[^1];
+            changes[first.Flight] = new ScheduleChangeTimes(
+                first.DepartureTime ?? first.ArrivalTime ?? string.Empty,
+                first.ArrivalTime ?? first.DepartureTime ?? string.Empty,
+                latest.DepartureTime ?? latest.ArrivalTime,
+                latest.ArrivalTime ?? latest.DepartureTime);
+        }
+
+        return changes;
     }
 
     private static IReadOnlyDictionary<string, ScheduleChangeTimes> ExtractScheduleChanges(string pnrText)
@@ -625,15 +710,15 @@ public static partial class Queue7Parser
         if (AccountingDataRegex().IsMatch(block))
             return true;
 
-        // Amadeus: TK OK or TK OK31AUG/BOMAK3303
-        if (AmadeusTkOkRegex().IsMatch(block))
+        // Amadeus: TK OK or FA PAX ticket record.
+        if (AmadeusTkOkRegex().IsMatch(block) || AmadeusFaPaxRegex().IsMatch(block))
             return true;
 
         var tktMatch = TktTimeLimitRegex().Match(block);
         if (!tktMatch.Success)
             return false;
 
-        // TAW/ alone (no office/signing) = unticketed
+        // TAW/ alone (no office/signing)  = unticketed
         // T-DATE-OFFICEID*SIGN or TAW/OFFICEID*SIGN = ticketed
         var tktValue = tktMatch.Groups["tkt"].Value.Trim();
         return TicketedTktRegex().IsMatch(tktValue);
@@ -807,10 +892,13 @@ public static partial class Queue7Parser
     [GeneratedRegex(@"\bTK\s+OK\b", RegexOptions.IgnoreCase)]
     private static partial Regex AmadeusTkOkRegex();
 
+    [GeneratedRegex(@"\bFA\s+PAX\b", RegexOptions.IgnoreCase)]
+    private static partial Regex AmadeusFaPaxRegex();
+
     [GeneratedRegex(@"ACCOUNTING DATA", RegexOptions.IgnoreCase)]
     private static partial Regex AccountingDataRegex();
 
-    [GeneratedRegex(@"\b(?:PNR|RECORD\s+LOCATOR|LOCATOR|RECLOC)\s*[:#-]?\s*(?<pnr>[A-Z0-9*.-]{3,12})\b", RegexOptions.IgnoreCase)]
+    [GeneratedRegex(@"^\s*(?:PNR|RECORD\s+LOCATOR|LOCATOR|RECLOC)\s*[:#-]?\s*(?<pnr>[A-Z0-9*.-]{3,12})\b", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
     private static partial Regex PnrHeaderRegex();
 
     [GeneratedRegex(@"<Response\b[\s\S]*?</Response>", RegexOptions.IgnoreCase)]
@@ -847,20 +935,23 @@ public static partial class Queue7Parser
     [GeneratedRegex(@"^\s*(?<officeId>[A-Z0-9]{3,5})\.[A-Z0-9*]+\s+\d{4}/\d{2}[A-Z]{3}\d{2}\b", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
     private static partial Regex PCCRegex();
 
-    [GeneratedRegex(@"^\s*[A-Z0-9]{5,8}/[A-Z]{2}\s+[A-Z]{5}\s+(?<officeId>[A-Z0-9]{4,8})\b", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
+    [GeneratedRegex(@"^\s*[A-Z0-9]{5,8}/[A-Z]{2}\s+[A-Z]{5}\s+(?<officeId>[A-Z0-9]{4})[A-Z0-9]*\b", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
     private static partial Regex GalileoPCCRegex();
 
     [GeneratedRegex(@"^\s*[A-Z0-9]{3,5}\.[^\r\n]*?\s(?<received>\d{4}/\d{2}[A-Z]{3}\d{2})\s+[A-Z0-9]{5,8}\b", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
     private static partial Regex ReceivedDateTimeRegex();
 
     // Galileo header: G28S5G/WS LONOU 6TP2GWS AG ... — PNR is the first token before the slash
-    [GeneratedRegex(@"^\s*(?<pnr>[A-Z0-9]{5,8})/[A-Z]{2}\s+[A-Z]{5}\b", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
+    [GeneratedRegex(@"^\s*(?<pnr>[A-Z0-9]{5,8})/[A-Z0-9]{2}\s+[A-Z]{5}\b", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
     private static partial Regex GalileoHeaderPnrRegex();
 
     // Matches both Sabre (space-separated origin/dest) and Galileo (concatenated 6-char IATA pair)
     // Also handles Amadeus format: segment carrier flight bookingClass date dayOfWeek origin6dest6 STATUS+count times
     [GeneratedRegex(@"^\s*(?<segment>\d{1,2})\.?\s+(?<carrier>[A-Z0-9]{2})\s*(?<flightNumber>\d{1,4}[A-Z]?)\s+(?:[A-Z]\s+)?(?<date>[0-9]{1,2}[A-Z]{3}|[A-Z]{3}\s*[0-9]{1,2})?\s*(?:\d\s+)?(?:[A-Z]\s+)?(?:(?<origin>[A-Z]{3})\s+(?<destination>[A-Z]{3})|(?<origin6>[A-Z]{3})(?<destination6>[A-Z]{3}))\*?\s*(?<status>HK|KK|KL|TK|HX|UN|UC|US|WL|NO)\d*\b(?<times>.*)$", RegexOptions.IgnoreCase)]
     private static partial Regex SegmentLineRegex();
+
+    [GeneratedRegex(@"^\s*\d{3}/\d{3}\s+[A-Z0-9]{2}/(?<carrier>[A-Z0-9]{2})\s+(?<flightNumber>\d{1,4}[A-Z]?)\s+(?:[A-Z]\s+)?(?<date>[0-9]{1,2}[A-Z]{3}|[A-Z]{3}\s*[0-9]{1,2})?\s*(?:\d\s+)?(?:(?<origin>[A-Z]{3})\s+(?<destination>[A-Z]{3})|(?<origin6>[A-Z]{3})(?<destination6>[A-Z]{3}))\s*(?<status>HK|KK|KL|TK|HX|UN|UC|US|WL|NO)\d*\b(?<times>.*)$", RegexOptions.IgnoreCase)]
+    private static partial Regex HistorySegmentLineRegex();
 
     [GeneratedRegex(@"\b\d{3,4}[AP]?\b", RegexOptions.IgnoreCase)]
     private static partial Regex TimeRegex();
@@ -971,8 +1062,7 @@ public static partial class Queue7Parser
     // DUPLICATE OF XDJSNK or CLEAR DUPLICATES BY LON 0148/04APR26
     [GeneratedRegex(@"(?:DUPLICATE\s+OF\s+(?<locator>[A-Z0-9]{5,8})|CLEAR\s+DUPLICATES)(?:.*?(?:BY|LON)\s+(?<deadline>[\d]{4}/[\d]{2}[A-Z]{3}[\d]{0,4}|[A-Z]{3}\s+[\d]{4}/[\d]{2}[A-Z]{3}[\d]{0,4}))?", RegexOptions.IgnoreCase)]
     private static partial Regex DuplicatePnrRegex();
-
-    // SV722 SCHEDULE CHANGE DUE TO OPERATIONAL REASON
-    [GeneratedRegex(@"(?<flight>[A-Z]{2}\d{1,4})\s+SCHEDULE\s+CHANGE", RegexOptions.IgnoreCase)]
+   // Supports both Sabre "SV722 SCHEDULE CHANGE" and Galileo "TIMING CHANGE SV722" remarks.
+    [GeneratedRegex(@"(?:(?<flight>[A-Z]{2}\d{1,4})\s+(?:SCHEDULE|TIMING)\s+CHANGE|(?:SCHEDULE|TIMING)\s+CHANGE\s+(?<flight>[A-Z]{2}\d{1,4}))", RegexOptions.IgnoreCase)]
     private static partial Regex VrScheduleChangeRegex();
 }

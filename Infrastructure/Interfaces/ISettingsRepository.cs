@@ -10,6 +10,7 @@ public interface ISettingsRepository
     
     Task<IReadOnlyList<PccAgentEmailMaster>> GetPccAgentEmailMastersAsync(CancellationToken ct = default);
     Task<IReadOnlyList<PccAgentEmailMaster>> GetPccAgentEmailMastersByPccAsync(string pccCode, CancellationToken ct = default);
+    Task<IReadOnlyList<PccAgentEmailMaster>> GetPccAgentEmailMastersByPccCompanyMarketAsync(string pccCode, string company, string market, CancellationToken ct = default);
     Task<IReadOnlyList<PccAgentEmailMaster>> GetPccAgentEmailMastersByPccsAsync(IEnumerable<string> pccCodes, CancellationToken ct = default);
     Task<long> CreatePccAgentEmailMasterAsync(PccAgentEmailMaster entry, CancellationToken ct = default);
     Task<bool> UpdateAsync(AppConfiguration config, CancellationToken ct = default);

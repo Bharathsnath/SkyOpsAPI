@@ -12,12 +12,15 @@ namespace SkyOpsQueueIntelligence.Application.Services;
 
 public sealed class EmailNotificationService : IEmailNotificationService
 {
+  private sealed record AlertRoute(string Pcc, string Prefix, string Company, string Market, bool IsOffline = false);
+
     private readonly IConfiguration _config;
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly ILogger<EmailNotificationService> _logger;
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly IHubContext<QueueNotificationsHub> _hubContext;
     private readonly IErrorLogService _errorLogService;
+    private readonly IMarketCompanyBranchService _marketCompanyBranchService;
 
     public EmailNotificationService(
         IConfiguration config,
@@ -25,7 +28,8 @@ public sealed class EmailNotificationService : IEmailNotificationService
         ILogger<EmailNotificationService> logger,
         IHttpClientFactory httpClientFactory,
         IHubContext<QueueNotificationsHub> hubContext,
-        IErrorLogService errorLogService)
+        IErrorLogService errorLogService,
+        IMarketCompanyBranchService marketCompanyBranchService)
     {
         _config = config;
         _scopeFactory = scopeFactory;
@@ -33,9 +37,10 @@ public sealed class EmailNotificationService : IEmailNotificationService
         _httpClientFactory = httpClientFactory;
         _hubContext = hubContext;
         _errorLogService = errorLogService;
+        _marketCompanyBranchService = marketCompanyBranchService;
     }
 
-    public async Task SendAlertAsync(string PCC, IReadOnlyList<QueueAnalysisResult> results, CancellationToken ct = default)
+    public async Task SendAlertAsync(string PCC, string company, string market, IReadOnlyList<QueueAnalysisResult> results, CancellationToken ct = default)
     {
         try
         {
@@ -45,20 +50,86 @@ public sealed class EmailNotificationService : IEmailNotificationService
         var sendOnCritical = section.GetValue<bool>("SendOnCritical");
         var sendOnTimeChange = section.GetValue<bool>("SendOnTimeChange");
         var baseUrl = section["BaseUrl"] ?? "https://skyopsapibeta.akbartravelsonline.com";
-        var toAddresses = await ResolveRecipientsAsync(section, PCC, results, ct);
 
-        var criticalActions = results
+        var routedResults = new Dictionary<AlertRoute, List<QueueAnalysisResult>>();
+        foreach (var result in results)
+        {
+          var route = IsOnlineTransactionId(result.ReceivedFrom)
+            ? await ResolveCompanyMarketAsync(result.ReceivedFrom, ct)
+            : new AlertRoute(string.Empty, string.Empty, string.Empty, string.Empty, IsOffline: true);
+          if (route is null)
+          {
+            _logger.LogWarning(
+              "Email skipped: no active CompanyMaster route for PCC={Pcc}, TransactionId={TransactionId}, TransactionPrefix={TransactionPrefix}, Company={Company}, Market={Market}, MatchedRecipientCount={MatchedRecipientCount}",
+              result.PCC ?? PCC, result.ReceivedFrom, ExtractTransactionPrefix(result.ReceivedFrom), null, null, 0);
+            continue;
+          }
+
+          route = route with { Pcc = string.IsNullOrWhiteSpace(result.PCC) ? PCC.Trim() : result.PCC.Trim() };
+
+          if (!routedResults.TryGetValue(route, out var routeResults))
+          {
+            routeResults = [];
+            routedResults[route] = routeResults;
+          }
+
+          routeResults.Add(result);
+        }
+
+        foreach (var (route, routeResults) in routedResults)
+        {
+          await SendAlertForRouteAsync(section, route.Pcc, route.Prefix, route.Company, route.Market, routeResults, ct);
+        }
+        }
+        catch (Exception ex) { await _errorLogService.LogAsync(ex, "EmailNotificationService", "SkyOpsQueueIntelligence", "SERVICE", nameof(SendAlertAsync), nameof(EmailNotificationService)); }
+    }
+
+    private async Task SendAlertForRouteAsync(
+        IConfigurationSection section,
+        string PCC,
+        string prefix,
+        string company,
+        string market,
+        IReadOnlyList<QueueAnalysisResult> filteredResults,
+        CancellationToken ct)
+    {
+        var sendOnCritical = section.GetValue<bool>("SendOnCritical");
+        var sendOnTimeChange = section.GetValue<bool>("SendOnTimeChange");
+        var baseUrl = section["BaseUrl"] ?? "https://skyopsapibeta.akbartravelsonline.com";
+
+        _logger.LogInformation(
+            "[EmailAlert] SendAlertAsync called: PCC={Pcc}, TransactionPrefix={TransactionPrefix}, Company={Company}, Market={Market}, TotalResults={Total}",
+            PCC, prefix, company, market, filteredResults.Count);
+
+        var toAddresses = await ResolveRecipientsAsync(section, PCC, prefix, company, market, filteredResults, ct);
+        _logger.LogInformation("Email routing for PCC={Pcc}, TransactionPrefix={TransactionPrefix}, Company={Company}, Market={Market}: {ResultCount} result(s), MatchedRecipientCount={RecipientCount}, TransactionIds={Transactions}.",
+          PCC,
+          prefix,
+          company,
+          market,
+          filteredResults.Count,
+          toAddresses.Count,
+          string.Join(", ", filteredResults.Select(result => result.ReceivedFrom ?? "offline")));
+
+        var criticalActions = filteredResults
             .SelectMany(r => r.Actions.Select(a => (r.Pnr, r.PCC, a)))
             .Where(x => x.a.Status is "HX" or "UN" or "UC")
             .ToList();
 
-        var timeChangeActions = results
+        var timeChangeActions = filteredResults
             .SelectMany(r => r.Actions.Select(a => (r.Pnr, r.PCC, a)))
             .Where(x => x.a.Status == "TK" && x.a.DelayMinutes is not null && x.a.DelayMinutes != 0)
             .ToList();
 
+        _logger.LogInformation(
+            "[EmailAlert] Actions: PCC={Pcc}, CriticalCount={Critical}, TimeChangeCount={TimeChange}, SendOnCritical={Soc}, SendOnTimeChange={Sotc}",
+            PCC, criticalActions.Count, timeChangeActions.Count, sendOnCritical, sendOnTimeChange);
+
         if ((!sendOnCritical || criticalActions.Count == 0) && (!sendOnTimeChange || timeChangeActions.Count == 0))
+        {
+          _logger.LogInformation("Email skipped for PCC {Pcc}: no enabled critical or time-change actions.", PCC);
             return;
+        }
 
         var allActions = new List<(string Pnr, string? PCC, ActionFinding Action)>();
         if (sendOnCritical) allActions.AddRange(criticalActions);
@@ -71,9 +142,52 @@ public sealed class EmailNotificationService : IEmailNotificationService
         var subject = $"[SKY OPS] Queue notification of PCC: {PCC}";
 
         await SendEmailAsync(section, subject, body, toAddresses, ct, throwOnError: false);
-        }
-        catch (Exception ex) { await _errorLogService.LogAsync(ex, "EmailNotificationService", "SkyOpsQueueIntelligence", "SERVICE", nameof(SendAlertAsync), nameof(EmailNotificationService)); }
     }
+
+      private async Task<AlertRoute?> ResolveCompanyMarketAsync(string? transactionId, CancellationToken ct)
+      {
+        var prefix = ExtractTransactionPrefix(transactionId);
+        if (string.IsNullOrEmpty(prefix)) return null;
+
+        var companies = await _marketCompanyBranchService.GetCompaniesAsync(ct);
+        var company = companies.FirstOrDefault(candidate =>
+          candidate.IsActive
+          && string.Equals(candidate.TransactionPrefix?.Trim(), prefix, StringComparison.OrdinalIgnoreCase));
+        if (company is null && prefix.Equals("AO", StringComparison.OrdinalIgnoreCase))
+          return new AlertRoute(string.Empty, prefix, "aoi", "b2b ind");
+        if (company is null) return null;
+
+        var markets = await _marketCompanyBranchService.GetMarketsAsync(ct);
+        var market = markets.FirstOrDefault(candidate => candidate.IsActive && candidate.Id == company.MarketId);
+        if (market is null || string.IsNullOrWhiteSpace(company.CompanyName) || string.IsNullOrWhiteSpace(market.MarketCode))
+        {
+          if (prefix.Equals("AO", StringComparison.OrdinalIgnoreCase))
+            return new AlertRoute(string.Empty, prefix, "aoi", "b2b ind");
+          return null;
+        }
+
+        if (string.IsNullOrWhiteSpace(company.CompanyCode))
+          return prefix.Equals("AO", StringComparison.OrdinalIgnoreCase)
+            ? new AlertRoute(string.Empty, prefix, "aoi", "b2b ind")
+            : null;
+
+        return new AlertRoute(string.Empty, prefix, company.CompanyCode.Trim(), market.MarketCode.Trim());
+      }
+
+      private static string ExtractTransactionPrefix(string? transactionId)
+      {
+        var trimmed = transactionId?.Trim() ?? string.Empty;
+        return trimmed.Length >= 2 ? trimmed[..2].ToUpperInvariant() : string.Empty;
+      }
+
+      private static bool IsOnlineTransactionId(string? transactionId)
+      {
+        var value = transactionId?.Trim() ?? string.Empty;
+        return value.Length == 11
+          && char.IsLetter(value[0])
+          && char.IsLetter(value[1])
+          && value[2..].All(char.IsDigit);
+      }
 
     public async Task SendQueueProcessingSummaryAsync(
         string pccCode,
@@ -551,6 +665,9 @@ public sealed class EmailNotificationService : IEmailNotificationService
     private async Task<IReadOnlyList<string>> ResolveRecipientsAsync(
         IConfigurationSection section,
         string PCC,
+      string prefix,
+      string company,
+      string market,
         IReadOnlyList<QueueAnalysisResult> results,
         CancellationToken ct)
     {
@@ -562,17 +679,32 @@ public sealed class EmailNotificationService : IEmailNotificationService
                 recipients.Add(recipient);
         }
 
-        foreach (var recipient in await ResolvePccRecipientsAsync(PCC, results, ct))
+        var pccRecipients = await ResolvePccRecipientsAsync(PCC, company, market, results, ct);
+        foreach (var recipient in pccRecipients)
         {
             recipients.Add(recipient);
         }
 
+        if (pccRecipients.Count == 0)
+        {
+          foreach (var recipient in section.GetSection("ToAddresses").Get<string[]>() ?? Array.Empty<string>())
+          {
+            foreach (var address in SplitRecipients(recipient))
+              recipients.Add(address);
+          }
+
+          _logger.LogWarning(
+            "No active PCC email recipients found for PCC {Pcc}; using configured default email recipients.",
+            PCC);
+        }
+
         if (recipients.Count == 0)
         {
-            foreach (var recipient in section.GetSection("ToAddresses").Get<string[]>() ?? Array.Empty<string>())
-            {
-                recipients.Add(recipient);
-            }
+          _logger.LogWarning(
+            "No active PCC email recipients found for PCC {Pcc}, company {Company}, market {Market}; no alert will be sent.",
+            PCC,
+            company,
+            market);
         }
 
         return recipients.ToArray();
@@ -585,13 +717,17 @@ public sealed class EmailNotificationService : IEmailNotificationService
 
         foreach (var recipient in value.Split(new[] { ';', ',' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
         {
-            if (!string.IsNullOrWhiteSpace(recipient))
+            if (!string.IsNullOrWhiteSpace(recipient)
+              && MailAddress.TryCreate(recipient, out var address)
+              && string.Equals(address.Address, recipient, StringComparison.OrdinalIgnoreCase))
                 yield return recipient;
         }
     }
 
     private async Task<IReadOnlyList<string>> ResolvePccRecipientsAsync(
         string PCC,
+      string company,
+      string market,
         IReadOnlyList<QueueAnalysisResult> results,
         CancellationToken ct)
     {
@@ -616,7 +752,25 @@ public sealed class EmailNotificationService : IEmailNotificationService
         var settingsRepository = scope.ServiceProvider.GetRequiredService<ISettingsRepository>();
         var recipients = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-        var entries = await settingsRepository.GetPccAgentEmailMastersByPccsAsync(pccCandidates, ct);
+        IReadOnlyList<PccAgentEmailMaster> entries;
+        if (!string.IsNullOrWhiteSpace(company) && !string.IsNullOrWhiteSpace(market))
+        {
+          var matchingEntries = new List<PccAgentEmailMaster>();
+          foreach (var pccCandidate in pccCandidates)
+          {
+            var rows = await settingsRepository
+              .GetPccAgentEmailMastersByPccCompanyMarketAsync(pccCandidate, company, market, ct);
+            _logger.LogInformation(
+              "[EmailAlert] DB lookup: PCCCode={Pcc}, Company={Company}, Market={Market} → {Count} row(s) found",
+              pccCandidate, company, market, rows.Count);
+            matchingEntries.AddRange(rows);
+          }
+          entries = matchingEntries;
+        }
+        else
+        {
+          entries = await settingsRepository.GetPccAgentEmailMastersByPccsAsync(pccCandidates, ct);
+        }
 
         foreach (var entry in entries.Where(entry => entry.IsActive == 1))
         {
@@ -625,6 +779,11 @@ public sealed class EmailNotificationService : IEmailNotificationService
                 recipients.Add(email);
             }
         }
+
+          if (recipients.Count == 0)
+          {
+            _logger.LogWarning("No active PCC email recipients found for PCC {Pcc}, company {Company}, market {Market}.", PCC, company, market);
+          }
 
         return recipients.ToArray();
     }

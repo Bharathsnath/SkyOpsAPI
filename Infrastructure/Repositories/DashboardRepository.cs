@@ -217,7 +217,9 @@ public sealed class DashboardRepository : IDashboardRepository
             ORDER BY UpdatedAt DESC
             """,
             r => new DelayItemDto(
-                r.IsDBNull(0) ? null : r.GetString(0), r.IsDBNull(1) ? null : r.GetString(1), r.IsDBNull(2) ? null : r.GetString(2),
+                r.IsDBNull(0) ? string.Empty : r.IsDBNull(0) ? null : r.GetString(0),
+                r.IsDBNull(1) ? string.Empty : r.IsDBNull(1) ? null : r.GetString(1),
+                r.IsDBNull(2) ? string.Empty : r.IsDBNull(2) ? null : r.GetString(2),
                 r.IsDBNull(3) ? null : r.GetInt32(3), r.IsDBNull(4) ? null : r.GetDecimal(4),
                 r.GetInt32(5), r.IsDBNull(6) ? null : r.GetString(6), r.IsDBNull(7) ? null : r.GetString(7), r.GetDateTime(8)),
             ct, ("@userId", userId));

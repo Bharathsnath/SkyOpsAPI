@@ -55,6 +55,8 @@ public sealed class CredentialStore : ICredentialStore
             const string sql = """
                 SELECT * FROM wpset_credentialdetails
                 WHERE RecordStatus = '0'
+                SELECT * FROM wpset_credentialdetails
+                WHERE RecordStatus = '0'
                 AND (
                     (Provider IN ('AB', 'SB') AND (
                         PCCMasterCode LIKE '%AB_1V08_COCHINTDESK_DOM'
