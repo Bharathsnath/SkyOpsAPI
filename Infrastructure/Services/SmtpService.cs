@@ -1,0 +1,18 @@
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using Microsoft.AspNetCore.DataProtection;
+using MimeKit;
+using SkyOpsQueueIntelligence.Application.Interfaces;
+using SkyOpsQueueIntelligence.Infrastructure.Interfaces;
+
+namespace SkyOpsQueueIntelligence.Infrastructure.Services;
+
+public sealed class SmtpService : ISmtpService
+{
+    private readonly ICrmRepository repository; private readonly IDataProtector protector; private readonly ILogger<SmtpService> logger; private readonly IConfiguration configuration;
+    public SmtpService(ICrmRepository repository,IDataProtectionProvider provider,ILogger<SmtpService> logger,IConfiguration configuration){this.repository=repository;protector=provider.CreateProtector("SkyOps.Crm.SmtpPassword.v1");this.logger=logger;this.configuration=configuration;}
+    public async Task TestConnectionAsync(SmtpConfigurationRequest request,CancellationToken ct=default){Validate(request);using var client=new SmtpClient();await client.ConnectAsync(request.Host,request.Port,Mode(request.UseSsl,request.Port),ct);await client.AuthenticateAsync(request.Username,request.Password!,ct);await client.DisconnectAsync(true,ct);}
+    public async Task SendAsync(SmtpSendRequest request,CancellationToken ct=default){var stored=await repository.GetSmtpConfigurationAsync(ct);var section=configuration.GetSection("EmailNotification");var host=stored?.Host??section["SmtpHost"]??throw new InvalidOperationException("SMTP host is not configured.");var port=stored?.Port??section.GetValue<int>("SmtpPort");var username=stored?.Username??section["Username"]??throw new InvalidOperationException("SMTP username is not configured.");var password=stored is null?section["Password"]:protector.Unprotect(stored.EncryptedPassword);var fromEmail=stored?.FromEmail??section["FromAddress"]??throw new InvalidOperationException("SMTP from address is not configured.");var fromName=stored?.FromName??section["FromName"]??"SkyOps Control Center";var useSsl=stored?.UseSsl??section.GetValue<bool>("UseSsl");if(string.IsNullOrWhiteSpace(password))throw new InvalidOperationException("SMTP password is not configured.");var message=new MimeMessage();message.From.Add(new MailboxAddress(fromName,fromEmail));foreach(var address in request.To.Split(',',StringSplitOptions.RemoveEmptyEntries|StringSplitOptions.TrimEntries))message.To.Add(MailboxAddress.Parse(address));if(!string.IsNullOrWhiteSpace(request.Cc))foreach(var address in request.Cc.Split(',',StringSplitOptions.RemoveEmptyEntries|StringSplitOptions.TrimEntries))message.Cc.Add(MailboxAddress.Parse(address));message.Subject=request.Subject;var body=new BodyBuilder{HtmlBody=request.HtmlBody};foreach(var attachment in request.Attachments??Array.Empty<SmtpAttachmentRequest>())body.Attachments.Add(attachment.FileName,Convert.FromBase64String(attachment.Base64Content),ContentType.Parse(attachment.ContentType));message.Body=body.ToMessageBody();using var client=new SmtpClient();await client.ConnectAsync(host,port,Mode(useSsl,port),ct);await client.AuthenticateAsync(username,password,ct);await client.SendAsync(message,ct);await client.DisconnectAsync(true,ct);logger.LogInformation("CRM email sent to {Recipient}",request.To);}
+    private static void Validate(SmtpConfigurationRequest request){if(string.IsNullOrWhiteSpace(request.Host)||request.Port is<1 or>65535||string.IsNullOrWhiteSpace(request.Username)||string.IsNullOrWhiteSpace(request.Password)||!System.Net.Mail.MailAddress.TryCreate(request.FromEmail,out _))throw new ArgumentException("Valid SMTP host, port, username, password, and from email are required.");}
+    private static SecureSocketOptions Mode(bool ssl,int port)=>!ssl?SecureSocketOptions.None:port==465?SecureSocketOptions.SslOnConnect:SecureSocketOptions.StartTls;
+}

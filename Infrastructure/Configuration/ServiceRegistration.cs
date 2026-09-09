@@ -38,6 +38,7 @@ public static class ServiceRegistration
         services.AddScoped<ISettingsService, SettingsService>();
         services.AddScoped<IDashboardService, DashboardService>();
         services.AddScoped<IQueueService, QueueService>();
+        services.AddScoped<ICrmService, CrmService>();
         services.AddSingleton<DashboardDtoAdapter>();
         services.AddSingleton<QueueDtoAdapter>();
         services.AddSingleton<SettingsDtoAdapter>();
@@ -46,10 +47,14 @@ public static class ServiceRegistration
         services.AddSingleton<IErrorLogService, ErrorLogService>();
         services.AddSingleton<ISabreXmlLogService, SabreXmlLogService>();
         services.AddSingleton<IEmailNotificationService, EmailNotificationService>();
+        services.AddSingleton<ICrmRepository, SqlCrmRepository>();
+        services.AddSingleton<ICrmActionTokenService, SqlCrmActionTokenService>();
+        services.AddSingleton<ISmtpService, SmtpService>();
+        services.AddDataProtection();
 
         // ADM background job
-        services.AddSingleton<AdmAnalysisBackgroundService>();
-        services.AddHostedService(sp => sp.GetRequiredService<AdmAnalysisBackgroundService>());
+        //services.AddSingleton<AdmAnalysisBackgroundService>();
+        //services.AddHostedService(sp => sp.GetRequiredService<AdmAnalysisBackgroundService>());
 
         // Proxy / Sabre API clients
         services.AddHttpClient<Queue7TextSource>();

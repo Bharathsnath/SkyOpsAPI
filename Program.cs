@@ -87,6 +87,7 @@ await credentialStore.LoadAsync();
 
 app.MapControllers();
 app.MapHub<QueueNotificationsHub>("/queue-notifications");
+app.MapHub<CrmHub>("/hubs/crm");
 app.MapMcp("/mcp");
 app.MapGet("/", () => "SkyOps Queue Intelligence MCP Running - analysis only (queues 7, 379, 62)");
 

@@ -1,0 +1,184 @@
+-- SkyOps Control Center CRM installation script
+-- Target: existing MySQL database `skyops`
+-- Run as a DBA/deployment account. This script does not create databases or users.
+-- Preconditions: the `skyops` database must already exist.
+
+USE `skyops`;
+
+CREATE TABLE  CrmCustomers (
+    Id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(200) NOT NULL,
+    Email VARCHAR(320) NOT NULL,
+    Mobile VARCHAR(40) NULL,
+    Company VARCHAR(200) NULL,
+    CreatedAt DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
+) ENGINE=InnoDB;
+
+CREATE TABLE  CrmCases (
+    Id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    CaseNumber VARCHAR(40) NOT NULL UNIQUE,
+    Pnr VARCHAR(20) NOT NULL,
+    CustomerId BIGINT NULL,
+    CaseType VARCHAR(80) NOT NULL,
+    Priority VARCHAR(20) NOT NULL DEFAULT 'MEDIUM',
+    Status VARCHAR(40) NOT NULL DEFAULT 'NEW',
+    AgentId VARCHAR(100) NULL,
+    OperationUserId VARCHAR(100) NULL,
+    CreatedAt DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    UpdatedAt DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    ClosedAt DATETIME(6) NULL,
+    SlaDueAt DATETIME(6) NULL,
+    CONSTRAINT FK_CrmCases_Customer FOREIGN KEY (CustomerId) REFERENCES CrmCustomers(Id)
+) ENGINE=InnoDB;
+
+CREATE TABLE  CrmEmails (
+    Id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    CaseId BIGINT NOT NULL,
+    MessageId VARCHAR(320) NULL,
+    FromEmail VARCHAR(320) NOT NULL,
+    ToEmail VARCHAR(2000) NOT NULL,
+    Cc VARCHAR(2000) NULL,
+    Subject VARCHAR(500) NOT NULL,
+    BodyHtml LONGTEXT NOT NULL,
+    EmailType VARCHAR(30) NOT NULL,
+    Pnr VARCHAR(20) NULL,
+    IsRead BOOLEAN NOT NULL DEFAULT FALSE,
+    IsStarred BOOLEAN NOT NULL DEFAULT FALSE,
+    ReceivedAt DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    CONSTRAINT FK_CrmEmails_Case FOREIGN KEY (CaseId) REFERENCES CrmCases(Id),
+    INDEX IX_CrmEmails_ReceivedAt (ReceivedAt),
+    INDEX IX_CrmEmails_CaseId (CaseId)
+) ENGINE=InnoDB;
+
+CREATE TABLE  CrmMessages (
+    Id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    CaseId BIGINT NOT NULL,
+    SenderType VARCHAR(30) NOT NULL,
+    SenderId VARCHAR(100) NULL,
+    Message LONGTEXT NOT NULL,
+    CreatedAt DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    CONSTRAINT FK_CrmMessages_Case FOREIGN KEY (CaseId) REFERENCES CrmCases(Id),
+    INDEX IX_CrmMessages_CaseTime (CaseId, CreatedAt)
+) ENGINE=InnoDB;
+
+CREATE TABLE  CrmActionEvents (
+    Id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    CaseId BIGINT NOT NULL,
+    MessageId BIGINT NULL,
+    ActorType VARCHAR(30) NOT NULL,
+    ActorId VARCHAR(100) NULL,
+    ActionCode VARCHAR(80) NOT NULL,
+    ActionSource VARCHAR(80) NOT NULL,
+    ActionData JSON NULL,
+    CreatedAt DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    CONSTRAINT FK_CrmActions_Case FOREIGN KEY (CaseId) REFERENCES CrmCases(Id),
+    CONSTRAINT FK_CrmActions_Message FOREIGN KEY (MessageId) REFERENCES CrmMessages(Id)
+) ENGINE=InnoDB;
+
+CREATE TABLE  CrmCaseAssignments (
+    Id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    CaseId BIGINT NOT NULL,
+    UserId VARCHAR(100) NOT NULL,
+    AssignmentType VARCHAR(40) NOT NULL,
+    AssignedAt DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    FOREIGN KEY (CaseId) REFERENCES CrmCases(Id)
+) ENGINE=InnoDB;
+
+CREATE TABLE  CrmCaseComments (
+    Id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    CaseId BIGINT NOT NULL,
+    UserId VARCHAR(100) NULL,
+    Comment LONGTEXT NOT NULL,
+    CreatedAt DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    FOREIGN KEY (CaseId) REFERENCES CrmCases(Id)
+) ENGINE=InnoDB;
+
+CREATE TABLE  CrmTasks (
+    Id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    CaseId BIGINT NOT NULL,
+    Title VARCHAR(300) NOT NULL,
+    Status VARCHAR(40) NOT NULL DEFAULT 'OPEN',
+    DueAt DATETIME(6) NULL,
+    AssignedTo VARCHAR(100) NULL,
+    FOREIGN KEY (CaseId) REFERENCES CrmCases(Id)
+) ENGINE=InnoDB;
+
+CREATE TABLE  CrmFollowUps (
+    Id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    CaseId BIGINT NOT NULL,
+    FollowUpAt DATETIME(6) NOT NULL,
+    Notes LONGTEXT NULL,
+    Status VARCHAR(40) NOT NULL DEFAULT 'OPEN',
+    FOREIGN KEY (CaseId) REFERENCES CrmCases(Id)
+) ENGINE=InnoDB;
+
+CREATE TABLE  CrmAttachments (
+    Id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    CaseId BIGINT NOT NULL,
+    FileName VARCHAR(260) NOT NULL,
+    ContentType VARCHAR(150) NOT NULL,
+    StorageKey VARCHAR(500) NOT NULL,
+    CreatedAt DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    FOREIGN KEY (CaseId) REFERENCES CrmCases(Id)
+) ENGINE=InnoDB;
+
+CREATE TABLE  CrmCaseStatusHistory (
+    Id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    CaseId BIGINT NOT NULL,
+    OldStatus VARCHAR(40) NULL,
+    NewStatus VARCHAR(40) NOT NULL,
+    ChangedBy VARCHAR(100) NULL,
+    ChangedAt DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    FOREIGN KEY (CaseId) REFERENCES CrmCases(Id)
+) ENGINE=InnoDB;
+
+CREATE TABLE  CrmNotifications (
+    Id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    CaseId BIGINT NULL,
+    UserId VARCHAR(100) NULL,
+    EventType VARCHAR(80) NOT NULL,
+    Payload JSON NULL,
+    IsRead BOOLEAN NOT NULL DEFAULT FALSE,
+    CreatedAt DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    FOREIGN KEY (CaseId) REFERENCES CrmCases(Id)
+) ENGINE=InnoDB;
+
+CREATE TABLE  SmtpConfigurations (
+    Id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    Provider VARCHAR(40) NOT NULL,
+    Host VARCHAR(255) NOT NULL,
+    Port INT NOT NULL,
+    Username VARCHAR(320) NOT NULL,
+    EncryptedPassword TEXT NOT NULL,
+    FromEmail VARCHAR(320) NOT NULL,
+    FromName VARCHAR(200) NOT NULL,
+    UseSsl BOOLEAN NOT NULL,
+    IsActive BOOLEAN NOT NULL DEFAULT TRUE,
+    UpdatedAt DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
+) ENGINE=InnoDB;
+
+CREATE TABLE  CrmActionTokens (
+    Id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    TokenHash BINARY(32) NOT NULL UNIQUE,
+    CaseId BIGINT NOT NULL,
+    Recipient VARCHAR(320) NOT NULL,
+    RecipientType VARCHAR(30) NOT NULL,
+    AllowedActions VARCHAR(1000) NOT NULL,
+    ExpiresAt DATETIME(6) NOT NULL,
+    UsedAt DATETIME(6) NULL,
+    FOREIGN KEY (CaseId) REFERENCES CrmCases(Id),
+    INDEX IX_CrmActionTokens_Expiry (ExpiresAt, UsedAt)
+) ENGINE=InnoDB;
+
+-- Verification
+SELECT TABLE_NAME
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_SCHEMA = DATABASE()
+  AND TABLE_NAME IN (
+      'CrmCustomers', 'CrmCases', 'CrmEmails', 'CrmMessages',
+      'CrmActionEvents', 'CrmCaseAssignments', 'CrmCaseComments',
+      'CrmTasks', 'CrmFollowUps', 'CrmAttachments',
+      'CrmCaseStatusHistory', 'CrmNotifications',
+      'SmtpConfigurations', 'CrmActionTokens'
+  )
+ORDER BY TABLE_NAME;

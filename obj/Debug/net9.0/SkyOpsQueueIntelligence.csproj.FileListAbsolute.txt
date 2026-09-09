@@ -1081,7 +1081,6 @@ D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\appsettings.B
 D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\appsettings.Development.json
 D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\appsettings.json
 D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\SkyOpsQueueIntelligence.staticwebassets.endpoints.json
-D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\SkyOpsQueueIntelligence.exe
 D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\SkyOpsQueueIntelligence.deps.json
 D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\SkyOpsQueueIntelligence.runtimeconfig.json
 D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\SkyOpsQueueIntelligence.dll
@@ -1477,3 +1476,6 @@ D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify-pnr\runtimes\win-x6
 D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify-pnr\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify-pnr\runtimes\win\lib\net9.0\System.Text.Encodings.Web.dll
 D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\obj\verify-pnr\runtimes\win\lib\net8.0\System.Windows.Extensions.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\MailKit.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\MimeKit.dll
+D:\Seshadrinath-Workbench\SkyOpsQueueIntelligence\bin\Debug\net9.0\SkyOpsQueueIntelligence.exe

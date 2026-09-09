@@ -7,7 +7,7 @@ public sealed class Queue7PollingOptions
     public static readonly IReadOnlySet<string> AllowedHostCommands =
         new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "Q/7", "Q/379", "Q/62", "I", "QXI", "EWR" ,"QR"};
 
-    public bool Enabled { get; init; } = true;
+    public bool Enabled { get; init; } = false;
 
     public string Source { get; init; } = "SabreApi";
 
@@ -62,7 +62,7 @@ public sealed class GalileoApiOptions
 
 public sealed class GalileoPollingOptions
 {
-    public bool Enabled { get; init; } = true;
+    public bool Enabled { get; init; } = false;
 
     public int IntervalMinutes { get; init; } = 15;
 
@@ -83,7 +83,7 @@ public sealed class AmadeusApiOptions
 
 public sealed class AmadeusPollingOptions
 {
-    public bool Enabled { get; init; } = true;
+    public bool Enabled { get; init; } = false;
     public int IntervalMinutes { get; init; } = 15;
     public string PccCode { get; init; } = "AM_BOMAK3303_DOM_MUM T DESK";
     public IReadOnlyList<int> Queues { get; init; } = [7, 41];
