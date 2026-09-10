@@ -684,18 +684,25 @@ public static partial class Queue7Parser
     private static string? ExtractRemarkEmail(string block)
     {
         var emails = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var nonContactLines = block.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries)
+            .Where(line => !line.Contains("CTCE", StringComparison.OrdinalIgnoreCase)
+                && !line.TrimStart().StartsWith("APE", StringComparison.OrdinalIgnoreCase))
+            .ToArray();
 
         // Parse remark format: N./LABEL//DOMAIN.TLD  → label@domain.tld
-        foreach (Match m in s_remarkEmailRegex.Matches(block))
+        foreach (Match m in s_remarkEmailRegex.Matches(string.Join(Environment.NewLine, nonContactLines)))
         {
             var local = m.Groups["local"].Value.Replace("/", ".").Trim('.');
             var domain = m.Groups["domain"].Value;
             emails.Add($"{local}@{domain}".ToLowerInvariant());
         }
 
-        // Also capture any plain email addresses already in the block
-        foreach (Match m in EmailRegex().Matches(block))
-            emails.Add(m.Groups["email"].Value.Trim().ToLowerInvariant());
+        // Capture plain email addresses, excluding GDS contact lines.
+        foreach (var line in nonContactLines)
+        {
+            foreach (Match m in EmailRegex().Matches(line))
+                emails.Add(m.Groups["email"].Value.Trim().ToLowerInvariant());
+        }
 
         return emails.Count == 0 ? null : string.Join(";", emails);
     }

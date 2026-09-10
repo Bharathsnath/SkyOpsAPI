@@ -112,12 +112,12 @@ public sealed class EmailNotificationService : IEmailNotificationService
           string.Join(", ", filteredResults.Select(result => result.ReceivedFrom ?? "offline")));
 
         var criticalActions = filteredResults
-            .SelectMany(r => r.Actions.Select(a => (r.Pnr, r.PCC, a)))
+          .SelectMany(r => r.Actions.Select(a => (r.Pnr, r.PCC, a, r.RemarkEmail)))
             .Where(x => x.a.Status is "HX" or "UN" or "UC")
             .ToList();
 
         var timeChangeActions = filteredResults
-            .SelectMany(r => r.Actions.Select(a => (r.Pnr, r.PCC, a)))
+          .SelectMany(r => r.Actions.Select(a => (r.Pnr, r.PCC, a, r.RemarkEmail)))
             .Where(x => x.a.Status == "TK" && x.a.DelayMinutes is not null && x.a.DelayMinutes != 0)
             .ToList();
 
@@ -131,7 +131,7 @@ public sealed class EmailNotificationService : IEmailNotificationService
             return;
         }
 
-        var allActions = new List<(string Pnr, string? PCC, ActionFinding Action)>();
+        var allActions = new List<(string Pnr, string? PCC, ActionFinding Action, string? RemarkEmail)>();
         if (sendOnCritical) allActions.AddRange(criticalActions);
         if (sendOnTimeChange) allActions.AddRange(timeChangeActions);
         var totalRecords = allActions.Select(x => x.Pnr).Distinct().Count();
@@ -384,6 +384,7 @@ public sealed class EmailNotificationService : IEmailNotificationService
             var encodedPnr = WebUtility.HtmlEncode(pnr);
             var encodedPnrUrl = WebUtility.HtmlEncode(pnrUrl);
             var encodedStatus = WebUtility.HtmlEncode(string.IsNullOrWhiteSpace(status) ? "Status change detected" : status);
+            var encodedInformedTo = WebUtility.HtmlEncode(string.Join("; ", toAddresses));
 
             var body = $"""
                 <!DOCTYPE html><html><head><meta charset='utf-8'/></head>
@@ -398,6 +399,7 @@ public sealed class EmailNotificationService : IEmailNotificationService
                     <p style='font-size:14px;line-height:1.7;margin:0 0 18px 0;'>Dear Travel Partner,</p>
                     <p style='font-size:14px;line-height:1.7;margin:0 0 18px 0;'>We would like to bring to your attention the changes on current status of PNR <strong>{encodedPnr}</strong>.</p>
                     <p style='font-size:14px;line-height:1.7;margin:0 0 18px 0;'>Please coordinate with your Operations Team for further assistance regarding the following:</p>
+                    <p style='font-size:14px;line-height:1.7;margin:0 0 18px 0;'><strong>Informed to:</strong> {encodedInformedTo}</p>
                     <table width='100%' cellpadding='0' cellspacing='0' style='background:#f5f7fa;border-left:4px solid #1a2744;margin:0 0 18px 0;'>
                       <tr><td style='padding:14px 16px;font-size:14px;line-height:1.8;'>
                         <strong>PNR:</strong> <a href='{encodedPnrUrl}' style='color:#1a2744;font-weight:700;text-decoration:none;'>{encodedPnr}</a><br/>
@@ -483,8 +485,8 @@ public sealed class EmailNotificationService : IEmailNotificationService
 
     private static string BuildEmailBody(
         string PCC,
-        List<(string Pnr, string? PCC, ActionFinding Action)> critical,
-        List<(string Pnr, string? PCC, ActionFinding Action)> timeChanges,
+      List<(string Pnr, string? PCC, ActionFinding Action, string? RemarkEmail)> critical,
+      List<(string Pnr, string? PCC, ActionFinding Action, string? RemarkEmail)> timeChanges,
         bool sendOnCritical,
         bool sendOnTimeChange,
         string baseUrl,
@@ -566,9 +568,13 @@ public sealed class EmailNotificationService : IEmailNotificationService
     </td>
   </tr>");
 
-        void AppendCard(string pnr, ActionFinding action, string statusColor, string statusBg, string statusLabel, string? segLabel)
+        void AppendCard(string pnr, ActionFinding action, string? remarkEmail, string statusColor, string statusBg, string statusLabel, string? segLabel)
         {
             var pnrUrl = $"{baseUrl}/pnr-detail/{pnr}";
+          var informedTo = string.Join("; ", SplitRecipients(remarkEmail));
+          var informedToHtml = string.IsNullOrWhiteSpace(informedTo)
+            ? string.Empty
+            : $"<div style='font-size:12px;color:#5b8dee;margin-top:8px;'><strong>Informed to:</strong> {WebUtility.HtmlEncode(informedTo)}</div>";
             
 
             var leftHtml = $@"
@@ -586,7 +592,8 @@ public sealed class EmailNotificationService : IEmailNotificationService
             </div>
           </td>
         </tr>
-      </table>";
+      </table>
+      {informedToHtml}";
 
             sb.Append($@"
   <tr>
@@ -611,7 +618,7 @@ public sealed class EmailNotificationService : IEmailNotificationService
 
         if (hasCritical)
         {
-            foreach (var (pnr, _, action) in critical)
+            foreach (var (pnr, _, action, remarkEmail) in critical)
             {
                 var (color, bg, label) = action.Status switch
                 {
@@ -621,17 +628,17 @@ public sealed class EmailNotificationService : IEmailNotificationService
                     _ => ("#d32f2f", "#fff5f5", action.Status)
                 };
                 var segLabel = action.Segment > 0 ? action.Segment.ToString("D3") : null;
-                AppendCard(pnr, action, color, bg, label, segLabel);
+                AppendCard(pnr, action, remarkEmail, color, bg, label, segLabel);
             }
         }
 
         if (hasTimeChange)
         {
-            foreach (var (pnr, _, action) in timeChanges)
+            foreach (var (pnr, _, action, remarkEmail) in timeChanges)
             {
                 var delayLabel = action.DelayMinutes.HasValue ? $"+{action.DelayMinutes} min" : "Schedule / Time Changes (TK Status)";
                 var segLabel = action.Segment > 0 ? action.Segment.ToString("D3") : null;
-                AppendCard(pnr, action, "#f57c00", "#fff8e1", delayLabel, segLabel);
+                AppendCard(pnr, action, remarkEmail, "#f57c00", "#fff8e1", delayLabel, segLabel);
             }
         }
 
