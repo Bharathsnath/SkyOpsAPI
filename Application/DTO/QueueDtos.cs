@@ -107,6 +107,8 @@ public sealed record InformationalFinding(
     [property: JsonPropertyName("flight")] string Flight,
     [property: JsonPropertyName("status")] string Status);
 
+public enum ScheduleChangeType { Postponed, Preponed, OnTime, FlightChanged }
+
 public sealed record DelayFlight(
     [property: JsonPropertyName("pnr")] string Pnr,
     [property: JsonPropertyName("flight")] string Flight,
@@ -116,7 +118,9 @@ public sealed record DelayFlight(
     [property: JsonPropertyName("previousDeparture")] string? PreviousDeparture,
     [property: JsonPropertyName("previousArrival")] string? PreviousArrival,
     [property: JsonPropertyName("currentDeparture")] string? CurrentDeparture,
-    [property: JsonPropertyName("currentArrival")] string? CurrentArrival);
+    [property: JsonPropertyName("currentArrival")] string? CurrentArrival,
+    [property: JsonPropertyName("scheduleChangeType")] ScheduleChangeType ScheduleChangeType = ScheduleChangeType.OnTime,
+    [property: JsonPropertyName("delayMinutes")] int? DelayMinutes = null);
 
 public sealed record DelaySummaryResult(
     [property: JsonPropertyName("queue")] int Queue,

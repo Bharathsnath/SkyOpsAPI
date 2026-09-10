@@ -49,13 +49,59 @@ public sealed class QueueAnalysisService : IQueueAnalysisService
 
         var delayedFlights = parsed.Pnrs
             .SelectMany(pnr => pnr.Segments
-                .Where(s => s.OldDepartureTime is not null || s.OldArrivalTime is not null)
-                .Select(s => new DelayFlight(pnr.Pnr, s.Flight, s.Date, s.Origin, s.Destination,
-                    s.OldDepartureTime, s.OldArrivalTime,
-                    s.NewDepartureTime ?? s.DepartureTime, s.NewArrivalTime ?? s.ArrivalTime)))
+                .Where(s => s.Status == "TK")
+                .Select(s =>
+                {
+                    var oldDep = s.OldDepartureTime;
+                    var newDep = s.NewDepartureTime ?? s.DepartureTime;
+                    var oldArr = s.OldArrivalTime;
+                    var newArr = s.NewArrivalTime ?? s.ArrivalTime;
+
+                    var depChanged = !string.Equals(oldDep, newDep, StringComparison.OrdinalIgnoreCase);
+                    var arrChanged = !string.Equals(oldArr, newArr, StringComparison.OrdinalIgnoreCase);
+                    var hasOldTimes = oldDep is not null || oldArr is not null;
+
+                    int? delayMinutes = null;
+                    if (oldDep is not null && newDep is not null && depChanged)
+                        delayMinutes = ComputeDelayMinutes(oldDep, newDep);
+
+                    var changeType = ClassifyChange(depChanged, arrChanged, hasOldTimes, delayMinutes);
+
+                    return new DelayFlight(pnr.Pnr, s.Flight, s.Date, s.Origin, s.Destination,
+                        oldDep, oldArr, newDep, newArr, changeType, delayMinutes);
+                }))
             .ToArray();
 
         return new DelaySummaryResult(queueNumber, delayedFlights.Length, delayedFlights);
+    }
+
+    private static int? ComputeDelayMinutes(string oldTime, string newTime)
+    {
+        static bool TryParse(string t, out int minutes)
+        {
+            var norm = Queue7Parser.NormalizeTime(t);
+            if (norm.Length == 4 && int.TryParse(norm[..2], out var h) && int.TryParse(norm[2..], out var m)
+                && h is >= 0 and <= 23 && m is >= 0 and <= 59)
+            {
+                minutes = h * 60 + m;
+                return true;
+            }
+            minutes = 0;
+            return false;
+        }
+
+        return TryParse(oldTime, out var o) && TryParse(newTime, out var n) ? n - o : null;
+    }
+
+    private static ScheduleChangeType ClassifyChange(bool depChanged, bool arrChanged, bool hasOldTimes, int? delayMinutes)
+    {
+        if (!hasOldTimes || (!depChanged && !arrChanged))
+            return ScheduleChangeType.FlightChanged;
+        if (delayMinutes is null)
+            return depChanged || arrChanged ? ScheduleChangeType.Postponed : ScheduleChangeType.OnTime;
+        return delayMinutes > 0 ? ScheduleChangeType.Postponed
+            : delayMinutes < 0 ? ScheduleChangeType.Preponed
+            : ScheduleChangeType.OnTime;
     }
 
     public async Task<QueueSummaryResult> GetSummaryAsync(int queueNumber, CancellationToken cancellationToken = default)
