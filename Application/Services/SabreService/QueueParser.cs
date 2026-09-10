@@ -12,7 +12,7 @@ public static partial class Queue7Parser
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(queueText);
 
-        var blocks = SplitPnrBlocks(queueText);
+        var blocks = MergeAmadeusPnrBlocks(SplitPnrBlocks(queueText));
         var pnrs = blocks.Select(block =>
         {
             var pnr = ExtractPnr(block);
@@ -33,6 +33,39 @@ public static partial class Queue7Parser
         }).ToArray();
 
         return new ParsedQueueResult(queueNumber, pnrs);
+    }
+
+    private static IReadOnlyList<string> MergeAmadeusPnrBlocks(IReadOnlyList<string> blocks)
+    {
+        if (blocks.Count < 2 || !blocks.Any(block => AmadeusRpHeaderRegex().IsMatch(block)))
+            return blocks;
+
+        // Amadeus sends the same PNR as separate RLR, RTF, and RHI responses.
+        // Keep one main itinerary and append history so TC rows can supply TK timings.
+        var merged = new List<string>();
+        var amadeusIndexes = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var block in blocks)
+        {
+            var header = AmadeusRpHeaderRegex().Match(block);
+            if (!header.Success)
+            {
+                merged.Add(block);
+                continue;
+            }
+
+            var pnr = header.Groups["pnr"].Value.Trim().ToUpperInvariant();
+            if (!amadeusIndexes.TryGetValue(pnr, out var index))
+            {
+                amadeusIndexes[pnr] = merged.Count;
+                merged.Add(block);
+                continue;
+            }
+
+            merged[index] = string.Join(Environment.NewLine, merged[index], block);
+        }
+
+        return merged;
     }
 
     public static IReadOnlyList<FlightSegment> ParseSegments(string pnrText)
@@ -120,6 +153,11 @@ public static partial class Queue7Parser
         var amadeusPnrBlocks = SplitByHeaderRegex(queueText, AmadeusRpHeaderRegex());
         if (amadeusPnrBlocks.Count > 0)
             return amadeusPnrBlocks;
+
+        // Split on Galileo header lines: H9B87Q/WS LONOU 6TP2GWS AG ...
+        var galileoBlocks = SplitByHeaderRegex(queueText, GalileoHeaderPnrRegex());
+        if (galileoBlocks.Count > 0)
+            return galileoBlocks;
 
         var matches = PnrHeaderRegex().Matches(queueText);
 
@@ -379,27 +417,9 @@ public static partial class Queue7Parser
             if (!historyMatch.Success)
                 return null;
 
-            var historyStatus = historyMatch.Groups["status"].Value.ToUpperInvariant();
-            var historyCarrier = historyMatch.Groups["carrier"].Value.ToUpperInvariant();
-            var historyFlightNumber = historyMatch.Groups["flightNumber"].Value;
-            var historyFlight = historyCarrier + historyFlightNumber;
-            var (historyDeparture, historyArrival) = ExtractPrimaryTimes(historyMatch.Groups["times"].Value);
-
-            return new FlightSegment(
-                0,
-                historyFlight,
-                historyCarrier,
-                historyFlightNumber,
-                EmptyToNull(historyMatch.Groups["date"].Value),
-                EmptyToNull(historyMatch.Groups["origin"].Value),
-                EmptyToNull(historyMatch.Groups["destination"].Value),
-                historyStatus,
-                historyDeparture,
-                historyArrival,
-                null,
-                null,
-                null,
-                null);
+            // RHI/TC rows are history only. They may provide timing evidence through
+            // ExtractScheduleChanges, but must never create an itinerary segment.
+            return null;
         }
 
         var status = match.Groups["status"].Value.ToUpperInvariant();
@@ -455,7 +475,8 @@ public static partial class Queue7Parser
             ExtractScheduleChanges(pnrText), StringComparer.OrdinalIgnoreCase);
         foreach (var inferredChange in InferDuplicateFlightChanges(segments))
         {
-            changes[inferredChange.Key] = inferredChange.Value;
+            // Preserve explicit Amadeus RHI/TC history; infer only when no history row exists.
+            changes.TryAdd(inferredChange.Key, inferredChange.Value);
         }
 
         return segments
@@ -466,17 +487,44 @@ public static partial class Queue7Parser
                     return segment;
                 }
 
+                var resolvedChange = ResolveScheduleChange(segment, change);
                 return segment with
                 {
-                    DepartureTime = change.OldDeparture,
-                    ArrivalTime = change.OldArrival,
-                    OldDepartureTime = change.OldDeparture,
-                    NewDepartureTime = change.NewDeparture ?? segment.DepartureTime,
-                    OldArrivalTime = change.OldArrival,
-                    NewArrivalTime = change.NewArrival ?? segment.ArrivalTime
+                    DepartureTime = resolvedChange.OldDeparture,
+                    ArrivalTime = resolvedChange.OldArrival,
+                    OldDepartureTime = resolvedChange.OldDeparture,
+                    NewDepartureTime = resolvedChange.NewDeparture ?? segment.DepartureTime,
+                    OldArrivalTime = resolvedChange.OldArrival,
+                    NewArrivalTime = resolvedChange.NewArrival ?? segment.ArrivalTime
                 };
             })
             .ToArray();
+    }
+
+    private static ScheduleChangeTimes ResolveScheduleChange(FlightSegment segment, ScheduleChangeTimes change)
+    {
+        var currentDeparture = segment.DepartureTime;
+        if (currentDeparture is not null && currentDeparture.Equals(change.NewDeparture, StringComparison.OrdinalIgnoreCase))
+        {
+            return change;
+        }
+
+        // Some Amadeus history rows are written newest/previous rather than previous/newest.
+        if (currentDeparture is not null && currentDeparture.Equals(change.OldDeparture, StringComparison.OrdinalIgnoreCase))
+        {
+            return new ScheduleChangeTimes(
+                change.NewDeparture ?? change.OldDeparture,
+                change.NewArrival ?? change.OldArrival,
+                change.OldDeparture,
+                change.OldArrival);
+        }
+
+        // If the displayed itinerary has moved again, use the latest history time as the old value.
+        return new ScheduleChangeTimes(
+            change.OldDeparture,
+            change.OldArrival,
+            currentDeparture,
+            segment.ArrivalTime);
     }
 
     private static IReadOnlyDictionary<string, ScheduleChangeTimes> InferDuplicateFlightChanges(
@@ -519,18 +567,27 @@ public static partial class Queue7Parser
         foreach (var line in lines)
         {
             var previousTimeMatch = PreviousTimeRegex().Match(line);
-
-            if (!previousTimeMatch.Success)
+            if (previousTimeMatch.Success)
             {
+                var flight = NormalizeFlight(previousTimeMatch.Groups["flight"].Value);
+                AddScheduleChange(changes, flight, new ScheduleChangeTimes(
+                    NormalizeTime(previousTimeMatch.Groups["dep"].Value),
+                    NormalizeTime(previousTimeMatch.Groups["arr"].Value),
+                    null,
+                    null));
                 continue;
             }
 
-            var flight = NormalizeFlight(previousTimeMatch.Groups["flight"].Value);
-            changes[flight] = new ScheduleChangeTimes(
-                NormalizeTime(previousTimeMatch.Groups["dep"].Value),
-                NormalizeTime(previousTimeMatch.Groups["arr"].Value),
-                null,
-                null);
+            var amadeusChangeMatch = AmadeusHistoryChangeRegex().Match(line);
+            if (amadeusChangeMatch.Success)
+            {
+                var flight = NormalizeFlight(amadeusChangeMatch.Groups["flight"].Value);
+                AddScheduleChange(changes, flight, new ScheduleChangeTimes(
+                    NormalizeTime(amadeusChangeMatch.Groups["firstDep"].Value),
+                    NormalizeTime(amadeusChangeMatch.Groups["firstArr"].Value),
+                    NormalizeTime(amadeusChangeMatch.Groups["secondDep"].Value),
+                    NormalizeTime(amadeusChangeMatch.Groups["secondArr"].Value)));
+            }
         }
 
         for (var index = 0; index < lines.Length - 2; index++)
@@ -551,14 +608,32 @@ public static partial class Queue7Parser
             }
 
             var flight = flightMatch.Groups["flight"].Value.ToUpperInvariant();
-            changes[flight] = new ScheduleChangeTimes(
+            AddScheduleChange(changes, flight, new ScheduleChangeTimes(
                 NormalizeTime(oldMatch.Groups["dep"].Value),
                 NormalizeTime(oldMatch.Groups["arr"].Value),
                 NormalizeTime(newMatch.Groups["dep"].Value),
-                NormalizeTime(newMatch.Groups["arr"].Value));
+                NormalizeTime(newMatch.Groups["arr"].Value)));
         }
 
         return changes;
+    }
+
+    private static void AddScheduleChange(
+        IDictionary<string, ScheduleChangeTimes> changes,
+        string flight,
+        ScheduleChangeTimes change)
+    {
+        if (!changes.TryGetValue(flight, out var existing))
+        {
+            changes[flight] = change;
+            return;
+        }
+
+        changes[flight] = new ScheduleChangeTimes(
+            existing.OldDeparture,
+            existing.OldArrival,
+            change.NewDeparture ?? existing.NewDeparture,
+            change.NewArrival ?? existing.NewArrival);
     }
 
     private static (string? Departure, string? Arrival) ExtractPrimaryTimes(string value)
@@ -965,6 +1040,9 @@ public static partial class Queue7Parser
 
     [GeneratedRegex(@"\bPREV\s+TIME\s+FOR\s+(?<flight>[A-Z0-9]{2}\s*\d{1,4}[A-Z]?)\s+\S+\s+\S+\s+(?<dep>\d{3,4}[AP]?)\s+(?<arr>\d{3,4}[AP]?)\b", RegexOptions.IgnoreCase)]
     private static partial Regex PreviousTimeRegex();
+
+    [GeneratedRegex(@"^\d{3}/\d{3}\s+TC/(?<flight>[A-Z0-9]{2}\s*\d{1,4}[A-Z]?)\s+.*?\s(?<firstDep>\d{3,4})\s+(?<firstArr>\d{3,4})(?:\+\d)?\s*/\s*(?<secondDep>\d{3,4})\s+(?<secondArr>\d{3,4})(?:\+\d)?\s*$", RegexOptions.IgnoreCase)]
+    private static partial Regex AmadeusHistoryChangeRegex();
 
     [GeneratedRegex(@"^(?<flight>[A-Z0-9]{2}\d{1,4}[A-Z]?)\s+[A-Z]{3}\s+[A-Z]{3}$", RegexOptions.IgnoreCase)]
     private static partial Regex ScheduleFlightRegex();
