@@ -212,24 +212,54 @@ public sealed class DashboardRepository : IDashboardRepository
         var accessFilter = await BuildAccessFilterAsync(userId, ct);
 
         var delays = await QueryAsync(conn, $"""
-            SELECT Pnr, Flight, TransactionId, DelayMinutes, DelayHours, QueueNumber, PCC, ProviderName, UpdatedAt
-            FROM wptravelitineraryflightqueuereports AS qr WHERE StatusCode='tk' AND ActionTaken=1 AND {accessFilter}
-            ORDER BY UpdatedAt DESC
+            SELECT
+                q.Pnr, q.Flight, q.TransactionId, q.StatusCode, q.QueueNumber,
+                q.DelayMinutes, q.DelayHours, q.PCC, q.ProviderName,
+                q.Origin, q.Destination, q.UpdatedAt,
+                CASE
+                    WHEN fc.TransactionId IS NOT NULL THEN 'FLIGHT_CHANGE'
+                    WHEN q.DelayMinutes < 0 THEN 'PREPONED'
+                    WHEN q.DelayMinutes > 0 THEN 'POSTPONED'
+                    WHEN q.DelayMinutes = 0 THEN 'ON_TIME'
+                    ELSE 'UNKNOWN'
+                END AS FlightType
+            FROM wptravelitineraryflightqueuereports q
+            LEFT JOIN (
+                SELECT TransactionId, Pnr, Origin, Destination
+                FROM wptravelitineraryflightqueuereports
+                WHERE ActionTaken = 1
+                GROUP BY TransactionId, Pnr, Origin, Destination
+                HAVING COUNT(DISTINCT Flight) > 1
+            ) fc ON fc.TransactionId = q.TransactionId
+                AND fc.Pnr = q.Pnr
+                AND fc.Origin = q.Origin
+                AND fc.Destination = q.Destination
+            WHERE q.StatusCode = 'TK' AND q.ActionTaken = 1
+              AND {accessFilter.Replace("qr.", "q.")}
+            ORDER BY q.UpdatedAt DESC
             """,
             r => new DelayItemDto(
-                r.IsDBNull(0) ? string.Empty : r.IsDBNull(0) ? null : r.GetString(0),
-                r.IsDBNull(1) ? string.Empty : r.IsDBNull(1) ? null : r.GetString(1),
-                r.IsDBNull(2) ? string.Empty : r.IsDBNull(2) ? null : r.GetString(2),
-                r.IsDBNull(3) ? null : r.GetInt32(3), r.IsDBNull(4) ? null : r.GetDecimal(4),
-                r.GetInt32(5), r.IsDBNull(6) ? null : r.GetString(6), r.IsDBNull(7) ? null : r.GetString(7), r.GetDateTime(8)),
+                r.IsDBNull(0) ? null : r.GetString(0),
+                r.IsDBNull(1) ? null : r.GetString(1),
+                r.IsDBNull(2) ? null : r.GetString(2),
+                r.IsDBNull(3) ? null : r.GetString(3),
+                r.GetInt32(4),
+                r.IsDBNull(5) ? null : r.GetInt32(5),
+                r.IsDBNull(6) ? null : r.GetDecimal(6),
+                r.IsDBNull(7) ? null : r.GetString(7),
+                r.IsDBNull(8) ? null : r.GetString(8),
+                r.IsDBNull(9) ? null : r.GetString(9),
+                r.IsDBNull(10) ? null : r.GetString(10),
+                r.GetDateTime(11),
+                r.GetString(12)),
             ct, ("@userId", userId));
 
-        var postponed = await ScalarAsync<decimal?>(conn, $"SELECT COUNT(DelayMinutes) FROM wptravelitineraryflightqueuereports AS qr WHERE StatusCode='tk' AND DelayMinutes>0 AND ActionTaken=1 AND {accessFilter}", ct, ("@userId", userId));
-        var preponed = await ScalarAsync<int?>(conn, $"SELECT COUNT(DelayMinutes) FROM wptravelitineraryflightqueuereports AS qr WHERE StatusCode='tk' AND DelayMinutes<0 AND ActionTaken=1 AND {accessFilter}", ct, ("@userId", userId));
-        var ontime = await ScalarAsync<int?>(conn, $"SELECT COUNT(DelayMinutes) FROM wptravelitineraryflightqueuereports AS qr WHERE StatusCode='tk' AND DelayMinutes=0 AND ActionTaken=1 AND {accessFilter}", ct, ("@userId", userId));
-        var FlightChange = await ScalarAsync<long>(conn, $"SELECT COUNT(*) FROM wptravelitineraryflightqueuereports AS qr WHERE StatusCode='tk' AND DelayMinutes IS NULL AND ActionTaken=1 AND {accessFilter}", ct, ("@userId", userId));
+        var postponed = delays.LongCount(d => d.FlightType == "POSTPONED");
+        var preponed = delays.LongCount(d => d.FlightType == "PREPONED");
+        var ontime = delays.LongCount(d => d.FlightType == "ON_TIME");
+        var flightChange = delays.LongCount(d => d.FlightType == "FLIGHT_CHANGE");
 
-        return new DelayAnalysisDto(preponed, postponed, FlightChange, ontime, delays);
+        return new DelayAnalysisDto(preponed, postponed, flightChange, ontime, delays);
     }
 
     public async Task<FlightImpactDto> GetFlightImpactAsync(int userId, CancellationToken ct = default)
