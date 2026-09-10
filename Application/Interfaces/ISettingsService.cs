@@ -11,6 +11,7 @@ public interface ISettingsService
     Task<long> CreateAsync(PccCredentialRequest request, CancellationToken ct = default);
     Task<IReadOnlyList<PccAgentEmailMaster>> GetPccAgentEmailMastersAsync(CancellationToken ct = default);
     Task<IReadOnlyList<PccAgentEmailMaster>> GetPccAgentEmailMastersByPccAsync(string pccCode, CancellationToken ct = default);
+    Task<IReadOnlyList<PccAgentEmailMaster>> GetPccAgentEmailMastersByPccCompanyMarketAsync(string pccCode, string company, string market, CancellationToken ct = default);
     Task<IReadOnlyList<PccAgentEmailMaster>> GetPccAgentEmailMastersByPccsAsync(IEnumerable<string> pccCodes, CancellationToken ct = default);
     Task<long> CreatePccAgentEmailMasterAsync(PccAgentEmailMasterRequest request, CancellationToken ct = default);
     Task<bool> UpdateAsync(AppConfigurationRequest request, CancellationToken ct = default);

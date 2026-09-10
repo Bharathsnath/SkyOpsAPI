@@ -35,6 +35,7 @@ public sealed class SettingsService : ISettingsService
     }
     public Task<IReadOnlyList<PccAgentEmailMaster>> GetPccAgentEmailMastersAsync(CancellationToken ct = default) => _repository.GetPccAgentEmailMastersAsync(ct);
     public Task<IReadOnlyList<PccAgentEmailMaster>> GetPccAgentEmailMastersByPccAsync(string pccCode, CancellationToken ct = default) => _repository.GetPccAgentEmailMastersByPccAsync(pccCode, ct);
+    public Task<IReadOnlyList<PccAgentEmailMaster>> GetPccAgentEmailMastersByPccCompanyMarketAsync(string pccCode, string company, string market, CancellationToken ct = default) => _repository.GetPccAgentEmailMastersByPccCompanyMarketAsync(pccCode, company, market, ct);
     public Task<IReadOnlyList<PccAgentEmailMaster>> GetPccAgentEmailMastersByPccsAsync(IEnumerable<string> pccCodes, CancellationToken ct = default) => _repository.GetPccAgentEmailMastersByPccsAsync(pccCodes, ct);
     public Task<long> CreatePccAgentEmailMasterAsync(PccAgentEmailMasterRequest request, CancellationToken ct = default)
     {

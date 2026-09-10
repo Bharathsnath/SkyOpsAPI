@@ -55,9 +55,16 @@ public sealed class CredentialStore : ICredentialStore
             const string sql = """
                 SELECT * FROM wpset_credentialdetails
                 WHERE RecordStatus = '0'
-                AND Provider IN ('AB', 'SB')
-                AND PCCMasterCode IN (
-                    'AB_1V08_COCHINTDESK_DOM','AB_1VZ8_PONNANITDESK_DOM','HO PCC','1SKSAONLINE'
+                SELECT * FROM wpset_credentialdetails
+                WHERE RecordStatus = '0'
+                AND (
+                    (Provider IN ('AB', 'SB') AND (
+                        PCCMasterCode LIKE '%AB_1V08_COCHINTDESK_DOM'
+                        OR PCCMasterCode LIKE '%AB_1VZ8_PONNANITDESK_DOM'
+                        OR PCCMasterCode LIKE '%HO PCC'
+                        OR PCCMasterCode LIKE '%1SKSAONLINE%'))
+                    OR (Provider = '1G' AND PCCMasterCode = '6TP2')
+                    OR (Provider = 'AM' AND PCCMasterCode = 'AM_BOMAK3303_DOM_MUM T DESK')
                 );
                 """;
 

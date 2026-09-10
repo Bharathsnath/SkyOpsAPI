@@ -60,6 +60,9 @@ public sealed class QueueActionRepository : IQueueActionRepository
             return (0, Array.Empty<QueueAnalysisResult>());
         }
 
+        _logger.LogInformation("Saving {ResultCount} queue results ({ActionCount} actions) for provider {ProviderName}.",
+            analysisResults.Count, analysisResults.Sum(result => result.Actions.Count), providerName);
+
         await using var connection = new MySqlConnection(_connectionString);
         await connection.OpenAsync(cancellationToken);
 
@@ -70,6 +73,9 @@ public sealed class QueueActionRepository : IQueueActionRepository
         {
             foreach (var action in result.Actions)
             {
+                if (action.Segment <= 0 || action.Status is not ("TK" or "HX" or "UN" or "UC"))
+                    continue;
+
                 var affected = await UpsertActionAsync(connection, result, action, uplId, providerName, cancellationToken);
                 // MySQL: INSERT=1, UPDATE=2, no-change=0
                 if (affected > 0)
@@ -271,7 +277,7 @@ public sealed class QueueActionRepository : IQueueActionRepository
                     QueueRecommendationJson, Summary, UplId, ProviderName,
                     Origin, Destination, DepartureTime, ArrivalTime, DepartureDate,
                     BaseFare, Taxes, TotalFare, PassengersJson, TicketingDeadline,
-                    UpdatedAt, ActionTaken, RemarkEmail, RawResponse, Airline, IsTicketed
+                    UpdatedAt, ActionTaken, RemarkEmail, Airline, IsTicketed
                 )
                 VALUES (
                     @QueueNumber, @Pnr, @TransactionId, @PCC, @ReceivedDateTime, @CurrencyCode,
@@ -280,7 +286,7 @@ public sealed class QueueActionRepository : IQueueActionRepository
                     @QueueRecommendationJson, @Summary, @UplId, @ProviderName,
                     @Origin, @Destination, @DepartureTime, @ArrivalTime, @DepartureDate,
                     @BaseFare, @Taxes, @TotalFare, @PassengersJson, @TicketingDeadline,
-                    CONVERT_TZ(UTC_TIMESTAMP(), '+00:00', '+05:30'), @ActionTaken, @RemarkEmail, @RawResponse, @Airline, @IsTicketed
+                    CONVERT_TZ(UTC_TIMESTAMP(), '+00:00', '+05:30'), @ActionTaken, @RemarkEmail, @Airline, @IsTicketed
                 );
                 """;
 
@@ -319,7 +325,6 @@ public sealed class QueueActionRepository : IQueueActionRepository
                 : JsonSerializer.Serialize(result.Passengers));
             insertCmd.Parameters.AddWithValue("@TicketingDeadline", result.TicketingDeadline ?? "");
             insertCmd.Parameters.AddWithValue("@RemarkEmail", result.RemarkEmail ?? "");
-            insertCmd.Parameters.AddWithValue("@RawResponse", result.RawResponse is null ? DBNull.Value : result.RawResponse);
             insertCmd.Parameters.AddWithValue("@Airline", result.Airline ?? "");
             insertCmd.Parameters.AddWithValue("@IsTicketed", result.IsTicketed ? 1 : 0);
 

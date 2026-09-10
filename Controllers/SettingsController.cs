@@ -52,11 +52,17 @@ public class SettingsController : ControllerBase
     }
 
     [HttpGet("pcc-agent-email-master")]
-    public async Task<IActionResult> GetPccAgentEmailMaster([FromQuery] string? pcc, CancellationToken ct)
+    public async Task<IActionResult> GetPccAgentEmailMaster(
+        [FromQuery] string? pcc,
+        [FromQuery] string? company,
+        [FromQuery] string? market,
+        CancellationToken ct)
     {
-        var data = string.IsNullOrWhiteSpace(pcc)
-            ? await _service.GetPccAgentEmailMastersAsync(ct)
-            : await _service.GetPccAgentEmailMastersByPccAsync(pcc, ct);
+        var data = !string.IsNullOrWhiteSpace(pcc) && !string.IsNullOrWhiteSpace(company) && !string.IsNullOrWhiteSpace(market)
+            ? await _service.GetPccAgentEmailMastersByPccCompanyMarketAsync(pcc, company, market, ct)
+            : string.IsNullOrWhiteSpace(pcc)
+                ? await _service.GetPccAgentEmailMastersAsync(ct)
+                : await _service.GetPccAgentEmailMastersByPccAsync(pcc, ct);
 
         return Ok(data);
     }

@@ -22,6 +22,8 @@ public sealed class SabreQueuePollingService : BackgroundService, IQueue7Polling
         int SavedCount,
         IReadOnlyCollection<string> CurrentPnrs);
 
+    private volatile bool _enabled;
+
     private readonly Queue7PollingOptions _options;
     private readonly IQueueActionRepository _repository;
     private readonly ICredentialStore _credentialStore;
@@ -64,23 +66,28 @@ public sealed class SabreQueuePollingService : BackgroundService, IQueue7Polling
         _errorLogService = errorLogService;
         _priorityPnrRepository = priorityPnrRepository;
         _scopeFactory = scopeFactory;
+        _enabled = options.Value.Enabled;
     }
+
+    public bool IsEnabled => _enabled;
+    public void Enable() => _enabled = true;
+    public void Disable() => _enabled = false;
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        if (!_options.Enabled)
-        {
-            _logger.LogInformation("Queue polling is disabled.");
-            await WriteFileLogAsync("Queue polling is disabled.", stoppingToken, "WARN");
-            return;
-        }
-
         var queues = GetQueueEntries();
         var interval = TimeSpan.FromMinutes(Math.Max(1, _options.IntervalMinutes));
         await WriteFileLogAsync($"Queue polling started. Queues: {string.Join(", ", queues.Select(q => q.HostCommand))}. Interval: {interval.TotalMinutes} min.", stoppingToken);
 
         while (!stoppingToken.IsCancellationRequested)
         {
+            if (!_enabled)
+            {
+                await WriteFileLogAsync("Sabre polling is paused. Waiting...", stoppingToken, "WARN");
+                await Task.Delay(interval, stoppingToken);
+                continue;
+            }
+
             try
             {
                 await PollAllPccsAsync(queues, stoppingToken);
@@ -102,6 +109,11 @@ public sealed class SabreQueuePollingService : BackgroundService, IQueue7Polling
 
     public async Task TriggerAsync(CancellationToken cancellationToken)
     {
+        if (!_enabled)
+        {
+            await WriteFileLogAsync("Sabre polling is disabled. TriggerAsync skipped.", cancellationToken, "WARN");
+            return;
+        }
         var queues = GetQueueEntries();
         await PollAllPccsAsync(queues, cancellationToken);
     }
@@ -116,7 +128,10 @@ public sealed class SabreQueuePollingService : BackgroundService, IQueue7Polling
         // Get distinct PCC credentials by actual Sabre login identity.
         // Multiple PCCMasterCode labels can share the same SourceOffice + Username + Password,
         // so we must dedupe by that triplet instead of by the master label itself.
-        var allCreds = _credentialStore.GetAll();
+        var allCreds = _credentialStore.GetAll()
+            .Where(c => c.Provider.Equals("AB", StringComparison.OrdinalIgnoreCase)
+                || c.Provider.Equals("SB", StringComparison.OrdinalIgnoreCase))
+            .ToList();
         var pccGroups = allCreds
             .GroupBy(c => c.PCCMasterCode, StringComparer.OrdinalIgnoreCase)
             .Select(g => new
@@ -198,7 +213,7 @@ public sealed class SabreQueuePollingService : BackgroundService, IQueue7Polling
 
                     try
                     {
-                        var summary = await ProcessQueueForPccAsync(pccCode, displayPcc, session, entry.HostCommand, entry.QueueNumber, cancellationToken);
+                        var summary = await ProcessQueueForPccAsync(pccCode, displayPcc, pccGroup.Company, pccGroup.Market, session, entry.HostCommand, entry.QueueNumber, cancellationToken);
                         queueSummaries.Add((summary.HostCommand, summary.QueueNumber, summary.AnalyzedCount, summary.SavedCount));
                         currentPnrsByQueue[entry.QueueNumber].UnionWith(summary.CurrentPnrs);
                     }
@@ -241,7 +256,7 @@ public sealed class SabreQueuePollingService : BackgroundService, IQueue7Polling
         await ReconcileMissingPnrsAsync(currentPnrsByQueue, reconciliationSkippedQueues, cancellationToken);
     }
 
-    private async Task<QueuePollResult> ProcessQueueForPccAsync(string pccCode, string displayPcc, SabreSession session, string hostCommand, int queueNumber, CancellationToken cancellationToken)
+    private async Task<QueuePollResult> ProcessQueueForPccAsync(string pccCode, string displayPcc, string company, string market, SabreSession session, string hostCommand, int queueNumber, CancellationToken cancellationToken)
     {
         var combinedText = await FetchQueueTextWithSessionAsync(session, hostCommand, pccCode, session.UplId, cancellationToken);
         var sourceId = $"{_options.SabreApi.Endpoint}|PCC:{pccCode}";
@@ -282,7 +297,7 @@ public sealed class SabreQueuePollingService : BackgroundService, IQueue7Polling
         // Send general queue alerts for newly inserted/updated records only.
         if (changedResults.Count > 0)
         {
-            await _emailService.SendAlertAsync(displayPcc, changedResults, cancellationToken);
+            await _emailService.SendAlertAsync(pccCode, company, market, changedResults, cancellationToken);
             await QueueNotificationsHub.SendQueueNotificationAsync(_hub, $"PCC {displayPcc}: {changedResults.Count} PNR(s) need attention.", cancellationToken);
         }
 
@@ -492,7 +507,13 @@ public sealed class SabreQueuePollingService : BackgroundService, IQueue7Polling
         }
 
         var analysisResults = Queue7Processor.ProcessQueueText(combinedText, queueNumber);
-        var (savedCount, _) = await _repository.SaveRecommendedActionsAsync(analysisResults, "", "", cancellationToken);
+        var (savedCount, changedResults) = await _repository.SaveRecommendedActionsAsync(analysisResults, "", "", cancellationToken);
+
+        if (changedResults.Count > 0)
+        {
+            await _emailService.SendAlertAsync("", "", "", changedResults, cancellationToken);
+        }
+
         await WriteFileLogAsync($"{hostCommand} (config): analyzed {analysisResults.Count} PNRs, saved {savedCount} actions.", cancellationToken);
 
         var contentHash = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(combinedText)));
