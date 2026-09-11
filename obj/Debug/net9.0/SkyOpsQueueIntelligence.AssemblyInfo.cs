@@ -15,12 +15,16 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+88bfbdb22320e6b32eabc4e916f01ff9028cadab")]
 =======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6c18d65ff7e9a080acf1a97a1e4216a617845c56")]
 >>>>>>> develop
 =======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4cdd6e260d5283faae4ba59f8a8002ce895f0c7f")]
+>>>>>>> develop
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+03ad4a3c809f3b1e0dfcca1e80204170a9e81b45")]
 >>>>>>> develop
 [assembly: System.Reflection.AssemblyProductAttribute("SkyOpsQueueIntelligence")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SkyOpsQueueIntelligence")]
