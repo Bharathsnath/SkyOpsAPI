@@ -174,25 +174,28 @@ public sealed class DashboardRepository : IDashboardRepository
                 r.IsDBNull(7) ? null : r.GetString(7), r.IsDBNull(8) ? null : r.GetString(8), r.GetDateTime(9)),
             ct, ("@userId", userId));
         var Unticketedcritical = await QueryAsync(conn, $"""
-            SELECT
-             q.Pnr, q.Flight,q.TransactionId,q.StatusCode,q.QueueNumber,q.ActionText,
-            q.ReasonText,q.PCC,q.ProviderName,q.UpdatedAt
-            FROM wptravelitineraryflightqueuereports q
+             SELECT
+            q.Pnr,q.Flight,q.TransactionId,q.StatusCode,q.QueueNumber,q.ActionText,
+             q.ReasonText,q.PCC,q.ProviderName,q.UpdatedAt
+                FROM wptravelitineraryflightqueuereports q
             WHERE q.isTicketed = 0
-                AND q.ActionTaken = 1
+            AND q.ActionTaken = 1
+            AND q.StatusCode = 'HX'
+
             AND {accessFilter.Replace("qr.", "q.")}
-              AND EXISTS
-            (
-            SELECT 1
-            FROM wptravelitineraryflightqueuereports x
-              WHERE x.Pnr = q.Pnr
-                AND x.isTicketed = 0
-                AND x.ActionTaken = 1
-            AND {accessFilter.Replace("qr.", "x.")}
-             GROUP BY x.Pnr
-              HAVING COUNT(*) = SUM(CASE WHEN x.StatusCode='HX' THEN 1 ELSE 0 END)
-            )
-            ORDER BY q.Pnr,q.SegmentNumber
+
+              -- ALL unticketed segments for this PNR must be HX
+               AND NOT EXISTS
+                (
+                    SELECT 1
+                     FROM wptravelitineraryflightqueuereports x
+                    WHERE x.Pnr = q.Pnr
+                    AND x.isTicketed = 0
+                    AND x.StatusCode <> 'HX'
+                     AND {accessFilter.Replace("qr.", "x.")}
+                    )
+
+                ORDER BY q.Pnr, q.SegmentNumber
             """,
             r => new CriticalQueueItemDto(
                 r.IsDBNull(0) ? null : r.GetString(0), r.IsDBNull(1) ? null : r.GetString(1), r.IsDBNull(2) ? null : r.GetString(2), r.IsDBNull(3) ? null : r.GetString(3), r.GetInt32(4),
@@ -783,7 +786,10 @@ public sealed class DashboardRepository : IDashboardRepository
 
     private static async Task<List<T>> QueryAsync<T>(MySqlConnection conn, string sql, Func<MySqlDataReader, T> map, CancellationToken ct, params (string name, object value)[] parameters)
     {
-        await using var cmd = new MySqlCommand(sql, conn);
+        ArgumentException.ThrowIfNullOrWhiteSpace(sql);
+
+        await using var cmd = conn.CreateCommand();
+        cmd.CommandText = sql;
         foreach (var parameter in parameters)
             cmd.Parameters.AddWithValue(parameter.name, parameter.value);
         await using var reader = await cmd.ExecuteReaderAsync(ct);
